@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// ! Order management for restaurants (need decision)
 const OrderSchema = new mongoose.Schema({
   customerId: { type: mongoose.Schema.Types.ObjectId, ref: "customers" },
   restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: "restaurants" },
