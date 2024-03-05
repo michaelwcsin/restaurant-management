@@ -18,7 +18,7 @@ MongoClient.connect(url)
 
     // Insert data
     collection
-      .insertMany(courses)
+      .insertMany(customers)
       .then((result) => {
         console.log("Document inserted successfully");
       })

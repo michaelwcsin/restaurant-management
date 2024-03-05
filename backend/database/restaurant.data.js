@@ -5,7 +5,7 @@ const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
 // Initialize data for courses
-const customers = [{}];
+const restaurants = [{}];
 
 // Connect to MongoDB
 MongoClient.connect(url)
@@ -18,7 +18,7 @@ MongoClient.connect(url)
 
     // Insert data
     collection
-      .insertMany(courses)
+      .insertMany(restaurants)
       .then((result) => {
         console.log("Document inserted successfully");
       })
