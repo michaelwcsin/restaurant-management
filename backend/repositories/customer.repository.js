@@ -10,46 +10,47 @@ export const getCustomersFromRepository = async (query) => {
   }
 }
 
-// GET
-export const getCustomerFromRepository = async (query) => {
-  try {
-    const customer = await Customer.findOne(query);
-    return customer;
-  } catch (e) {
-    throw Error("Error while fetching a customer");
-  }
-}
-
-// CREATE
-export const createCustomersInRepository = async (data) => {
-  try {
-    const customer = await Customer.create(data);
-    return customer;
-  } catch (e) {
-    throw Error("Error while creating a customer");
-  }
-}
-
 // PATCH
 export const updateCustomersInRepository = async (query, update) => {
-  try {
-    const customer = await Customer.findOneAndUpdate(
-      { ...query },
-      { ...update },
-      { new: true }
-    ).lean();
-    return customer;
-  } catch (e) {
-    throw Error("Error while updating customer");
-  } 
-}
-
-// DELETE
-export const deleteCustomerFromRepository = async (query) => {
-  try {
-    const customer = await Customer.findOneAndDelete({ ...query });
-    return customer;
-  } catch (e) {
-    throw Error("Error while deleting a customer");
+    try {
+      const customer = await Customer.findOneAndUpdate(
+        { ...query },
+        { ...update },
+        { new: true }
+      ).lean();
+      return customer;
+    } catch (e) {
+      throw Error("Error while updating customer");
+    } 
   }
-}
+  
+  // DELETE
+  export const deleteCustomerFromRepository = async (query) => {
+    try {
+      const customer = await Customer.findOneAndDelete({ ...query });
+      return customer;
+    } catch (e) {
+      throw Error("Error while deleting a customer");
+    }
+  }
+
+
+export const createCustomerInRepository = async (data) => {
+  try {
+      const { name, email, address, phone } = data;
+      const existingCustomer = await Customer.findOne({ email });
+      if (existingCustomer) {
+          throw new Error('Customer already exists');
+      }
+      const newCustomer = new Customer({
+          name,
+          email,
+          address,
+          phone
+      });
+      const savedCustomer = await newCustomer.save();
+      return savedCustomer;
+  } catch (error) {
+      throw new Error(`Failed to create customer: ${error.message}`);
+  }
+};

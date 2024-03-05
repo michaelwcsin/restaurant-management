@@ -1,4 +1,5 @@
-import { getCustomersFromRepository, updateCustomersInRepository, deleteCustomerFromRepository, createCustomersInRepository } from '../repositories/customer.repository.js';
+import { getCustomersFromRepository, updateCustomersInRepository, deleteCustomerFromRepository, createCustomerInRepository } from '../repositories/customer.repository.js';
+
 
 export const getCustomers = async (req, res) => {
   try {
@@ -9,20 +10,11 @@ export const getCustomers = async (req, res) => {
   }
 }
 
-export const getCustomer = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const customer = await getCustomersFromRepository({ _id: id });
-    res.status(200).send(customer);
-  } catch (e) {
-    res.status(500).send(`Failed to get customer ${id}: ${e.message}`);
-  }
-}
 
 export const createCustomer = async (req, res) => {
   const { body } = req;
   try {
-    const customer = await createCustomersInRepository(body);
+    const customer = await createCustomerInRepository(body);
     console.log(customer);
     res.status(200).send(customer);
   } catch (e) {
