@@ -25,7 +25,7 @@ export const updateMenusInRepository = async (query, update) => {
 };
 
 // DELETE
-export const deleteMenusFromRepository = async (query) => {
+export const deleteMenuFromRepository = async (query) => {
   try {
     const menus = await Menu.findOneAndDelete({ ...query });
     return menus;

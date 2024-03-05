@@ -1,3 +1,10 @@
+import {
+  createOrdersInRepository,
+  deleteOrderFromRepository,
+  getOrdersFromRepository,
+  updateOrderInRepository,
+} from "../repositories/order.repository.js";
+
 export const getOrders = async (req, res) => {
   try {
     const orders = await getOrdersFromRepository({});
@@ -10,7 +17,7 @@ export const getOrders = async (req, res) => {
 export const createOrder = async (req, res) => {
   const { body } = req;
   try {
-    const orders = await createOrderInRepository(body);
+    const orders = await createOrdersInRepository(body);
     console.log(orders);
     res.status(200).send(orders);
   } catch (e) {
@@ -22,7 +29,7 @@ export const updateOrder = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   try {
-    const orders = await updateOrdersInRepository({ _id: id }, body);
+    const orders = await updateOrderInRepository({ _id: id }, body);
     res.status(200).send(orders);
   } catch (e) {
     res.status(500).send(`Failed to update orders ${id}: ${e.message}`);
@@ -32,7 +39,7 @@ export const updateOrder = async (req, res) => {
 export const deleteOrders = async (req, res) => {
   const { id } = req.params;
   try {
-    const orders = await deleteOrdersFromRepository({ _id: id });
+    const orders = await deleteOrderFromRepository({ _id: id });
     if (orders) {
       res.status(204).send();
     } else {

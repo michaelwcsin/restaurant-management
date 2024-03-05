@@ -50,15 +50,3 @@ export const deleteCustomer = async (req, res) => {
     res.status(500).send(`Failed to delete customer ${id}: ${e.message}`);
   }
 };
-
-// Restaurants
-// ! Create, Update, Delete, GET
-
-// Menus
-// ! Create, Update, Delete, GET
-
-// Pickup
-// ! Create, Update, Delete, GET
-
-// Orders
-// ! Create, Update, Delete, GET

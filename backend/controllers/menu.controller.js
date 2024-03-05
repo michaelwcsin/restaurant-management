@@ -1,6 +1,13 @@
+import {
+  createMenusInRepository,
+  deleteMenuFromRepository,
+  getMenusFromRepository,
+  updateMenusInRepository,
+} from "../repositories/menu.repository.js";
+
 export const getMenus = async (req, res) => {
   try {
-    const menus = await getMenuFromRepository({});
+    const menus = await getMenusFromRepository({});
     res.status(200).send(menus);
   } catch (e) {
     res.status(500).send(`Failed to get a list of menus: ${e.message}`);
@@ -10,7 +17,7 @@ export const getMenus = async (req, res) => {
 export const createMenu = async (req, res) => {
   const { body } = req;
   try {
-    const menus = await createMenuInRepository(body);
+    const menus = await createMenusInRepository(body);
     console.log(menus);
     res.status(200).send(menus);
   } catch (e) {
