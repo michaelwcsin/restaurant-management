@@ -1,6 +1,13 @@
-export const getPickup = async (req, res) => {
+import {
+  createPickupsInRepository,
+  deletePickupFromRepository,
+  getPickupsFromRepository,
+  updatePickupsInRepository,
+} from "../repositories/pickup.repository.js";
+
+export const getPickups = async (req, res) => {
   try {
-    const pickup = await getPickupFromRepository({});
+    const pickup = await getPickupsFromRepository({});
     res.status(200).send(pickup);
   } catch (e) {
     res.status(500).send(`Failed to get a list of pickup: ${e.message}`);
@@ -10,7 +17,7 @@ export const getPickup = async (req, res) => {
 export const createPickup = async (req, res) => {
   const { body } = req;
   try {
-    const pickup = await createPickupInRepository(body);
+    const pickup = await createPickupsInRepository(body);
     console.log(pickup);
     res.status(200).send(pickup);
   } catch (e) {

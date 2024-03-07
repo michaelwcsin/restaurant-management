@@ -5,6 +5,7 @@ import {
   getPickups,
   updatePickup,
 } from "../controllers/pickup.controller.js";
+
 const router = express.Router();
 
 router.get("/", getPickups);
