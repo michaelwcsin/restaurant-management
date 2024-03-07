@@ -18,9 +18,9 @@ ConnectDB();
 // Routes
 app.use("/customers", customerRoutes);
 app.use("/restaurants", restaurantRoutes);
-app.use("/menu", menuRoutes);
-app.use("/order", orderRoutes);
-app.use("/pickup", pickupRoutes);
+app.use("/menus", menuRoutes);
+app.use("/orders", orderRoutes);
+app.use("/pickups", pickupRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
