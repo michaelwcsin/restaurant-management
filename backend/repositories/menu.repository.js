@@ -1,4 +1,5 @@
 import Menu from "../models/menu.model.js";
+import Restaurant from "../models/restaurant.model.js";
 
 // GET
 export const getMenusFromRepository = async (query) => {
@@ -34,23 +35,33 @@ export const deleteMenuFromRepository = async (query) => {
   }
 };
 
-export const createMenusInRepository = async (data) => {
+// POST
+export const createMenuInRepository = async (req, res) => {
+  const { restaurantEmail, name, description, price, status } = req.body;
   try {
-    const { restaurantId, name, description, price, status } = data;
-    const existingMenus = await Menu.findOne({ _id });
-    if (existingMenus) {
-      throw new Error("Menu already exists");
+    // Findrestaurant by email
+    const restaurant = await Restaurant.findOne({ email: restaurantEmail });
+    
+    if (!restaurant) {
+      return res.status(404).json({ error: "Restaurant not found" });
     }
-    const newMenus = new Menu({
+
+    // Extract restaurantId
+    const restaurantId = restaurant._id;
+
+    const newMenu = new Menu({
       restaurantId,
       name,
       description,
       price,
       status,
     });
-    const savedMenus = await newMenus.save();
-    return savedMenus;
+
+    const savedMenu = await newMenu.save();
+
+    res.status(201).json(savedMenu);
   } catch (error) {
-    throw new Error(`Failed to create menu: ${error.message}`);
+    console.error("Error creating menu:", error);
+    res.status(500).json({ error: "Failed to create menu" });
   }
 };
