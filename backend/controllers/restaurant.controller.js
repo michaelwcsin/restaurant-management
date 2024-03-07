@@ -3,7 +3,7 @@ import {
   deleteRestaurantFromRepository,
   getRestaurantsFromRepository,
   updateRestaurantsInRepository,
-} from "../repositories/menu.repository.js";
+} from "../repositories/restaurant.repository.js";
 
 export const getRestaurants = async (req, res) => {
   try {

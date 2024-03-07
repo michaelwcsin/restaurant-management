@@ -1,9 +1,9 @@
 import {
-  createPickupInRepository,
+  createPickupsInRepository,
   deletePickupFromRepository,
   getPickupsFromRepository,
   updatePickupsInRepository,
-} from "../repositories/menu.repository.js";
+} from "../repositories/pickup.repository.js";
 
 export const getPickups = async (req, res) => {
   try {
@@ -17,7 +17,7 @@ export const getPickups = async (req, res) => {
 export const createPickup = async (req, res) => {
   const { body } = req;
   try {
-    const pickup = await createPickupInRepository(body);
+    const pickup = await createPickupsInRepository(body);
     console.log(pickup);
     res.status(200).send(pickup);
   } catch (e) {

@@ -34,7 +34,7 @@ export const deletePickupFromRepository = async (query) => {
   }
 };
 
-export const createPickupInRepository = async (data) => {
+export const createPickupsInRepository = async (data) => {
   try {
     const { orderId, date, pickUpTime } = data;
     const existingPickup = await Pickup.findOne({ email });

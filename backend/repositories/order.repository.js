@@ -34,7 +34,7 @@ export const deleteOrderFromRepository = async (query) => {
   }
 };
 
-export const createOrderInRepository = async (data) => {
+export const createOrdersInRepository = async (data) => {
   try {
     const { customerId, restaurantId, menuItems, sumPrice } = data;
     const existingOrder = await Order.findOne({ _id });
