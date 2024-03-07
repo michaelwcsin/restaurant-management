@@ -5,6 +5,7 @@ import {
   getMenus,
   updateMenu,
 } from "../controllers/menu.controller.js";
+
 const router = express.Router();
 
 router.get("/", getMenus);
