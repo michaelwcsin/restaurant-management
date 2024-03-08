@@ -5,7 +5,27 @@ const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
 // Initialize data for courses
-const menu = [{}];
+const menus = [
+  {
+    name: "Spaghetti Carbonara",
+    description: "Classic Italian pasta dish with bacon, eggs, and cheese",
+    price: 14.99,
+    status: true,
+  },
+  {
+    name: "Margarita Pizza",
+    description: "Traditional pizza with tomato sauce, mozzarella, and basil",
+    price: 12.99,
+    status: true,
+  },
+  { 
+    name: "Grilled Salmon",
+    description: "Fresh salmon fillet grilled to perfection, served with steamed vegetables",
+    price: 18.99,
+    status: false,
+  },
+];
+
 
 // Connect to MongoDB
 MongoClient.connect(url)
@@ -18,7 +38,7 @@ MongoClient.connect(url)
 
     // Insert data
     collection
-      .insertMany(menu)
+      .insertMany(menus)
       .then((result) => {
         console.log("Document inserted successfully");
       })
