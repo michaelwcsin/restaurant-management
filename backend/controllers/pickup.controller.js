@@ -1,5 +1,5 @@
 import {
-  createPickupsInRepository,
+  createPickupInRepository,
   deletePickupFromRepository,
   getPickupsFromRepository,
   updatePickupsInRepository,
@@ -17,7 +17,7 @@ export const getPickups = async (req, res) => {
 export const createPickup = async (req, res) => {
   const { body } = req;
   try {
-    const pickup = await createPickupsInRepository(body);
+    const pickup = await createPickupInRepository(body);
     console.log(pickup);
     res.status(200).send(pickup);
   } catch (e) {

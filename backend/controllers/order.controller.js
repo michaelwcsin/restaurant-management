@@ -1,5 +1,5 @@
 import {
-  createOrdersInRepository,
+  createOrderInRepository,
   deleteOrderFromRepository,
   getOrdersFromRepository,
   updateOrdersInRepository,
@@ -17,7 +17,7 @@ export const getOrders = async (req, res) => {
 export const createOrder = async (req, res) => {
   const { body } = req;
   try {
-    const orders = await createOrdersInRepository(body);
+    const orders = await createOrderInRepository(body);
     console.log(orders);
     res.status(200).send(orders);
   } catch (e) {
