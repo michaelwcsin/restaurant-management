@@ -6,12 +6,12 @@ const MenuList = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchMenus = async () => {
       const response = await axios("http://localhost:8000/menus");
       setMenuItems(response.data);
       console.log(response.data);
     };
-    fetchUsers();
+    fetchMenus();
   }, []);
 
   return (
