@@ -1,23 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Badge from 'react-bootstrap/Badge';
-import RestaurantList from './Restaurant'; 
+import React from "react";
+import Badge from "react-bootstrap/Badge";
+import {
+  Link,
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+import RestaurantList from "./Restaurant";
+import HomePage from "./pages/shared/homepage.pages";
+import CustomerPage from "./pages/user/customer.pages";
 
 const App = () => {
   return (
     <Router>
-      <div>
-        <h1>Restaurant Management</h1>
-        <Badge bg="secondary">
-          <Link to="/restaurants" className="btn btn-primary btn-lg">
-            Available Restaurants
-          </Link>
-        </Badge>
-
-        <Routes>
-          <Route path="/restaurants" element={<RestaurantList />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route index element={<Navigate to="/home" />}></Route>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/restaurants" element={<RestaurantList />} />
+        <Route path="/customers" element={<CustomerPage />} />
+      </Routes>
     </Router>
   );
 };

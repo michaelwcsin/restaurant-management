@@ -1,0 +1,26 @@
+.onboarding {
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  align-items: center;
+  justify-content: center;
+}
+.onboarding h1 {
+  font-size: 6rem;
+  font-weight: 800;
+}
+.onboarding button {
+  width: 15%;
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  text-align: center;
+  margin: 10px;
+}
+.onboarding a {
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 30%;
+  text-decoration: none;
+  color: black;
+}

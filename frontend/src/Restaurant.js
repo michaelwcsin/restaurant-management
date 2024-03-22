@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavBar from "./components/shared/navbar/navbar.component";
 import MenuList from "./components/user/menu/menuList.component";
 
 function RestaurantList() {
@@ -30,6 +31,7 @@ function RestaurantList() {
 
   return (
     <div className="restaurant-list">
+      <NavBar />
       <h1>Restaurants</h1>
       <div className="search-bar">
         <input
