@@ -10,12 +10,12 @@ const HomePage = () => {
       <div className="onboarding">
         <h1>MINKs</h1>
 
-        <button>
+        <button className="options">
           <a href="/customers">Go to Customer View</a>
         </button>
 
-        <button>
-          <a href="/restaurants">Go to Manager view</a>
+        <button className="options">
+          <a href="/restaurants">Go to Manager View</a>
         </button>
       </div>
     </div>
