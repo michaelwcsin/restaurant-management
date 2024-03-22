@@ -1,6 +1,11 @@
+.homepage {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .onboarding {
   display: flex;
-  height: 80vh;
+  height: 100vh;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
   align-items: center;

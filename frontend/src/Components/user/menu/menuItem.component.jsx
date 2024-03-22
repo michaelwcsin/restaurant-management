@@ -9,7 +9,11 @@ const MenuItem = ({ menuItem }) => {
   const [count, setCount] = useState(1);
 
   const addToCount = () => {
-    setCount(count + 1);
+    if (count < 99) {
+      setCount(count + 1);
+    } else {
+      setCount(99);
+    }
   };
 
   const subtractFromCount = () => {

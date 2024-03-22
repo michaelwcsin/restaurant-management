@@ -167,10 +167,11 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 .add-items p {
   font-size: 1.75rem;
+  padding-top: 3px;
   margin: 0;
 }
 .item-incrementor {

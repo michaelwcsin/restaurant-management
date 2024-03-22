@@ -1,10 +1,14 @@
 import React from "react";
+import AshBackground from "../../assets/background/ash.png";
 import NavBar from "../../components/shared/navbar/navbar.component";
 import "./homepage.styles.css";
 
 const HomePage = () => {
   return (
-    <div className="homepage">
+    <div
+      className="homepage"
+      style={{ backgroundImage: `url(${AshBackground})` }}
+    >
       <NavBar />
 
       <div className="onboarding">
