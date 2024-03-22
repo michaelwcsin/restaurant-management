@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import MenuList from "./components/user/menu/menuList.component";
 
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/restaurants');
-        console.log('Response:', response.data);
+        const response = await axios.get("http://localhost:8000/restaurants");
+        console.log("Response:", response.data);
         setRestaurants(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching restaurants:', error);
+        console.error("Error fetching restaurants:", error);
         setLoading(false);
       }
     };
@@ -47,18 +48,26 @@ function RestaurantList() {
           {filteredRestaurants.map((restaurant) => (
             <div key={restaurant._id} className="restaurant-card">
               <h2>{restaurant.name}</h2>
-              <p><strong>Email:</strong> {restaurant.email}</p>
-              <p><strong>Address:</strong> {restaurant.address}</p>
+              <p>
+                <strong>Email:</strong> {restaurant.email}
+              </p>
+              <p>
+                <strong>Address:</strong> {restaurant.address}
+              </p>
               <ul>
                 {restaurant.menuItems.map((menuItem) => (
                   <li key={menuItem._id}>{menuItem.name}</li>
                 ))}
               </ul>
-              <Link to={`/restaurants/${restaurant._id}/details`}>Place Order</Link>
+              <Link to={`/restaurants/${restaurant._id}/details`}>
+                Place Order
+              </Link>
             </div>
           ))}
         </div>
       )}
+
+      <MenuList />
     </div>
   );
 }

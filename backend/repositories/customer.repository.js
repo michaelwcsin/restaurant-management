@@ -1,12 +1,22 @@
 import Customer from "../models/customer.model.js";
 
-// GET
+// GET customer list
 export const getCustomersFromRepository = async (query) => {
   try {
     const customers = await Customer.find(query);
     return customers;
   } catch (e) {
     throw Error("Error while fetching customers");
+  }
+};
+
+// GET single customer
+export const getCustomerFromRepository = async (query) => {
+  try {
+    const customer = await Customer.find(query);
+    return customer;
+  } catch (e) {
+    throw Error("Error while fetching customer");
   }
 };
 
