@@ -11,14 +11,15 @@
   font-weight: 800;
 }
 .onboarding button {
-  width: 20%;
+  width: 15%;
   border: 2px solid lightgray;
   border-radius: 10px;
   text-align: center;
   margin: 10px;
 }
 .onboarding a {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
   width: 30%;
   text-decoration: none;
   color: black;
