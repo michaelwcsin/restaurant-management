@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
+import cors from "cors"; 
 import customerRoutes from "./routes/customer.route.js";
 import menuRoutes from "./routes/menu.route.js";
 import orderRoutes from "./routes/order.route.js";
@@ -12,6 +13,7 @@ const port = 8000;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors()); 
 
 ConnectDB();
 
