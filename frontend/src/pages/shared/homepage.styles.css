@@ -1,6 +1,11 @@
+.homepage {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .onboarding {
   display: flex;
-  height: 80vh;
+  height: 100vh;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
   align-items: center;
@@ -10,17 +15,24 @@
   font-size: 6rem;
   font-weight: 800;
 }
-.onboarding button {
+.options {
   width: 15%;
-  border: 2px solid lightgray;
-  border-radius: 10px;
+  border: 2px solid #212529;
+  border-radius: 8px;
   text-align: center;
   margin: 10px;
+  transition-duration: 0.4s;
 }
-.onboarding a {
+.options:hover {
+  background-color: #212529;
+}
+.options a {
   font-size: 1.5rem;
   font-weight: 500;
   width: 30%;
   text-decoration: none;
-  color: black;
+  color: #212529;
+}
+.options a:hover {
+  color: white;
 }
