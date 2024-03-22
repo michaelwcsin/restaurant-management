@@ -1,8 +1,28 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { useState } from "react";
+import addSVG from "../../../assets/itemcontrol/add.svg";
+import subtractSVG from "../../../assets/itemcontrol/subtract.svg";
 import "./menuItem.styles.css";
 
 const MenuItem = ({ menuItem }) => {
   const { name, description, price } = menuItem;
+  const [count, setCount] = useState(1);
+
+  const addToCount = () => {
+    if (count < 99) {
+      setCount(count + 1);
+    } else {
+      setCount(99);
+    }
+  };
+
+  const subtractFromCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    } else {
+      setCount(1);
+    }
+  };
 
   return (
     <Dialog.Root>
@@ -22,9 +42,13 @@ const MenuItem = ({ menuItem }) => {
           </Dialog.Description>
 
           <div className="add-items">
-            <button>Minus</button>
-            <p>Count</p>
-            <button>Plus</button>
+            <button className="item-button" onClick={subtractFromCount}>
+              <img src={subtractSVG} alt="subtractSVG" />
+            </button>
+            <p>{count}</p>
+            <button className="item-button" onClick={addToCount}>
+              <img src={addSVG} alt="addSVG" />
+            </button>
           </div>
 
           <div className="add-to-cart">

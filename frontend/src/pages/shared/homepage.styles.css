@@ -1,3 +1,8 @@
+.homepage {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .onboarding {
   display: flex;
   height: 85vh;
@@ -16,7 +21,7 @@
   color: white;
   font-size: 2rem;
 }
-.onboarding button {
+.options {
   width: 15%;
   height: 50px;
   border-radius: 20px;
