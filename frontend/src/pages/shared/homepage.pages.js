@@ -8,7 +8,7 @@ const HomePage = () => {
       <NavBar />
 
       <div className="onboarding">
-        <h1>Name of Company</h1>
+        <h1>MINKs</h1>
 
         <button>
           <a href="/customers">Go to Customer View</a>
