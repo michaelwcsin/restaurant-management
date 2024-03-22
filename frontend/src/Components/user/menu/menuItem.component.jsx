@@ -1,6 +1,4 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import "./menuItem.styles.css";
 
 const MenuItem = ({ menuItem }) => {
