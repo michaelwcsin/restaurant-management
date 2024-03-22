@@ -1,26 +1,49 @@
 .onboarding {
   display: flex;
-  height: 80vh;
+  height: 85vh;
   flex-direction: column;
-  font-family: "Roboto", sans-serif;
   align-items: center;
   justify-content: center;
+  padding-top: 90px;
 }
 .onboarding h1 {
-  font-size: 6rem;
+  color: white;
+  font-size: 7rem;
   font-weight: 800;
+  letter-spacing: 2rem;
+}
+.onboarding h3 {
+  color: white;
+  font-size: 2rem;
 }
 .onboarding button {
   width: 15%;
-  border: 2px solid lightgray;
-  border-radius: 10px;
+  height: 50px;
+  border-radius: 20px;
   text-align: center;
   margin: 10px;
+  background-color: rgba(254, 254, 254, 0.885)
+
 }
 .onboarding a {
-  font-size: 1.5rem;
+  font-size: 2vh;
   font-weight: 500;
   width: 30%;
   text-decoration: none;
-  color: black;
+  color: rgb(92, 92, 92);
+  background-color: rgba(254, 254, 254, 0)
+}
+
+.homepage{
+  height: 100vh;
+  background-color: black;
+  background-image: url('./louis-hansel-phEaeqe555M-unsplash.jpg') ;
+  background-size: cover;
+  box-shadow: inset 0 0 0 2000px rgba(0,0,0,.3);
+}
+
+.twoButtons {
+  padding-top: 0;
+  align-items: center;
+  justify-content: center;
 }
