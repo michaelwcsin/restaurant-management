@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
-import RestaurantList from './Restaurant'; // Import your RestaurantList component
+import RestaurantList from './Restaurant'; 
 
 const App = () => {
   return (
