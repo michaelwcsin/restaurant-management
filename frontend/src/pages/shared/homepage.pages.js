@@ -1,6 +1,6 @@
 import React from "react";
 import AshBackground from "../../assets/background/ash.png";
-import NavBar from "../../components/shared/navbar/navbar.component";
+import NavBar from "../../Components/shared/navbar/navbar.component";
 import "./homepage.styles.css";
 
 const HomePage = () => {
@@ -19,7 +19,7 @@ const HomePage = () => {
         </button>
 
         <button className="options">
-          <a href="/restaurants">Go to Manager View</a>
+          <a href="/manager">Go to Manager View</a>
         </button>
       </div>
     </div>

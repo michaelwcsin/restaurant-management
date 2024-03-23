@@ -36,10 +36,11 @@ export const deleteMenuFromRepository = async (query) => {
 };
 
 // POST
+// POST
 export const createMenuInRepository = async (data) => {
   try {
     const { name, description, price, status } = data;
-    const existingMenu = await Menu.findOne({ email });
+    const existingMenu = await Menu.findOne({ name }); // Check for existing menu by name
     if (existingMenu) {
       throw new Error("Menu already exists");
     }
@@ -55,3 +56,4 @@ export const createMenuInRepository = async (data) => {
     throw new Error(`Failed to create menu: ${error.message}`);
   }
 };
+
