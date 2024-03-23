@@ -1,7 +1,5 @@
 import React from "react";
-import Badge from "react-bootstrap/Badge";
 import {
-  Link,
   Navigate,
   Route,
   BrowserRouter as Router,
