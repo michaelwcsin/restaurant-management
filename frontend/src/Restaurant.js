@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "./components/shared/navbar/navbar.component";
-import MenuList from "./components/user/menu/menuList.component";
+
+import NavBar from "./Components/shared/navbar/navbar.component.jsx";
+import MenuList from "./Components/user/menu/menuList.component";
+
 import { Container, Card, Image, Dimmer, Header, Input, Button } from 'semantic-ui-react';
 
 

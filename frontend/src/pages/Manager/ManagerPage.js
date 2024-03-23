@@ -1,18 +1,18 @@
 import React from "react";
 import NavBar from "../../Components/shared/navbar/navbar.component";
 
-const CustomerPage = () => {
+const ManagerPage = () => {
   return (
     <div>
       <NavBar />
       <div className="onboarding">
-        <h1>Choose a following option</h1>
+        <h1>Manager Functions</h1>
         <button className="options">
-          <a href="/placeorder">Place Order</a>
+          <a href="/add-menu-item">Add Menu Item</a>
         </button>
       </div>
     </div>
   );
 };
 
-export default CustomerPage;
+export default ManagerPage;
