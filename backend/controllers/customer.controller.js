@@ -1,6 +1,7 @@
 import {
   createCustomerInRepository,
   deleteCustomerFromRepository,
+  getCustomerFromRepository,
   getCustomersFromRepository,
   updateCustomersInRepository,
 } from "../repositories/customer.repository.js";
@@ -12,6 +13,16 @@ export const getCustomers = async (req, res) => {
     res.status(200).send(customers);
   } catch (e) {
     res.status(500).send(`Failed to get a list of customers: ${e.message}`);
+  }
+};
+
+// ! Should get one single customer
+export const getCustomer = async (req, res) => {
+  try {
+    const customer = await getCustomerFromRepository({});
+    res.status(200).send(customer);
+  } catch (e) {
+    res.status(500).send(`Failed to get customer: ${e.message}`);
   }
 };
 
@@ -50,15 +61,3 @@ export const deleteCustomer = async (req, res) => {
     res.status(500).send(`Failed to delete customer ${id}: ${e.message}`);
   }
 };
-
-// Restaurants
-// ! Create, Update, Delete, GET
-
-// Menus
-// ! Create, Update, Delete, GET
-
-// Pickup
-// ! Create, Update, Delete, GET
-
-// Orders
-// ! Create, Update, Delete, GET
