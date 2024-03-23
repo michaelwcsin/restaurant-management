@@ -1,17 +1,21 @@
 .homepage {
   height: 100vh;
-  overflow-y: hidden;
+  background-color: black;
+  background-image: url("./louis-hansel-phEaeqe555M-unsplash.jpg");
+  background-size: cover;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);
 }
 
 .onboarding {
   display: flex;
-  height: 85vh;
+  height: 80vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-top: 90px;
 }
 .onboarding h1 {
+  font-family: "Roboto", sans-serif;
   color: white;
   font-size: 7rem;
   font-weight: 800;
@@ -27,28 +31,28 @@
   border-radius: 20px;
   text-align: center;
   margin: 10px;
-  background-color: rgba(254, 254, 254, 0.885)
-
+  background-color: rgba(254, 254, 254, 0.885);
 }
 .onboarding a {
-  font-size: 2vh;
+  font-size: 1.25rem;
   font-weight: 500;
   width: 30%;
   text-decoration: none;
   color: rgb(92, 92, 92);
-  background-color: rgba(254, 254, 254, 0)
-}
-
-.homepage{
-  height: 100vh;
-  background-color: black;
-  background-image: url('./louis-hansel-phEaeqe555M-unsplash.jpg') ;
-  background-size: cover;
-  box-shadow: inset 0 0 0 2000px rgba(0,0,0,.3);
+  background-color: rgba(254, 254, 254, 0);
 }
 
 .twoButtons {
   padding-top: 0;
   align-items: center;
   justify-content: center;
+}
+
+#manager-button {
+  color: black;
+}
+
+.shadow-sm {
+  width: 15%;
+  margin: 10px;
 }
