@@ -11,6 +11,8 @@ function RestaurantList() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [active, setActive] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
+
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -61,14 +63,14 @@ function RestaurantList() {
                           <Card key={restaurant._id}>
                             <Dimmer.Dimmable
                                 as={Image}
-                                dimmed={active}
-                                dimmer={{ active, content: (
+                                dimmed={hoveredCard === restaurant._id}
+                                dimmer={{ active: hoveredCard === restaurant._id, content: (
                                     <Button primary onClick={() => alert('Place your order!')}>
                                         Order Here
                                     </Button>
                                 ) }}
-                                onMouseEnter={() => setActive(true)}
-                                onMouseLeave={() => setActive(false)}
+                                onMouseEnter={() => setHoveredCard(restaurant._id)}
+                                onMouseLeave={() => setHoveredCard(null)}
                                 // src='/assets/restaurantsphoto/Cactus.jpg'
                                 src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg'
                             />
@@ -86,9 +88,7 @@ function RestaurantList() {
                       ))}
                   </div>
               )}
-
               <MenuList/>
-
           </Container>
       </div>
   )}
