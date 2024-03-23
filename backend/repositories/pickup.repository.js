@@ -10,19 +10,36 @@ export const getPickupsFromRepository = async (query) => {
   }
 };
 
-// PATCH
+// PATCH (update Date and/or time of the order)
 export const updatePickupsInRepository = async (query, update) => {
   try {
-    const pickups = await Pickup.findOneAndUpdate(
+    const { date, pickUpTime } = update; 
+
+    const updateFields = {};
+    if (date) {
+      updateFields.date = date;
+    }
+    if (pickUpTime) {
+      updateFields.pickUpTime = pickUpTime;
+    }
+
+    const updatedPickup = await Pickup.findOneAndUpdate(
       { ...query },
-      { ...update },
+      { $set: updateFields }, 
       { new: true }
     ).lean();
-    return pickups;
+
+    if (!updatedPickup) {
+      throw new Error("Pickup order not found");
+    }
+
+    return updatedPickup;
   } catch (e) {
-    throw Error("Error while updating pickups");
+    throw new Error(`Error while updating pickup order: ${e.message}`);
   }
 };
+
+
 
 // DELETE
 export const deletePickupFromRepository = async (query) => {
@@ -37,10 +54,6 @@ export const deletePickupFromRepository = async (query) => {
 export const createPickupInRepository = async (data) => {
   try {
     const { orderId, date, pickUpTime } = data;
-    const existingPickup = await Pickup.findOne({ email });
-    if (existingPickup) {
-      throw new Error("Pickup already exists");
-    }
     const newPickup = new Pickup({
       orderId,
       date,

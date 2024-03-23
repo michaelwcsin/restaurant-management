@@ -1,5 +1,6 @@
 import Menu from "../models/menu.model.js";
 
+
 // GET
 export const getMenusFromRepository = async (query) => {
   try {
@@ -25,7 +26,7 @@ export const updateMenusInRepository = async (query, update) => {
 };
 
 // DELETE
-export const deleteMenusFromRepository = async (query) => {
+export const deleteMenuFromRepository = async (query) => {
   try {
     const menus = await Menu.findOneAndDelete({ ...query });
     return menus;
@@ -34,22 +35,22 @@ export const deleteMenusFromRepository = async (query) => {
   }
 };
 
-export const createMenusInRepository = async (data) => {
+// POST
+export const createMenuInRepository = async (data) => {
   try {
-    const { restaurantId, name, description, price, status } = data;
-    const existingMenus = await Menu.findOne({ _id });
-    if (existingMenus) {
+    const { name, description, price, status } = data;
+    const existingMenu = await Menu.findOne({ email });
+    if (existingMenu) {
       throw new Error("Menu already exists");
     }
-    const newMenus = new Menu({
-      restaurantId,
+    const newMenu = new Menu({
       name,
       description,
       price,
       status,
     });
-    const savedMenus = await newMenus.save();
-    return savedMenus;
+    const savedMenu = await newMenu.save();
+    return savedMenu;
   } catch (error) {
     throw new Error(`Failed to create menu: ${error.message}`);
   }

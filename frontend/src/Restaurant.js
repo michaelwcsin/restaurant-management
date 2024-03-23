@@ -13,7 +13,6 @@ function RestaurantList() {
   const [active, setActive] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
 
-
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
@@ -33,7 +32,6 @@ function RestaurantList() {
   const filteredRestaurants = restaurants.filter((restaurant) =>
     restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
 
   return (
 
@@ -93,6 +91,49 @@ function RestaurantList() {
       </div>
   )}
 
+  return (
+    <div className="restaurant-list">
+      <NavBar />
+      <h1>Restaurants</h1>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search Restaurant 🔍"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : filteredRestaurants.length === 0 ? (
+        <p>No restaurants found.</p>
+      ) : (
+        <div className="restaurant-container">
+          {filteredRestaurants.map((restaurant) => (
+            <div key={restaurant._id} className="restaurant-card">
+              <h2>{restaurant.name}</h2>
+              <p>
+                <strong>Email:</strong> {restaurant.email}
+              </p>
+              <p>
+                <strong>Address:</strong> {restaurant.address}
+              </p>
+              <ul>
+                {restaurant.menuItems.map((menuItem) => (
+                  <li key={menuItem._id}>{menuItem.name}</li>
+                ))}
+              </ul>
+              <Link to={`/restaurants/${restaurant._id}/details`}>
+                Place Order
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
 
+      <MenuList />
+    </div>
+  );
+}
 
 export default RestaurantList;

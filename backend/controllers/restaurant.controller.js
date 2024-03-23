@@ -1,3 +1,10 @@
+import {
+  createRestaurantInRepository,
+  deleteRestaurantFromRepository,
+  getRestaurantsFromRepository,
+  updateRestaurantsInRepository,
+} from "../repositories/restaurant.repository.js";
+
 export const getRestaurants = async (req, res) => {
   try {
     const restaurants = await getRestaurantsFromRepository({});
