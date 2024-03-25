@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../components/shared/navbar/navbar.component";
+import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";;
 
 const ManagerPage = () => {
   return (

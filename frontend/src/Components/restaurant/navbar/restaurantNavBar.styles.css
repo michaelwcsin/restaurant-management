@@ -1,0 +1,25 @@
+.navBar {
+  background-color: rgba(254, 254, 254, 0.829);
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 30px;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  width: 95%;
+}
+.navBarBrand {
+  display: inline-flex;
+  align-items: center;
+}
+
+b {
+  color: rgb(140, 174, 140);
+  font-size: 1.75vh;
+}
+
+b1 {
+  font-weight: bold;
+  color: rgb(140, 174, 140);
+  font-size: 2vh;
+}

@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
-import AshBackground from "../../assets/background/ash.png";
-import NavBar from "../../components/shared/navbar/navbar.component";
+import NavBar from "../../components/home/navbar/homeNavBar.component";
 import "./homepage.styles.css";
 
 const HomePage = () => {
@@ -10,22 +9,30 @@ const HomePage = () => {
     <div className="homepage">
       <NavBar />
 
-      <Stack className="onboarding">
-        <h1>MINK</h1>
-        <h3>Food Service Made Easy</h3>
-        <Stack className="twoButtons">
-          <Button variant="light" className="shadow-sm">
-            <a href="/customers">
-              <b>Customer View</b>
-            </a>
-          </Button>
-          <Button variant="light" className="shadow-sm">
-            <a href="/manager">
-              <b id="manager-button">Manager View</b>
-            </a>
-          </Button>
+      <Stack gap={5} className="onboarding">
+        <div>
+          <h1>MINK</h1>
+          <h3>Food Service Made Easy</h3>
+        </div>
+        <div>
+        <Stack gap={3} className="stack">
+          <div>
+            <Button variant="light" className="twoButtons">
+              <a href="/customers">
+                <b id="customer-button">Customer View</b>
+              </a>
+            </Button>
+          </div>
+          <div>
+            <Button variant="light" className="twoButtons">
+              <a href="/manager">
+                <b id="manager-button">Manager View</b>
+              </a>
+            </Button>
+          </div>
         </Stack>
-      </Stack>
+        </div>
+    </Stack>
     </div>
   );
 };
