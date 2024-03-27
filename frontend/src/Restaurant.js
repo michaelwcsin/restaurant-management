@@ -10,11 +10,7 @@ import {
   Image,
   Input,
 } from "semantic-ui-react";
-import NavBar from "../src/components/shared/navbar/navbar.component";
-import {
-  default as MenuList,
-  default as MenuList,
-} from "../src/components/user/menu/menuList.component";
+import { default as MenuList } from "../src/components/user/menu/menuList.component";
 import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
 
 function RestaurantList() {
