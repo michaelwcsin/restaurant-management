@@ -1,10 +1,12 @@
 import React from "react";
-import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";;
+import RestaurantSelect from "../../components/admin/dropdown/dropdown.component";
+import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 
 const ManagerPage = () => {
   return (
     <div>
       <NavBar />
+      <RestaurantSelect />
       <div className="onboarding">
         <h1>Manager Functions</h1>
         <button className="options">
