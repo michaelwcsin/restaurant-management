@@ -14,11 +14,10 @@ const AdminPage = () => {
   return (
     <div className="admin-sheet">
       <h1>{selectedRestaurant.name}</h1>
+      <h4>{selectedRestaurant.address}</h4>
+      <h4>{selectedRestaurant.phone}</h4>
       <TabSheet />
-      {/* <p>{selectedRestaurant._id}</p>
-      <p>{selectedRestaurant.name}</p>
-      <p>{selectedRestaurant.address}</p>
-      <p>{selectedRestaurant.phone}</p> */}
+      {/* <p>{selectedRestaurant._id}</p> */}
     </div>
   );
 };
