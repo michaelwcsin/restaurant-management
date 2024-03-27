@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../src/components/shared/navbar/navbar.component";
+import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
 import MenuList from "../src/components/user/menu/menuList.component";
 
 import {

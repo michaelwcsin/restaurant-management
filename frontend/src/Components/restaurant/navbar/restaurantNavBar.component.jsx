@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavLink from "react-bootstrap/esm/NavLink";
-import "./navbar.styles.css";
+import "./restaurantNavBar.styles.css";
 
 function NavBar() {
   return (
@@ -26,11 +26,11 @@ function NavBar() {
           </NavLink>
           <div class="vr"></div>
           <Nav.Link href="/restaurants">
-            <b>Restaurant</b>
+            <b>Orders</b>
           </Nav.Link>
           <div class="vr"></div>
           <Nav.Link href="/customers">
-            <b>Customer</b>
+            <b>Analytics</b>
           </Nav.Link>
         </Nav>
       </Container>

@@ -8,11 +8,11 @@
 
 .onboarding {
   display: flex;
-  height: 80vh;
+  height: 60vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 90px;
+
 }
 .onboarding h1 {
   font-family: "Roboto", sans-serif;
@@ -20,10 +20,12 @@
   font-size: 7rem;
   font-weight: 800;
   letter-spacing: 2rem;
+  text-align: center;
 }
 .onboarding h3 {
   color: white;
   font-size: 2rem;
+  text-align: center;
 }
 .options {
   width: 15%;
@@ -43,16 +45,25 @@
 }
 
 .twoButtons {
-  padding-top: 0;
   align-items: center;
   justify-content: center;
+  width: 20vh;
+  height: 5vh;
 }
 
 #manager-button {
-  color: black;
+  color: rgb(96, 123, 66);
+}
+
+#customer-button {
+  color: rgb(96, 123, 66);
 }
 
 .shadow-sm {
   width: 15%;
   margin: 10px;
+}
+
+.stack {
+  padding-top: 20px;
 }
