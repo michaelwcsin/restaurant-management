@@ -25,7 +25,9 @@ const RestaurantSelect = () => {
       search
       selection
       options={restaurants.map((restaurant) => ({
+        key: restaurant._id,
         text: restaurant.name,
+        value: restaurant.name,
       }))}
       style={{ width: "40%" }}
     />
