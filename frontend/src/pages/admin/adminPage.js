@@ -1,18 +1,23 @@
 import React from "react";
 import { useRestaurant } from "../../components/admin/restaurants/RestaurantContext";
-import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
+import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
+import "./adminPage.styles.css";
+
+// TODO: Given this page with the restaurant _id, add components of menu list for specific restaurant -> alter status of menu item
+// TODO: Add - add/remove menu item to this page
+// TODO: Check orders
+// TODO: Analytics
 
 const AdminPage = () => {
   const { selectedRestaurant } = useRestaurant();
 
   return (
-    <div>
-      <NavBar />
-      <p>Hello</p>
-      <p>{selectedRestaurant.name}</p>
-      <p>{selectedRestaurant.address}</p>
-      <p>{selectedRestaurant.phone}</p>
-      <p>Goodbyes</p>
+    <div className="admin-sheet">
+      <h1>{selectedRestaurant.name}</h1>
+      <h4>{selectedRestaurant.address}</h4>
+      <h4>{selectedRestaurant.phone}</h4>
+      <TabSheet />
+      {/* <p>{selectedRestaurant._id}</p> */}
     </div>
   );
 };
