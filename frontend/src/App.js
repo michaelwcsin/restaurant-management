@@ -6,10 +6,10 @@ import {
   Routes,
 } from "react-router-dom";
 import RestaurantList from "./Restaurant";
-import HomePage from "./pages/shared/homepage.pages";
-import CustomerPage from "./pages/user/customer.pages";
 import AddMenuItem from "./pages/Manager/AddMenuItem";
 import ManagerPage from "./pages/Manager/ManagerPage";
+import HomePage from "./pages/shared/homepage.pages";
+import CustomerPage from "./pages/user/customer.pages";
 
 const App = () => {
   return (
@@ -21,7 +21,6 @@ const App = () => {
         <Route path="/customers" element={<CustomerPage />} />
         <Route path="/manager" element={<ManagerPage />} />
         <Route path="/add-menu-item" element={<AddMenuItem />} />
-
       </Routes>
     </Router>
   );

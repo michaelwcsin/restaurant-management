@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './AddMenuItem.css'; 
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./AddMenuItem.css";
 
 function AddMenuItem() {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    status: 'available', // Default status (available=true)
+    name: "",
+    description: "",
+    price: "",
+    status: "available", // Default status (available=true)
   });
 
   const handleChange = (e) => {
@@ -18,35 +18,34 @@ function AddMenuItem() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const { name, description, price, status } = formData;
-      const statusBool = status === 'available' ? true : false;
-  
-      const response = await axios.post('http://localhost:8000/menus', {
+      const statusBool = status === "available" ? true : false;
+
+      const response = await axios.post("http://localhost:8000/menus", {
         name,
         description,
         price,
         status: statusBool,
       });
-  
-      console.log('Response:', response);
-  
+
+      console.log("Response:", response);
+
       if (!response.data.success) {
-        throw new Error(response.data.message || 'Failed to add the menu item');
+        throw new Error(response.data.message || "Failed to add the menu item");
       }
-  
+
       setFormData({
-        name: '',
-        description: '',
-        price: '',
-        status: 'available',
+        name: "",
+        description: "",
+        price: "",
+        status: "available",
       });
     } catch (error) {
-      console.error('Error:', error.response); 
-    }  
+      console.error("Error:", error.response);
+    }
   };
-  
 
   return (
     <div className="container">
@@ -76,14 +75,14 @@ function AddMenuItem() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="price">Price($):</label>
+          <label htmlFor="price">Price ($):</label>
           <input
             type="number"
             id="price"
             name="price"
             value={formData.price}
             onChange={handleChange}
-            className="form-control" 
+            className="form-control"
             required
           />
         </div>
@@ -100,9 +99,13 @@ function AddMenuItem() {
             <option value="soldout">Sold Out</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary">Add Item</button>
+        <button type="submit" className="btn btn-primary">
+          Add Item
+        </button>
       </form>
-      <Link to="/home" className="btn btn-secondary">Back to Homepage</Link>
+      <Link to="/home" className="btn btn-secondary">
+        Back to Homepage
+      </Link>
     </div>
   );
 }

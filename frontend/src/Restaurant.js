@@ -1,9 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
-import MenuList from "../src/components/user/menu/menuList.component";
-
 import {
   Button,
   Card,
@@ -13,6 +10,12 @@ import {
   Image,
   Input,
 } from "semantic-ui-react";
+import NavBar from "../src/components/shared/navbar/navbar.component";
+import {
+  default as MenuList,
+  default as MenuList,
+} from "../src/components/user/menu/menuList.component";
+import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
 
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
@@ -45,7 +48,7 @@ function RestaurantList() {
     <div className="restaurant-list">
       <NavBar />
       <Container style={{ padding: 20 }}>
-        <Header as="h1">Restaurants List</Header>
+        <Header as="h1">Available Restaurants</Header>
 
         <div className="search-bar">
           <Input
