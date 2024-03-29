@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRestaurant } from "../../components/admin/restaurants/RestaurantContext";
 import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
+import MenuItem from "../../components/user/menu/menuItem.component";
 import "./adminPage.styles.css";
 
 // TODO: Given this page with the restaurant _id, add components of menu list for specific restaurant -> alter status of menu item
@@ -30,15 +31,11 @@ const AdminPage = () => {
       <h2>{selectedRestaurant.name}</h2>
       <h4>{selectedRestaurant.address}</h4>
       <h4>{selectedRestaurant.phone}</h4>
-      <h4>{selectedRestaurant._id}</h4>
-      <h4>{selectedRestaurant.menuItems}</h4>
-      <ul>
+      <div className="menu-list">
         {filteredMenus.map((menu) => (
-          <li key={menu._id}>
-            {menu.name} // {menu.description} // ${menu.price}
-          </li>
+          <MenuItem key={menu._id} menuItem={menu} />
         ))}
-      </ul>
+      </div>
       <TabSheet />
       {/* <p>{selectedRestaurant._id}</p> */}
     </div>
