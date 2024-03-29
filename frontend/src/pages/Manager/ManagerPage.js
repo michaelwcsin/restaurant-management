@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ManagerList from "../../components/admin/managerlist/managerlist.component";
+import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 import "./managerPage.styles.css";
 
@@ -8,9 +9,8 @@ const ManagerPage = () => {
   const [managerId, setManagerId] = useState("");
   const [manager, setManager] = useState({});
 
-  // Grabs manager ID from selection from dropdown and sets it in useState
+  // gets manager ID from selection from dropdown and sets it in useState
   const handleManagerSelect = (managerId) => {
-    console.log("Selected manager ID:", managerId);
     setManagerId(managerId);
   };
 
@@ -24,7 +24,7 @@ const ManagerPage = () => {
           );
           const [managerData] = response.data;
           const { name, email, address, phone, restaurant } = managerData;
-          setManager({ name, email, address, phone, restaurant });
+          setManager({ name, email, address, phone, restaurant }); // Pass manager.restaurant to another component to fetch restaurant information
         } catch (error) {
           console.error("Error fetching manager:", error);
         }
@@ -38,19 +38,8 @@ const ManagerPage = () => {
       <NavBar />
       <div className="manager-select">
         <ManagerList onSelectManager={handleManagerSelect} />
-        {/* Example of showing manager information */}
-        <p>{manager.name}</p>
-        <p>{manager.email}</p>
-        <p>{manager.address}</p>
-        <p>{manager.phone}</p>
-        <p>{manager.restaurant}</p>
       </div>
-      <div className="onboarding">
-        <h1>Manager Functions</h1>
-        <button className="options">
-          <a href="/add-menu-item">Add Menu Item</a>
-        </button>
-      </div>
+      <TabSheet restaurant={manager.restaurant} />
     </div>
   );
 };

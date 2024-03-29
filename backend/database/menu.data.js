@@ -18,14 +18,14 @@ const menus = [
     price: 12.99,
     status: true,
   },
-  { 
+  {
     name: "Grilled Salmon",
-    description: "Fresh salmon fillet grilled to perfection, served with steamed vegetables",
+    description:
+      "Fresh salmon fillet grilled to perfection, served with steamed vegetables",
     price: 18.99,
     status: false,
   },
 ];
-
 
 // Connect to MongoDB
 MongoClient.connect(url)
