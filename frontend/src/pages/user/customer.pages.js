@@ -8,7 +8,7 @@ const CustomerPage = () => {
       <div className="onboarding">
         <h1>Choose a following option</h1>
         <button className="options">
-          <a href="/placeorder">Place Order</a>
+          <a href="/restaurants">Place Order</a>
         </button>
       </div>
     </div>
