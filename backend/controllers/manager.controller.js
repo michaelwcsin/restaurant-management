@@ -1,7 +1,17 @@
 import {
   getManagerFromRepository,
+  getManagersFromRepository,
   updateManagersInRepository,
-} from "../repositories/manager.respository";
+} from "../repositories/manager.respository.js";
+
+export const getManagers = async (req, res) => {
+  try {
+    const managers = await getManagersFromRepository({});
+    res.status(200).send(managers);
+  } catch (e) {
+    res.status(500).send(`Failed to get a list of managers: ${e.message}`);
+  }
+};
 
 export const getManager = async (req, res) => {
   const { id } = req.params;

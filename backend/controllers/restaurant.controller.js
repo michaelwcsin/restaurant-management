@@ -18,7 +18,7 @@ export const getRestaurants = async (req, res) => {
 export const getRestaurant = async (req, res) => {
   const { id } = req.params;
   try {
-    const restaurant = await getRestaurantsFromRepository({ _id: id });
+    const restaurant = await getRestaurantFromRepository({ _id: id });
     res.status(200).send(restaurant);
   } catch (e) {
     res.status(500).send(e.message, `failed to fetch restaurant ${id}`);
