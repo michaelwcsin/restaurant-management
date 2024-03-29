@@ -35,7 +35,7 @@ const AdminPage = () => {
       <ul>
         {filteredMenus.map((menu) => (
           <li key={menu._id}>
-            <strong>{menu.name}</strong> - {menu.description} - ${menu.price}
+            {menu.name} // {menu.description} // ${menu.price}
           </li>
         ))}
       </ul>
