@@ -1,6 +1,7 @@
 import {
   createRestaurantInRepository,
   deleteRestaurantFromRepository,
+  getRestaurantFromRepository,
   getRestaurantsFromRepository,
   updateRestaurantsInRepository,
 } from "../repositories/restaurant.repository.js";
@@ -11,6 +12,16 @@ export const getRestaurants = async (req, res) => {
     res.status(200).send(restaurants);
   } catch (e) {
     res.status(500).send(`Failed to get a list of restaurants: ${e.message}`);
+  }
+};
+
+export const getRestaurant = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const restaurant = await getRestaurantsFromRepository({ _id: id });
+    res.status(200).send(restaurant);
+  } catch (e) {
+    res.status(500).send(e.message, `failed to fetch restaurant ${id}`);
   }
 };
 
