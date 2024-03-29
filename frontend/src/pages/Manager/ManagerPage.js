@@ -23,8 +23,9 @@ const ManagerPage = () => {
             `http://localhost:8000/managers/${managerId}`
           );
           const [managerData] = response.data;
+          // Deconstruct data
           const { name, email, address, phone, restaurant } = managerData;
-          setManager({ name, email, address, phone, restaurant }); // Pass manager.restaurant to another component to fetch restaurant information
+          setManager({ name, email, address, phone, restaurant });
         } catch (error) {
           console.error("Error fetching manager:", error);
         }
@@ -39,7 +40,7 @@ const ManagerPage = () => {
       <div className="manager-select">
         <ManagerList onSelectManager={handleManagerSelect} />
       </div>
-      <TabSheet restaurant={manager.restaurant} />
+      <TabSheet restaurant={manager.restaurant} /> {/* Passes restaurant._id */}
     </div>
   );
 };

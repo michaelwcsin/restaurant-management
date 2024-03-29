@@ -9,7 +9,7 @@ const TabSheet = ({ restaurant }) => (
     panes={[
       {
         menuItem: "Menu Items",
-        render: () => <MenuItem restaurant={restaurant} />,
+        render: () => <MenuItem restaurant={restaurant} />, // Passes restaurant._id
       },
       { menuItem: "Orders", render: () => <TabPane>Tab 2 Content</TabPane> },
       { menuItem: "Analytics", render: () => <TabPane>Tab 3 Content</TabPane> },

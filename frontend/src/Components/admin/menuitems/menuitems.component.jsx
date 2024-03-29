@@ -7,7 +7,7 @@ const MenuItem = ({ restaurant }) => {
   return (
     <TabPane>
       <AddMenu />
-      <MenuList restaurant={restaurant} />
+      <MenuList restaurant={restaurant} /> {/* Again passes restaurant._id */}
     </TabPane>
   );
 };
