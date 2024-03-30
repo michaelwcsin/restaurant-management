@@ -5,7 +5,7 @@ import AddMenu from "../menuinteraction/addMenu.component";
 
 const MenuItem = ({ restaurant }) => {
   return (
-    <TabPane style={{ overflowY: "auto", maxHeight: "80vh" }}>
+    <TabPane style={{ overflowY: "auto", height: "80vh" }}>
       <AddMenu restaurant={restaurant} />
       <MenuList restaurant={restaurant} />
     </TabPane>

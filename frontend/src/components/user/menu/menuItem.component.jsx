@@ -51,7 +51,6 @@ const MenuItem = ({ menuItem }) => {
       <Dialog.Trigger asChild>
         <button className="Button violet">
           <h1>{name}</h1>
-          {/* <p>{_id}</p> */}
           <p>{description}</p>
           <p>${price}</p>
         </button>
