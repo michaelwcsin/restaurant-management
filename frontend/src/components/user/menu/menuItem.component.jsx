@@ -1,34 +1,18 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
-import addSVG from "../../../assets/itemcontrol/add.svg";
-import subtractSVG from "../../../assets/itemcontrol/subtract.svg";
+import { Header, Input, Select } from "semantic-ui-react";
+import EditMenu from "../../admin/menuinteraction/editMenu.component";
 import "./menuItem.styles.css";
 
 const MenuItem = ({ menuItem }) => {
-  const { name, description, price } = menuItem;
-  const [count, setCount] = useState(1);
-
-  const addToCount = () => {
-    if (count < 99) {
-      setCount(count + 1);
-    } else {
-      setCount(99);
-    }
-  };
-
-  const subtractFromCount = () => {
-    if (count > 1) {
-      setCount(count - 1);
-    } else {
-      setCount(1);
-    }
-  };
+  const { _id, name, description, price, status } = menuItem;
 
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button className="Button violet">
           <h1>{name}</h1>
+          {/* <p>{_id}</p> */}
           <p>{description}</p>
           <p>${price}</p>
         </button>
@@ -36,26 +20,46 @@ const MenuItem = ({ menuItem }) => {
       <Dialog.Portal>
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent">
-          <Dialog.Title className="DialogTitle">{name}</Dialog.Title>
-          <Dialog.Description className="DialogDescription">
-            {description}
-          </Dialog.Description>
+          <Header>Edit name:</Header>
+          <Input
+            placeholder="Edit name of menu item"
+            name="name"
+            value={name}
+            required
+            style={{ width: "100%" }}
+          />
+          <Header>Edit description:</Header>
+          <Input
+            placeholder="Edit description of menu item"
+            name="name"
+            value={description}
+            required
+            style={{ width: "100%" }}
+          />
+          <Header>Edit price:</Header>
+          <Input
+            placeholder="Edit price of menu item"
+            name="name"
+            value={price}
+            required
+            style={{ width: "100%" }}
+          />
+          <Header>Edit availability:</Header>
 
-          <div className="add-items">
-            <button className="item-button" onClick={subtractFromCount}>
-              <img src={subtractSVG} alt="subtractSVG" />
-            </button>
-            <p>{count}</p>
-            <button className="item-button" onClick={addToCount}>
-              <img src={addSVG} alt="addSVG" />
-            </button>
+          <div className="edit-options">
+            <Select
+              placeholder="Edit menu item availability"
+              name="status"
+              required
+              value={status}
+              options={[
+                { text: "Available", value: true },
+                { text: "Sold Out", value: false },
+              ]}
+            />
+            <EditMenu />
           </div>
 
-          <div className="add-to-cart">
-            <Dialog.Close asChild>
-              <button className="Button green">Add To Cart</button>
-            </Dialog.Close>
-          </div>
           <Dialog.Close asChild>
             <button className="IconButton" aria-label="Close"></button>
           </Dialog.Close>

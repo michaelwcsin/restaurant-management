@@ -64,7 +64,7 @@ function AddMenu({ restaurant }) {
       style={{ width: "50%", height: "58%", top: "25%", left: "25%" }}
     >
       <ModalHeader>Add Menu Item</ModalHeader>
-      <ModalContent image>
+      <ModalContent>
         <ModalDescription>
           <Header>Name:</Header>
           <Input

@@ -1,7 +1,7 @@
 import React from "react";
 import { Tab, TabPane } from "semantic-ui-react";
 import MenuList from "../../user/menu/menuList.component";
-import AddMenu from "../addmenu/addMenu.component";
+import AddMenu from "../menuinteraction/addMenu.component";
 import MenuItem from "../menuitems/menuitems.component";
 import "./tabsheet.styles.css";
 
