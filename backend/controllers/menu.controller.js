@@ -3,6 +3,7 @@ import {
   deleteMenuFromRepository,
   getMenusFromRepository,
   updateMenusInRepository,
+  getMenuFromRepository,
 } from "../repositories/menu.repository.js";
 
 // Menus
@@ -12,6 +13,16 @@ export const getMenus = async (req, res) => {
     res.status(200).send(menus);
   } catch (e) {
     res.status(500).send(`Failed to get a list of menus: ${e.message}`);
+  }
+};
+
+export const getMenu = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const menu = await getMenuFromRepository({ _id: id });
+    res.status(200).send(menu);
+  } catch (e) {
+    res.status(500).send(e.message, `failed to fetch menu ${id}`);
   }
 };
 
