@@ -9,7 +9,6 @@ import RestaurantList from "./Restaurant";
 import { RestaurantProvider } from "./components/admin/restaurants/RestaurantContext";
 import AddMenuItem from "./pages/Manager/AddMenuItem";
 import ManagerPage from "./pages/Manager/ManagerPage";
-import AdminPage from "./pages/admin/adminPage";
 import HomePage from "./pages/shared/homepage.pages";
 import CustomerPage from "./pages/user/customer.pages";
 import PlaceOrderPage from "./pages/user/placeorder";

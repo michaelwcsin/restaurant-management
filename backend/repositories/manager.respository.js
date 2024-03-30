@@ -1,6 +1,15 @@
 import Manager from "../models/manager.model.js";
 
 // GET
+export const getManagersFromRepository = async (query) => {
+  try {
+    const managers = await Manager.find(query);
+    return managers;
+  } catch (e) {
+    throw Error("Error while fetching managers");
+  }
+};
+
 export const getManagerFromRepository = async (query) => {
   try {
     const manager = await Manager.find(query);
