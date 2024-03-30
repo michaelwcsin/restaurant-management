@@ -1,11 +1,50 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
-import { Header, Input, Select } from "semantic-ui-react";
-import EditMenu from "../../admin/menuinteraction/editMenu.component";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  ButtonGroup,
+  ButtonOr,
+  Header,
+  Input,
+  Select,
+} from "semantic-ui-react";
 import "./menuItem.styles.css";
 
 const MenuItem = ({ menuItem }) => {
-  const { _id, name, description, price, status } = menuItem;
+  const {
+    _id,
+    name: initialName,
+    description: initialDescription,
+    price: initialPrice,
+    status: initialStatus,
+  } = menuItem;
+  const [name, setName] = useState(initialName);
+  const [description, setDescription] = useState(initialDescription);
+  const [price, setPrice] = useState(initialPrice);
+  const [status, setStatus] = useState(initialStatus);
+
+  // ! Need to delete from restaurant menuList
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8000/menus/${_id}`);
+    } catch (error) {
+      console.log("Error deleting menu item:", error);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      await axios.patch(`http://localhost:8000/menus/${_id}`, {
+        name,
+        description,
+        price,
+        status,
+      });
+    } catch (error) {
+      console.log("Error updating menu item:", error);
+    }
+  };
 
   return (
     <Dialog.Root>
@@ -25,6 +64,7 @@ const MenuItem = ({ menuItem }) => {
             placeholder="Edit name of menu item"
             name="name"
             value={name}
+            onChange={(e) => setName(e.target.value)}
             required
             style={{ width: "100%" }}
           />
@@ -33,6 +73,7 @@ const MenuItem = ({ menuItem }) => {
             placeholder="Edit description of menu item"
             name="name"
             value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
             style={{ width: "100%" }}
           />
@@ -41,6 +82,7 @@ const MenuItem = ({ menuItem }) => {
             placeholder="Edit price of menu item"
             name="name"
             value={price}
+            onChange={(e) => setPrice(e.target.value)}
             required
             style={{ width: "100%" }}
           />
@@ -52,12 +94,25 @@ const MenuItem = ({ menuItem }) => {
               name="status"
               required
               value={status}
+              onChange={(e, { value }) => setStatus(value)}
               options={[
                 { text: "Available", value: true },
                 { text: "Sold Out", value: false },
               ]}
             />
-            <EditMenu />
+            <ButtonGroup>
+              <Dialog.Close asChild>
+                <Button negative onClick={handleDelete}>
+                  Delete Menu
+                </Button>
+              </Dialog.Close>
+              <ButtonOr />
+              <Dialog.Close asChild>
+                <Button positive onClick={handleSave}>
+                  Save Changes
+                </Button>
+              </Dialog.Close>
+            </ButtonGroup>
           </div>
 
           <Dialog.Close asChild>
