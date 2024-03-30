@@ -3,11 +3,11 @@ import { TabPane } from "semantic-ui-react";
 import MenuList from "../../user/menu/menuList.component";
 import AddMenu from "../addmenu/addMenu.component";
 
-const MenuItem = () => {
+const MenuItem = ({ restaurant }) => {
   return (
-    <TabPane>
-      <AddMenu />
-      <MenuList />
+    <TabPane style={{ overflowY: "auto", maxHeight: "80vh" }}>
+      <AddMenu restaurant={restaurant} />
+      <MenuList restaurant={restaurant} />
     </TabPane>
   );
 };

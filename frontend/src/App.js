@@ -13,7 +13,6 @@ import HomePage from "./pages/shared/homepage.pages";
 import CustomerPage from "./pages/user/customer.pages";
 import PlaceOrderPage from "./pages/user/placeorder";
 
-
 const App = () => {
   return (
     <RestaurantProvider>
@@ -25,9 +24,10 @@ const App = () => {
           <Route path="/customers" element={<CustomerPage />} />
           <Route path="/manager" element={<ManagerPage />} />
           <Route path="/add-menu-item" element={<AddMenuItem />} />
-         
-          <Route path="/place-order/:restaurantId" element={<PlaceOrderPage />} />
-
+          <Route
+            path="/place-order/:restaurantId"
+            element={<PlaceOrderPage />}
+          />
         </Routes>
       </Router>
     </RestaurantProvider>

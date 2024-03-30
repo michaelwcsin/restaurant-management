@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ManagerList from "../../Components/admin/managerlist/managerlist.component.jsx";
+import ManagerList from "../../components/admin/managerlist/managerlist.component";
 import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 import "./managerPage.styles.css";
