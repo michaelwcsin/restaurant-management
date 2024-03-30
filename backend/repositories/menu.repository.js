@@ -1,6 +1,5 @@
 import Menu from "../models/menu.model.js";
 
-
 // GET
 export const getMenusFromRepository = async (query) => {
   try {
@@ -56,4 +55,3 @@ export const createMenuInRepository = async (data) => {
     throw new Error(`Failed to create menu: ${error.message}`);
   }
 };
-
