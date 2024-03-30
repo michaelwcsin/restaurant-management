@@ -35,7 +35,7 @@ const ManagerPage = () => {
   }, [managerId]);
 
   return (
-    <div>
+    <div className="manager-page">
       <NavBar />
       <div className="manager-select">
         <ManagerList onSelectManager={handleManagerSelect} />

@@ -5,7 +5,7 @@ import AddMenu from "../addmenu/addMenu.component";
 
 const MenuItem = ({ restaurant }) => {
   return (
-    <TabPane>
+    <TabPane style={{ overflowY: "auto", maxHeight: "80vh" }}>
       <AddMenu restaurant={restaurant} />
       <MenuList restaurant={restaurant} /> {/* Again passes restaurant._id */}
     </TabPane>
