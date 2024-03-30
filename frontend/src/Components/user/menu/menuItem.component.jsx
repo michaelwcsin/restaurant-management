@@ -1,26 +1,48 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
-import addSVG from "../../../assets/itemcontrol/add.svg";
-import subtractSVG from "../../../assets/itemcontrol/subtract.svg";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  ButtonGroup,
+  ButtonOr,
+  Header,
+  Input,
+  Select,
+} from "semantic-ui-react";
 import "./menuItem.styles.css";
 
 const MenuItem = ({ menuItem }) => {
-  const { name, description, price } = menuItem;
-  const [count, setCount] = useState(1);
+  const {
+    _id,
+    name: initialName,
+    description: initialDescription,
+    price: initialPrice,
+    status: initialStatus,
+  } = menuItem;
+  const [name, setName] = useState(initialName);
+  const [description, setDescription] = useState(initialDescription);
+  const [price, setPrice] = useState(initialPrice);
+  const [status, setStatus] = useState(initialStatus);
 
-  const addToCount = () => {
-    if (count < 99) {
-      setCount(count + 1);
-    } else {
-      setCount(99);
+  // ! Need to delete from restaurant menuList
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8000/menus/${_id}`);
+    } catch (error) {
+      console.log("Error deleting menu item:", error);
     }
   };
 
-  const subtractFromCount = () => {
-    if (count > 1) {
-      setCount(count - 1);
-    } else {
-      setCount(1);
+  const handleSave = async () => {
+    try {
+      await axios.patch(`http://localhost:8000/menus/${_id}`, {
+        name,
+        description,
+        price,
+        status,
+      });
+    } catch (error) {
+      console.log("Error updating menu item:", error);
     }
   };
 
@@ -29,6 +51,7 @@ const MenuItem = ({ menuItem }) => {
       <Dialog.Trigger asChild>
         <button className="Button violet">
           <h1>{name}</h1>
+          {/* <p>{_id}</p> */}
           <p>{description}</p>
           <p>${price}</p>
         </button>
@@ -36,26 +59,62 @@ const MenuItem = ({ menuItem }) => {
       <Dialog.Portal>
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent">
-          <Dialog.Title className="DialogTitle">{name}</Dialog.Title>
-          <Dialog.Description className="DialogDescription">
-            {description}
-          </Dialog.Description>
+          <Header>Edit name:</Header>
+          <Input
+            placeholder="Edit name of menu item"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={{ width: "100%" }}
+          />
+          <Header>Edit description:</Header>
+          <Input
+            placeholder="Edit description of menu item"
+            name="name"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            style={{ width: "100%" }}
+          />
+          <Header>Edit price:</Header>
+          <Input
+            placeholder="Edit price of menu item"
+            name="name"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+            style={{ width: "100%" }}
+          />
+          <Header>Edit availability:</Header>
 
-          <div className="add-items">
-            <button className="item-button" onClick={subtractFromCount}>
-              <img src={subtractSVG} alt="subtractSVG" />
-            </button>
-            <p>{count}</p>
-            <button className="item-button" onClick={addToCount}>
-              <img src={addSVG} alt="addSVG" />
-            </button>
+          <div className="edit-options">
+            <Select
+              placeholder="Edit menu item availability"
+              name="status"
+              required
+              value={status}
+              onChange={(e, { value }) => setStatus(value)}
+              options={[
+                { text: "Available", value: true },
+                { text: "Sold Out", value: false },
+              ]}
+            />
+            <ButtonGroup>
+              <Dialog.Close asChild>
+                <Button negative onClick={handleDelete}>
+                  Delete Menu
+                </Button>
+              </Dialog.Close>
+              <ButtonOr />
+              <Dialog.Close asChild>
+                <Button positive onClick={handleSave}>
+                  Save Changes
+                </Button>
+              </Dialog.Close>
+            </ButtonGroup>
           </div>
 
-          <div className="add-to-cart">
-            <Dialog.Close asChild>
-              <button className="Button green">Add To Cart</button>
-            </Dialog.Close>
-          </div>
           <Dialog.Close asChild>
             <button className="IconButton" aria-label="Close"></button>
           </Dialog.Close>

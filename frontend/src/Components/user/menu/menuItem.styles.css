@@ -26,10 +26,9 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: 450px;
-  max-height: 85vh;
+  width: 40vw;
   padding: 25px;
+  height: 46vh;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .DialogContent:focus {
@@ -192,4 +191,9 @@ input {
 .item-button {
   border: 2px solid black;
   border-radius: 20px;
+}
+
+.edit-options {
+  display: flex;
+  justify-content: space-between;
 }
