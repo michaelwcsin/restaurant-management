@@ -10,7 +10,6 @@ import {
   Image,
   Input,
 } from "semantic-ui-react";
-import { default as MenuList } from "../src/components/user/menu/menuList.component";
 import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
 
 function RestaurantList() {
@@ -99,7 +98,6 @@ function RestaurantList() {
             ))}
           </div>
         )}
-        
       </Container>
     </div>
   );

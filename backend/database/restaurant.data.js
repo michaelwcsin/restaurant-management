@@ -1,4 +1,4 @@
-import { MongoClient,ObjectId } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 // Connection to localhost & db selection
 const url = "mongodb://localhost:27017";
@@ -11,45 +11,38 @@ const restaurants = [
     email: "restaurantA@example.com",
     address: "111 Main Street, Edmonton, AB",
     phone: "111-111-1111",
-    password: "111",
   },
   {
     name: "Restaurant B",
     email: "restaurantB@example.com",
     address: "222 Elm Street, Edmonton, AB",
     phone: "222-222-2222",
-    password: "222",
   },
   {
     name: "Restaurant C",
     email: "restaurantC@example.com",
     address: "333 Oak Street, Edmonton, AB",
     phone: "333-333-3333",
-    password: "333",
   },
   {
     name: "Restaurant D",
     email: "restaurantD@example.com",
     address: "444 Pine Street, Edmonton, AB",
     phone: "444-444-4444",
-    password: "444",
   },
   {
     name: "Restaurant E",
     email: "restaurantE@example.com",
     address: "555 Maple Avenue, Edmonton, AB",
     phone: "555-555-5555",
-    password: "555",
   },
   {
     name: "Restaurant F",
     email: "restaurantF@example.com",
     address: "666 Cedar Lane, Edmonton, AB",
     phone: "666-666-6666",
-    password: "666",
   },
 ];
-
 
 // Connect to MongoDB
 MongoClient.connect(url)
@@ -67,14 +60,16 @@ MongoClient.connect(url)
       const menuItems = await menuCollection.find({}).toArray();
 
       // Update restaurants with menu items
-      await Promise.all(restaurants.map(async (restaurant) => {
-        const randomMenuItems = getRandomMenuItems(menuItems, 4); 
-        const menuItemIds = randomMenuItems.map((item) => item._id); 
-        await restaurantCollection.updateOne(
-          { email: restaurant.email }, 
-          { $set: { menuItems: menuItemIds } }
-        );
-      }));
+      await Promise.all(
+        restaurants.map(async (restaurant) => {
+          const randomMenuItems = getRandomMenuItems(menuItems, 4);
+          const menuItemIds = randomMenuItems.map((item) => item._id);
+          await restaurantCollection.updateOne(
+            { email: restaurant.email },
+            { $set: { menuItems: menuItemIds } }
+          );
+        })
+      );
 
       console.log("Restaurants updated with menu items successfully!");
     } catch (error) {

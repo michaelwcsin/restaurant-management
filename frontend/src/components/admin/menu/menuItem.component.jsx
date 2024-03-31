@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import "./menuItem.styles.css";
 
-const MenuItem = ({ menuItem }) => {
+const MenuItem = ({ menuItem, restaurant }) => {
   const {
     _id,
     name: initialName,
@@ -28,6 +28,10 @@ const MenuItem = ({ menuItem }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8000/menus/${_id}`);
+
+      await axios.patch(`http://localhost:8000/restaurants/${restaurant._id}`, {
+        $pull: { menuItems: _id },
+      });
     } catch (error) {
       console.log("Error deleting menu item:", error);
     }
@@ -51,7 +55,6 @@ const MenuItem = ({ menuItem }) => {
       <Dialog.Trigger asChild>
         <button className="Button violet">
           <h1>{name}</h1>
-          {/* <p>{_id}</p> */}
           <p>{description}</p>
           <p>${price}</p>
         </button>
