@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import "./menuItem.styles.css";
 
-const MenuItem = ({ menuItem, restaurant, handleRefresh }) => {
+const MenuItem = ({ restaurant, menuItem, handleRefresh }) => {
   const {
     _id,
     name: initialName,
@@ -29,10 +29,11 @@ const MenuItem = ({ menuItem, restaurant, handleRefresh }) => {
     try {
       await axios.delete(`http://localhost:8000/menus/${_id}`);
 
-      await axios.patch(`http://localhost:8000/restaurants/${restaurant._id}`, {
+      await axios.patch(`http://localhost:8000/restaurants/${restaurant}`, {
         $pull: { menuItems: _id },
       });
 
+      console.log(restaurant);
       handleRefresh();
     } catch (error) {
       console.log("Error deleting menu item:", error);
