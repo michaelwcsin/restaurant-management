@@ -55,10 +55,16 @@ const MenuItem = ({ menuItem, restaurant }) => {
       <Dialog.Trigger asChild>
         <button className="Button violet">
           <h1>{name}</h1>
+          <h3>
+            <span className={status ? "available" : "sold-out"}>
+              {status ? "Available" : "Sold Out"}
+            </span>
+          </h3>
           <p>{description}</p>
           <p>${price}</p>
         </button>
       </Dialog.Trigger>
+
       <Dialog.Portal>
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent">

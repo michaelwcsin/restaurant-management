@@ -70,6 +70,16 @@ input {
   color: #212529;
   box-shadow: 0 2px 10px var(--black-a7);
 }
+.Button.violet p {
+  margin: 0;
+}
+.Button.violet h1 {
+  margin: 0;
+}
+.Button.violet h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
 .Button.violet:hover {
   background-color: var(--mauve-3);
 }
@@ -196,4 +206,11 @@ input {
 .edit-options {
   display: flex;
   justify-content: space-between;
+}
+
+.available {
+  color: green;
+}
+.sold-out {
+  color: red;
 }
