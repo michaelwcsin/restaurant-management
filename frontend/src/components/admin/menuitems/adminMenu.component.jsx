@@ -61,7 +61,11 @@ const AdminMenu = ({ restaurant }) => {
   return (
     <TabPane style={{ overflowY: "auto", height: "80vh" }}>
       <AddMenu restaurant={restaurant} handleRefresh={handleRefresh} />
-      <MenuList filteredMenuItems={filteredMenuItems} />
+      <MenuList
+        restaurant={restaurant}
+        filteredMenuItems={filteredMenuItems}
+        handleRefresh={handleRefresh}
+      />
     </TabPane>
   );
 };
