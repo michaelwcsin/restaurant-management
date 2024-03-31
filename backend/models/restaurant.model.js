@@ -5,7 +5,6 @@ const RestaurantSchema = new mongoose.Schema({
   email: { type: String, required: true },
   address: { type: String, required: true },
   phone: { type: String, required: false },
-  password: { type: String, required: true },
   menuItems: [{ type: mongoose.Schema.Types.ObjectId, ref: "Menu" }],
   manager: [{ type: mongoose.Schema.Types.ObjectId, ref: "Manager" }],
 });
