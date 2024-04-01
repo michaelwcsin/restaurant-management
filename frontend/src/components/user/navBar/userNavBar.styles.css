@@ -26,3 +26,12 @@ b1 {
 svg {
   fill : rgb(140, 174, 140);
 }
+
+.cart {
+  color: rgb(140, 174, 140);
+}
+
+span {
+  font-weight: bold;
+  font-size: 14px;
+}

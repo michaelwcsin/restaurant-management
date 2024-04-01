@@ -25,7 +25,7 @@ function NavBar() {
             <b>Manager</b>
           </Nav.Link>
           <div class="vr"></div>
-          <Nav.Link href="/customers">
+          <Nav.Link href="/restaurants">
             <b>Customer</b>
           </Nav.Link>
         </Nav>
