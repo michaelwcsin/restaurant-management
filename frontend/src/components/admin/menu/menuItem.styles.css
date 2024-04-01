@@ -73,12 +73,8 @@ input {
 .Button.violet p {
   margin: 0;
 }
-.Button.violet h1 {
-  margin: 0;
-}
 .Button.violet h3 {
   margin: 0;
-  margin-bottom: 0.5rem;
 }
 .Button.violet:hover {
   background-color: var(--mauve-3);
@@ -213,4 +209,23 @@ input {
 }
 .sold-out {
   color: red;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-item h1 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+}
+.menu-item h3 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+}
+.Button.violet p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
