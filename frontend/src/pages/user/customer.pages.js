@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../components/user/navBar/userNavBar.component";
+import NavBar from "../../Components/user/navBar/userNavBar.component";
 
 const CustomerPage = () => {
   return (

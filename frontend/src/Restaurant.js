@@ -10,7 +10,7 @@ import {
   Image,
   Input,
 } from "semantic-ui-react";
-import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
+import NavBar from "./Components/restaurant/navbar/restaurantNavBar.component";
 
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
