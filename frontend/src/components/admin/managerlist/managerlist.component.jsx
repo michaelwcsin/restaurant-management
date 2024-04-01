@@ -21,9 +21,7 @@ const ManagerList = ({ onSelectManager }) => {
     <Dropdown
       placeholder="Select Manager"
       fluid
-      search
       selection
-      clearable
       floating
       options={managers.map((manager) => ({
         key: manager._id,
