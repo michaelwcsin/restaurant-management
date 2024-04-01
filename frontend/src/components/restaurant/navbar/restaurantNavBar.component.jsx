@@ -24,14 +24,6 @@ function NavBar() {
           <NavLink href="/home">
             <b>Home</b>
           </NavLink>
-          <div class="vr"></div>
-          <Nav.Link href="/restaurants">
-            <b>Orders</b>
-          </Nav.Link>
-          <div class="vr"></div>
-          <Nav.Link href="/customers">
-            <b>Analytics</b>
-          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>

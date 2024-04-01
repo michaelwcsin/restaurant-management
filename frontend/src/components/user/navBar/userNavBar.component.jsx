@@ -24,12 +24,9 @@ function NavBar() {
             <b>Home</b>
           </Nav.Link>
           <div class="vr"></div>
-          <Nav.Link href="">
-            <b>Orders</b>
-          </Nav.Link>
-          <div class="vr"></div>
-          <Nav.Link href="">
-            <b>Cart</b>
+          <Nav.Link href="/cart">
+          <i class="large cart plus icon cart"></i>
+            <span>0</span>
           </Nav.Link>
         </Nav>
       </Container>
