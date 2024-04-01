@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button, Icon, Segment } from "semantic-ui-react";
+import NavBar from "../../components/user/navBar/userNavBar.component";
+import "./placeorder.css"
 
 const PlaceOrderPage = () => {
   const { restaurantId } = useParams();
@@ -46,25 +49,31 @@ const PlaceOrderPage = () => {
 
   return (
     <div>
+    <NavBar/>
+    <div className="container1">
       <h1>{restaurant.name}</h1>
       <p>Address: {restaurant.address}</p>
       <p>Contact: {restaurant.phone}</p>
-      <h2>Menu</h2>
+      <div class="ui divider"></div>
+      <h2 class="ui center aligned header">Menu</h2>
       {menuItems.length > 0 ? (
         <ul>
           {menuItems.map((menuItem) => (
-            <li key={menuItem?._id}>
+            <Segment key={menuItem?._id}>
               <h3>
-                {menuItem?.name}, ${menuItem?.price} | Status: {menuItem?.status ? "Available" : "Unavailable"}
+                {menuItem?.name}, ${menuItem?.price}
               </h3>
-
               <p>{menuItem?.description}</p>
-            </li>
+              <Button>
+                  <Icon name="shop" />
+              </Button>
+            </Segment>
           ))}
         </ul>
       ) : (
         <p>No menu items available</p>
       )}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,6 @@
+.restaurant-container {
+    padding: 40px;
+    width: 100vh;
+    display: flex;
+    flex-direction: column;
+}
