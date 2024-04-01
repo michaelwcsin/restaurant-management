@@ -15,7 +15,7 @@ import "./addMenu.styles.css";
 
 // ! Where is the CSS for form-control class?
 
-function AddMenu({ restaurant }) {
+function AddMenu({ restaurant, handleRefresh }) {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -45,6 +45,7 @@ function AddMenu({ restaurant }) {
       });
 
       setOpen(false);
+      handleRefresh();
     } catch (error) {
       console.error("Error adding menu item:", error);
     }

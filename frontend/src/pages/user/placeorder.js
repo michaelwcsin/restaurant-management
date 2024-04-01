@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const PlaceOrderPage = () => {
   const { restaurantId } = useParams();
@@ -11,21 +11,19 @@ const PlaceOrderPage = () => {
   useEffect(() => {
     const fetchRestaurantAndMenuItems = async () => {
       try {
-        
         const restaurantResponse = await axios.get(
           `http://localhost:8000/restaurants/${restaurantId}`
         );
-        const fetchedRestaurant = restaurantResponse.data[0]; 
+        const fetchedRestaurant = restaurantResponse.data[0];
         console.log("Fetched Restaurant:", fetchedRestaurant);
         setRestaurant(fetchedRestaurant);
 
-        
         const menuItemsData = await Promise.all(
           fetchedRestaurant.menuItems.map(async (itemId) => {
             const itemResponse = await axios.get(
               `http://localhost:8000/menus/${itemId}`
             );
-            const menuItem = itemResponse.data[0]; 
+            const menuItem = itemResponse.data[0];
             console.log("Fetched Menu Item:", menuItem);
             return menuItem;
           })
@@ -55,9 +53,11 @@ const PlaceOrderPage = () => {
       {menuItems.length > 0 ? (
         <ul>
           {menuItems.map((menuItem) => (
-            <li key={menuItem._id}>
-              <h3>{menuItem.name}, ${menuItem.price}</h3>
-              <p>{menuItem.description}</p>
+            <li key={menuItem?._id}>
+              <h3>
+                {menuItem?.name}, ${menuItem?.price}
+              </h3>
+              <p>{menuItem?.description}</p>
             </li>
           ))}
         </ul>
