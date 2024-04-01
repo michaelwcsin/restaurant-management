@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Icon, Segment } from "semantic-ui-react";
+import { Button, Icon, Segment, Tab, TabPane } from "semantic-ui-react";
 import NavBar from "../../components/user/navBar/userNavBar.component";
-import "./placeorder.css"
+import "./placeorder.css";
 
 const PlaceOrderPage = () => {
   const { restaurantId } = useParams();
@@ -49,31 +49,57 @@ const PlaceOrderPage = () => {
 
   return (
     <div>
-    <NavBar/>
-    <div className="container1">
-      <h1>{restaurant.name}</h1>
-      <p>Address: {restaurant.address}</p>
-      <p>Contact: {restaurant.phone}</p>
-      <div class="ui divider"></div>
-      <h2 class="ui center aligned header">Menu</h2>
-      {menuItems.length > 0 ? (
-        <ul>
-          {menuItems.map((menuItem) => (
-            <Segment key={menuItem?._id}>
-              <h3>
-                {menuItem?.name}, ${menuItem?.price}
-              </h3>
-              <p>{menuItem?.description}</p>
-              <Button>
+      <NavBar />
+      <div className="container1">
+        <h1>{restaurant.name}</h1>
+        <p>Address: {restaurant.address}</p>
+        <p>Contact: {restaurant.phone}</p>
+        <div class="ui divider"></div>
+        <h2 class="ui center aligned header">Menu</h2>
+        {menuItems.length > 0 ? (
+          <ul>
+            {menuItems.map((menuItem) => (
+              <Segment key={menuItem?._id}>
+                <h3>
+                  {menuItem?.name}, ${menuItem?.price}
+                </h3>
+                <p>{menuItem?.description}</p>
+                <Button>
                   <Icon name="shop" />
-              </Button>
-            </Segment>
-          ))}
-        </ul>
-      ) : (
-        <p>No menu items available</p>
-      )}
+                </Button>
+              </Segment>
+            ))}
+          </ul>
+        ) : (
+          <p>No menu items available</p>
+        )}
       </div>
+
+      <Tab
+        menu={{ fluid: true, vertical: true, tabular: true }}
+        panes={[
+          {
+            menuItem: "Menu",
+            render: () => (
+              <TabPane style={{ overflowY: "auto", height: "80vh" }}>
+                {" "}
+                {/* Styling goes within TabPane */}
+                Tab 1 Content {/* Content goes here*/}
+                <h1>Etc etc</h1>
+                <p>Blah blah</p>
+              </TabPane>
+            ), // This can be imported from another file, take a look at admin/menuitems/adminmenu.component.jsx
+          },
+          {
+            menuItem: "Cart",
+            render: () => <TabPane>Tab 2 Content</TabPane>,
+          },
+          {
+            menuItem: "History",
+            render: () => <TabPane>Tab 3 Content</TabPane>,
+          },
+        ]}
+      />
     </div>
   );
 };

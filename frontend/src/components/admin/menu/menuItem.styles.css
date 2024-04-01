@@ -214,3 +214,8 @@ input {
 .sold-out {
   color: red;
 }
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+}
