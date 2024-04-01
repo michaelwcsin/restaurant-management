@@ -55,8 +55,9 @@ const PlaceOrderPage = () => {
           {menuItems.map((menuItem) => (
             <li key={menuItem?._id}>
               <h3>
-                {menuItem?.name}, ${menuItem?.price}
+                {menuItem?.name}, ${menuItem?.price} | Status: {menuItem?.status ? "Available" : "Unavailable"}
               </h3>
+
               <p>{menuItem?.description}</p>
             </li>
           ))}

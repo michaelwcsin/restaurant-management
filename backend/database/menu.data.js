@@ -73,6 +73,90 @@ const menus = [
     price: 8.99,
     status: true,
   },
+  {
+    name: "Fish and Chips",
+    description: "Crispy battered fish served with fries and tartar sauce",
+    price: 15.99,
+    status: true,
+  },
+  {
+    name: "Lemon Garlic Chicken",
+    description: "Grilled chicken breast marinated in lemon, garlic, and herbs, served with roasted potatoes",
+    price: 16.99,
+    status: true,
+  },
+  {
+    name: "Caprese Salad",
+    description: "Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze",
+    price: 10.99,
+    status: true,
+  },
+  {
+    name: "Beef Tacos",
+    description: "Soft corn tortillas filled with seasoned beef, lettuce, cheese, and salsa",
+    price: 11.99,
+    status: true,
+  },
+  {
+    name: "Chicken Caesar Wrap",
+    description: "Grilled chicken, romaine lettuce, parmesan cheese, and Caesar dressing wrapped in a flour tortilla",
+    price: 9.99,
+    status: true,
+  },
+  {
+    name: "Vegetable Tempura",
+    description: "Assorted vegetables battered and deep-fried, served with dipping sauce",
+    price: 12.99,
+    status: true,
+  },
+  {
+    name: "Cheeseburger",
+    description: "Juicy beef patty with melted cheese, lettuce, tomato, and pickles on a toasted bun",
+    price: 13.99,
+    status: true,
+  },
+  {
+    name: "Chicken Quesadilla",
+    description: "Grilled chicken, melted cheese, onions, and peppers folded in a flour tortilla, served with salsa and sour cream",
+    price: 10.99,
+    status: true,
+  },
+  {
+    name: "Eggplant Parmesan",
+    description: "Breaded and fried eggplant slices topped with marinara sauce and melted mozzarella cheese, served with spaghetti",
+    price: 14.99,
+    status: true,
+  },
+  {
+    name: "Tiramisu",
+    description: "Classic Italian dessert made with layers of coffee-soaked ladyfingers and mascarpone cheese",
+    price: 7.99,
+    status: true,
+  },
+  {
+    name: "Garden Salad",
+    description: "Mixed greens, cucumbers, tomatoes, carrots, and choice of dressing",
+    price: 8.99,
+    status: true,
+  },
+  {
+    name: "Beef Stir-Fry",
+    description: "Tender strips of beef stir-fried with vegetables in a savory sauce, served over rice",
+    price: 17.99,
+    status: true,
+  },
+  {
+    name: "Chicken Parmesan",
+    description: "Breaded chicken cutlet topped with marinara sauce and melted mozzarella cheese, served with spaghetti",
+    price: 16.99,
+    status: true,
+  },
+  {
+    name: "Fettuccine Alfredo",
+    description: "Creamy pasta tossed in a parmesan cheese sauce",
+    price: 12.99,
+    status: true,
+  },
 ];
 
 // Connect to MongoDB

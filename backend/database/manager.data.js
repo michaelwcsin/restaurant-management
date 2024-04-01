@@ -26,28 +26,48 @@ const managers = [
   },
 ];
 
+// Function to shuffle an array in place
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 // Connect to MongoDB
 MongoClient.connect(url)
-  .then((client) => {
-    // Select database
-    const db = client.db(dbName);
+  .then(async (client) => {
+    try {
+      const db = client.db(dbName);
 
-    // Select collection
-    const collection = db.collection("managers");
+      const managerCollection = db.collection("managers");
+      await managerCollection.insertMany(managers);
 
-    // Insert data
-    collection
-      .insertMany(managers)
-      .then((result) => {
-        console.log("Document inserted successfully");
-      })
-      .catch((err) => {
-        console.error("Failed to insert document");
-      })
-      .finally(() => {
-        client.close();
-      });
+      const allManagers = await managerCollection.find({}).toArray();
+      const restaurantCollection = db.collection("restaurants");
+      const allRestaurants = await restaurantCollection.find({}).toArray();
+
+     
+      const shuffledRestaurants = shuffleArray(allRestaurants);
+
+      // Assign each manager to a restaurant 
+      for (let i = 0; i < allManagers.length; i++) {
+        const manager = allManagers[i];
+        const restaurant = shuffledRestaurants[i % shuffledRestaurants.length];
+        await managerCollection.updateOne(
+          { _id: manager._id },
+          { $set: { restaurant: restaurant._id } }
+        );
+      }
+
+      console.log("Managers assigned to restaurants successfully!");
+    } catch (error) {
+      console.error("Failed to assign managers to restaurants:", error);
+    } finally {
+      client.close();
+    }
   })
   .catch((err) => {
-    console.error("Failed to connect to MongoDB");
+    console.error("Failed to connect to MongoDB:", err);
   });

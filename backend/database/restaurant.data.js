@@ -24,24 +24,6 @@ const restaurants = [
     address: "333 Oak Street, Edmonton, AB",
     phone: "333-333-3333",
   },
-  {
-    name: "Restaurant D",
-    email: "restaurantD@example.com",
-    address: "444 Pine Street, Edmonton, AB",
-    phone: "444-444-4444",
-  },
-  {
-    name: "Restaurant E",
-    email: "restaurantE@example.com",
-    address: "555 Maple Avenue, Edmonton, AB",
-    phone: "555-555-5555",
-  },
-  {
-    name: "Restaurant F",
-    email: "restaurantF@example.com",
-    address: "666 Cedar Lane, Edmonton, AB",
-    phone: "666-666-6666",
-  },
 ];
 
 // Connect to MongoDB
@@ -51,19 +33,19 @@ MongoClient.connect(url)
       // Select database
       const db = client.db(dbName);
 
-      // Insert restaurants data
+      
       const restaurantCollection = db.collection("restaurants");
       await restaurantCollection.insertMany(restaurants);
 
-      // Fetch menu items from the database
+      
       const menuCollection = db.collection("menus");
       const menuItems = await menuCollection.find({}).toArray();
 
       // Update restaurants with menu items
       await Promise.all(
         restaurants.map(async (restaurant) => {
-          const randomMenuItems = getRandomMenuItems(menuItems, 4);
-          const menuItemIds = randomMenuItems.map((item) => item._id);
+          const uniqueMenuItems = getUniqueMenuItems(menuItems, 8);
+          const menuItemIds = uniqueMenuItems.map((item) => item._id);
           await restaurantCollection.updateOne(
             { email: restaurant.email },
             { $set: { menuItems: menuItemIds } }
@@ -82,8 +64,14 @@ MongoClient.connect(url)
     console.error("Failed to connect to MongoDB:", err);
   });
 
-// get random menu items
-function getRandomMenuItems(menuItems, count) {
+// get unique menu items
+function getUniqueMenuItems(menuItems, count) {
   const shuffledMenuItems = menuItems.sort(() => 0.5 - Math.random());
-  return shuffledMenuItems.slice(0, count);
+  const uniqueItems = new Set();
+
+  while (uniqueItems.size < count) {
+    uniqueItems.add(shuffledMenuItems.pop());
+  }
+
+  return Array.from(uniqueItems);
 }
