@@ -6,6 +6,13 @@ const CustomerSchema = new mongoose.Schema({
   address: { type: String, required: false },
   phone: { type: String, required: false },
   password: { type: String, required: true },
+  cart: [
+    {
+      menuItemId: { type: mongoose.Schema.Types.ObjectId, ref: "Menu", required: true},
+      quantity: { type: Number, default: 1 }
+    }
+  ],
+  totalPrice: { type: Number, default: 0 }
 });
 
 const Customer = mongoose.model("customers", CustomerSchema);
