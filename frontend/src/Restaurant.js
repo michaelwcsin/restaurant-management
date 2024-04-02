@@ -14,11 +14,14 @@ import { default as MenuList } from "../src/components/user/menu/menuList.compon
 import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
 
 import restaurantImage1 from "./assets/restaurantsphoto/cactus.jpeg"
+import restaurantImage2 from "./assets/restaurantsphoto/shawarma.png"
+import restaurantImage3 from "./assets/restaurantsphoto/saigontaste.png"
+import defaultImage from "./assets/restaurantsphoto/default.jpg"
 
 const restaurantImages = {
   'Cactus Club': restaurantImage1,
-  // 'pizzaPlace': restaurantImage2,
-  // Add more mappings here
+  'Shawarma City': restaurantImage2,
+  'Saigon Taste': restaurantImage3,
 };
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
@@ -68,9 +71,15 @@ function RestaurantList() {
         ) : filteredRestaurants.length === 0 ? (
           <p>No restaurants found.</p>
         ) : (
-          <div className="restaurant-container">
+          <div className="restaurant-container"
+               style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
             {filteredRestaurants.map((restaurant) => (
-              <Card key={restaurant._id}>
+              <Card //inline css code for each card
+                  key={restaurant._id}
+                  style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    width: '300px',
+                    margin: '10px', // some space around the cards
+              }}>
                 <Dimmer.Dimmable
                   as={Image}
                   dimmed={hoveredCard === restaurant._id}
@@ -87,7 +96,7 @@ function RestaurantList() {
                   }}
                   onMouseEnter={() => setHoveredCard(restaurant._id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  src={restaurantImages[restaurant.name] || 'defaultImage'}
+                  src={restaurantImages[restaurant.name] || defaultImage}
                 />
                 <Card.Content>
                   <Card.Header>{restaurant.name}</Card.Header>

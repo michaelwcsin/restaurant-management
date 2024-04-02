@@ -1,6 +1,5 @@
 import React from 'react';
 import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
-
 import {
     MDBBtn,
     MDBContainer,
@@ -13,10 +12,12 @@ import {
     MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-
-
+import "./login.customers.css";
+import LoginNavBar from "../../components/user/navBar/userLoginNavBar.component.jsx";
 const LoginCustomers = () => {
     return (
+        <div>
+        <LoginNavBar />
         <MDBContainer className='my-5'>
             <MDBCard>
 
@@ -48,6 +49,7 @@ const LoginCustomers = () => {
 
             </MDBCard>
         </MDBContainer>
+        </div>
     );
 }
 
