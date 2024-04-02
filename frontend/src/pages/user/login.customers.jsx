@@ -13,42 +13,45 @@ import {
 }
 from 'mdb-react-ui-kit';
 import "./login.customers.css";
-import LoginNavBar from "../../components/user/navBar/userLoginNavBar.component.jsx";
+import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
 const LoginCustomers = () => {
     return (
         <div>
         <LoginNavBar />
-        <MDBContainer className='my-5'>
-            <MDBCard>
 
-                <MDBRow className='g-0 d-flex align-items-center'>
+            <MDBContainer className='my-5'>
+                <h2 className="text-center mb-4">Customers Log in</h2>
 
-                    <MDBCol md='4'>
-                        <MDBCardImage src={image1} alt='mink' className='rounded-t-5 rounded-tr-lg-0' fluid />
-                    </MDBCol>
+                <MDBCard>
 
-                    <MDBCol md='8'>
+                    <MDBRow className='g-0 d-flex align-items-center'>
 
-                        <MDBCardBody>
+                        <MDBCol md='4'>
+                            <MDBCardImage src={image1} alt='mink' className='rounded-t-5 rounded-tr-lg-0' fluid/>
+                        </MDBCol>
 
-                            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+                        <MDBCol md='8'>
 
-                            <div className="d-flex justify-content-between mx-4 mb-4">
-                                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                                <a href="!#">Forgot password?</a>
-                            </div>
+                            <MDBCardBody>
 
-                            <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+                                <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
+                                <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
 
-                        </MDBCardBody>
+                                <div className="d-flex justify-content-between mx-4 mb-4">
+                                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
+                                    <a href="!#">Forgot password?</a>
+                                </div>
 
-                    </MDBCol>
+                                <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
 
-                </MDBRow>
+                            </MDBCardBody>
 
-            </MDBCard>
-        </MDBContainer>
+                        </MDBCol>
+
+                    </MDBRow>
+
+                </MDBCard>
+            </MDBContainer>
         </div>
     );
 }

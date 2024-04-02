@@ -1,18 +1,20 @@
 import React from "react";
 import NavBar from "../../components/user/navBar/userNavBar.component";
+import Button from "react-bootstrap/Button";
+import "./customer.pages.css"
 
 const CustomerPage = () => {
   return (
-    <div>
+    <div className='customerLoginPage'>
       <NavBar />
         <div className="onboarding">
-            <h1>Choose a following option</h1>
-            <button>
+            {/*Adding style in <a> make the whole area clickable)*/}
+            <Button variant="light" className="mb-2 btn">
                 <a href="/login-customers">Log in</a>
-            </button>
-            <button className="options">
+            </Button>
+            <Button variant="light" className="mb-2 btn">
                 <a href="/placeorder">Place Order as guest</a>
-            </button>
+            </Button>
         </div>
     </div>
   );
