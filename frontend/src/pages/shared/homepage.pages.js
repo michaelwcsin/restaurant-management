@@ -25,7 +25,7 @@ const HomePage = () => {
           </div>
           <div>
             <Button variant="light" className="twoButtons">
-              <a href="/manager">
+              <a href="/login-managers">
                 <b id="manager-button">Manager View</b>
               </a>
             </Button>

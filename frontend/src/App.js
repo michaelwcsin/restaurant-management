@@ -12,6 +12,7 @@ import ManagerPage from "./pages/Manager/ManagerPage";
 import HomePage from "./pages/shared/homepage.pages";
 import CustomerPage from "./pages/user/customer.pages";
 import LoginCustomers from "./pages/user/login.customers";
+import LoginManagers from "./pages/Manager/login.managers";
 
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
           <Route path="/manager" element={<ManagerPage />} />
           <Route path="/add-menu-item" element={<AddMenuItem />} />
           <Route path="/login-customers" element={<LoginCustomers/>} />
+          <Route path="/login-managers" element={<LoginManagers/>} />
+
         </Routes>
       </Router>
     </RestaurantProvider>
