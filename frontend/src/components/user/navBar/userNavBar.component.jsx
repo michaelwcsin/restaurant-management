@@ -23,11 +23,6 @@ function NavBar() {
           <Nav.Link href="/home">
             <b>Home</b>
           </Nav.Link>
-          <div class="vr"></div>
-          <Nav.Link href="/cart">
-          <i class="large cart plus icon cart"></i>
-            <span>0</span>
-          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>
