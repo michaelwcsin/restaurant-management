@@ -55,24 +55,34 @@ const PlaceOrderPage = () => {
         <p>Address: {restaurant.address}</p>
         <p>Contact: {restaurant.phone}</p>
         <div class="ui divider"></div>
-        <h2 class="ui center aligned header">Menu</h2>
+        <h2 className="ui center aligned header">Menu</h2>
         {menuItems.length > 0 ? (
           <ul>
-            {menuItems.map((menuItem) => (
-              <Segment key={menuItem?._id}>
-                <h3>
-                  {menuItem?.name}, ${menuItem?.price}
-                </h3>
-                <p>{menuItem?.description}</p>
-                <Button>
-                  <Icon name="shop" />
-                </Button>
-              </Segment>
-            ))}
+            {menuItems.map((menuItem) => {
+              console.log("MenuItem:", menuItem); 
+              
+              if (menuItem?.status) {
+                return (
+                  <Segment key={menuItem?._id}>
+                    <h3>
+                      {menuItem?.name}, ${menuItem?.price} 
+                    </h3>
+                    <p>{menuItem?.description}</p>
+                    <Button>
+                      <Icon name="shop" />
+                    </Button>
+                  </Segment>
+                );
+              }
+              return null;
+            })}
           </ul>
         ) : (
-          <p>No menu items available</p>
+          <p>No items available</p>
         )}
+
+
+
       </div>
 
       <Tab
