@@ -13,6 +13,13 @@ import {
 import { default as MenuList } from "../src/components/user/menu/menuList.component";
 import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
 
+import restaurantImage1 from "./assets/restaurantsphoto/cactus.jpeg"
+
+const restaurantImages = {
+  'Cactus Club': restaurantImage1,
+  // 'pizzaPlace': restaurantImage2,
+  // Add more mappings here
+};
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -80,8 +87,7 @@ function RestaurantList() {
                   }}
                   onMouseEnter={() => setHoveredCard(restaurant._id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  // src='/assets/restaurantsphoto/Cactus.jpg'
-                  src="https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
+                  src={restaurantImages[restaurant.name] || 'defaultImage'}
                 />
                 <Card.Content>
                   <Card.Header>{restaurant.name}</Card.Header>

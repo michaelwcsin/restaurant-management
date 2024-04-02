@@ -7,21 +7,21 @@ const dbName = "restaurantDB";
 // Initialize data for courses
 const restaurants = [
   {
-    name: "Restaurant A",
+    name: "Cactus Club",
     email: "restaurantA@example.com",
     address: "111 Main Street, Edmonton, AB",
     phone: "111-111-1111",
     password: "111",
   },
   {
-    name: "Restaurant B",
+    name: "Shawarma City",
     email: "restaurantB@example.com",
     address: "222 Elm Street, Edmonton, AB",
     phone: "222-222-2222",
     password: "222",
   },
   {
-    name: "Restaurant C",
+    name: "Saigon Taste",
     email: "restaurantC@example.com",
     address: "333 Oak Street, Edmonton, AB",
     phone: "333-333-3333",
