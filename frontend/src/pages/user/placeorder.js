@@ -5,6 +5,7 @@ import { Segment, Tab, TabPane } from "semantic-ui-react";
 import NavBar from "../../components/user/navBar/userNavBar.component";
 import "./placeorder.css";
 import { Dropdown } from "semantic-ui-react";
+import Checkout from "./checkoutpage";
 
 const PlaceOrderPage = () => {
   const { restaurantId } = useParams();
@@ -15,6 +16,7 @@ const PlaceOrderPage = () => {
   const [total, setTotal] = useState(0);
   const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState("");
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -128,6 +130,7 @@ const PlaceOrderPage = () => {
     .catch((err) => {
       console.error("Failed to insert document",err);
     });
+    setCheckoutOpen(true);
   }
 
   return (
@@ -226,7 +229,12 @@ const PlaceOrderPage = () => {
                     <p>No Items In Cart</p>
                   )}
                   <h3>Total: ${total}</h3>
-                  <button class="ui toggle button active" onClick={(e) => handleOrder(e)}>Checkout</button>
+                  {!checkoutOpen && (
+                    <button className="ui toggle button active" onClick={handleOrder}>
+                      Checkout
+                    </button>
+                  )}
+                  {checkoutOpen && <Checkout />}
                 </div>
               </TabPane>
             ),
