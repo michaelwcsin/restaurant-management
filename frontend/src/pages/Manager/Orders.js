@@ -40,9 +40,11 @@ function Orders({ restaurantId }) {
   const fetchCustomerDetails = async (customerId) => {
     try {
       const response = await axios.get(`http://localhost:8000/customers/${customerId}`);
-      const customer = response.data; 
-      console.log("Fetched Customer:", customer); 
-      return customer;
+      if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+        return response.data[0];
+      } else {
+        throw new Error("Customer not found or invalid response");
+      }
     } catch (error) {
       console.error("Error fetching customer details:", error);
       return null;
@@ -55,9 +57,13 @@ function Orders({ restaurantId }) {
   const fetchMenuDetails = async (menuId) => {
     try {
       const response = await axios.get(`http://localhost:8000/menus/${menuId}`);
-      return response.data;
+      if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+        return response.data[0];
+      } else {
+        throw new Error("Menu Item not found or invalid response");
+      }
     } catch (error) {
-      console.error("Error fetching menu details:", error);
+      console.error("Error fetching menuItem details:", error);
       return null;
     }
   };
@@ -70,13 +76,14 @@ function Orders({ restaurantId }) {
             const orderResponse = await axios.get(`http://localhost:8000/orders/${order._id}`);
             const customer = await fetchCustomerDetails(order.customerId);
             const menuItems = await Promise.all(order.menuItems.map(async (itemId) => {
-              return fetchMenuDetails(itemId);
+              const menuItem = await fetchMenuDetails(itemId);
+              console.log("Menu Item Name:", menuItem ? menuItem.name : "Unknown");
+              return menuItem;
             }));
             const totalPrice = menuItems.reduce((acc, item) => acc + item.price, 0);
-
-            
-          console.log("Customer Name:", customer ? customer.name : "Unknown");
-            
+  
+            console.log("Customer Name:", customer ? customer.name : "Unknown");
+  
             return {
               ...orderResponse.data,
               customerName: customer ? customer.name : "Unknown",
@@ -89,7 +96,7 @@ function Orders({ restaurantId }) {
           }
         })
       );
-
+  
       const validOrders = detailedOrders.filter(order => order !== null);
       if (isMounted.current) {
         setOrders(validOrders);
@@ -107,27 +114,25 @@ function Orders({ restaurantId }) {
     <div className="container">
       <h1 className="title">Orders</h1>
       <ul className="order-list">
-      {orders.map((order) => (
-  <li key={order._id} className="order-item">
-    <p>Order ID: {order._id}</p>
-    <p>Customer ID: {order.customerId}</p> 
-    <p>Menu Items:</p>
-    <ul>
-      {order.menuItems.map((itemId) => (
-        <li key={itemId}>
-          
-          {itemId} - Price: ${order.sumPrice}
-        </li>
-      ))}
-    </ul>
-          <p>Total Price: ${order.sumPrice}</p> 
-        </li>
-
-
+        {orders.map((order) => (
+          <li key={order._id} className="order-item">
+            <p>Order ID: {order._id}</p>
+            <p>Customer Name: {order.customerName}</p>
+            <p>Menu Items:</p>
+            <ul>
+              {order.menuItems.map((itemName, index) => (
+                <li key={index}>
+                  {itemName} 
+                </li>
+              ))}
+            </ul>
+            <p>Total Price: ${order.totalPrice}</p>
+          </li>
         ))}
       </ul>
     </div>
   );
+  
 }
 
 export default Orders;
