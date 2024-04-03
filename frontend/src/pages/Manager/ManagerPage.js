@@ -8,10 +8,12 @@ import "./managerPage.styles.css";
 const ManagerPage = () => {
   const [managerId, setManagerId] = useState("");
   const [manager, setManager] = useState({});
+  const [showOrders, setShowOrders] = useState(false);
 
   // gets manager ID from selection from dropdown and sets it in useState
   const handleManagerSelect = (managerId) => {
     setManagerId(managerId);
+    setShowOrders(true);
   };
 
   useEffect(() => {

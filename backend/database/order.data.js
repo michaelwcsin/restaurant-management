@@ -6,19 +6,20 @@ const dbName = "restaurantDB";
 
 // Initialize data for courses
 const orders = [{
-  "customerId": "65f9d06c90e2a739f762e694",
-  "restaurantId": "65f9d079d03e1fbaee245064",
+  "customerId": "660cd5995dce748125e400c9",
+  "restaurantId": "660af6042c3daf09719bbc86",
   "menuItems": [
-    "65f9d0819786ab1328a19523", // Spaghetti Carbonara
-    "65f9d0819786ab1328a19524"  // Margarita Pizza
+    "660af6010e98c3834e1632bc",
+    "660af6010e98c3834e1632c7"
   ],
   "sumPrice": 27.98
 },
 {
-  "customerId": "65f9d06c90e2a739f762e695",
-  "restaurantId": "65f9d079d03e1fbaee245065",
+  "customerId": "660cd5995dce748125e400ca",
+  "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
-    "65f9d0819786ab1328a19525" // Grilled Salmon
+    "660af6010e98c3834e1632b8",
+    "660af6010e98c3834e1632ca"
   ],
   "sumPrice": 18.99
 }

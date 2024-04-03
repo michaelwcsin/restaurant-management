@@ -10,7 +10,6 @@ export const getCustomersFromRepository = async (query) => {
   }
 };
 
-// GET single customer
 export const getCustomerFromRepository = async (query) => {
   try {
     const customer = await Customer.find(query);
