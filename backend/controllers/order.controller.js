@@ -21,9 +21,10 @@ export const createOrder = async (req, res) => {
     console.log(orders);
     res.status(200).send(orders);
   } catch (e) {
-    res.status(500).send(e.message, `failed to get orders ${id}`);
+    res.status(500).send(`Failed to create order: ${e.message}`);
   }
 };
+
 
 export const updateOrder = async (req, res) => {
   const { id } = req.params;
