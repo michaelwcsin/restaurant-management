@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -8,13 +8,14 @@ import {
   Input,
 } from "semantic-ui-react";
 import NavBar from "../../components/user/navBar/userNavBar.component";
-import UserDropDown from "../../components/user/userdropdown/userdropdown.component";
 import "./Restaurant.css";
 
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const CartContext = createContext();
 
 
   useEffect(() => {
@@ -52,7 +53,6 @@ function RestaurantList() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="dropdown"><UserDropDown /></div>
         {loading ? (
           <div>Loading...</div>
         ) : filteredRestaurants.length === 0 ? (
@@ -60,8 +60,8 @@ function RestaurantList() {
         ) : (
           <div className="restaurant-container">
             {filteredRestaurants.map((restaurant) => (
-              <Card key={restaurant._id}>
-                <Card.Content>
+              <Card  key={restaurant._id}>
+                <Card.Content >
                   <Card.Header>{restaurant.name}</Card.Header>
                   <Card.Meta>Email: {restaurant.email}</Card.Meta>
                   <Card.Description>
