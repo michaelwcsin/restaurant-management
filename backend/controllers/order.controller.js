@@ -3,6 +3,7 @@ import {
   deleteOrderFromRepository,
   getOrdersFromRepository,
   updateOrdersInRepository,
+  getOrderFromRepository,
 } from "../repositories/order.repository.js";
 
 export const getOrders = async (req, res) => {
@@ -48,5 +49,15 @@ export const deleteOrders = async (req, res) => {
     }
   } catch (e) {
     res.status(500).send(`Failed to delete orders ${id}: ${e.message}`);
+  }
+};
+
+export const getOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const order = await getOrderFromRepository({ _id: id });
+    res.status(200).send(order);
+  } catch (e) {
+    res.status(500).send(e.message, `failed to fetch order ${id}`);
   }
 };
