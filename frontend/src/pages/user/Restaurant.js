@@ -10,7 +10,6 @@ import {
   Image,
   Input,
 } from "semantic-ui-react";
-// import { default as MenuList } from "../src/components/user/menu/menuList.component";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 
 import restaurantImage1 from "../../assets/restaurantsphoto/cactus.jpeg"
@@ -38,7 +37,7 @@ function RestaurantList() {
         setRestaurants(response.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching restaurants:", error);
+        console.error("Error fetching restaurantsContext:", error);
         setLoading(false);
       }
     };
@@ -47,76 +46,72 @@ function RestaurantList() {
   }, []);
 
   const filteredRestaurants = restaurants.filter((restaurant) =>
-    restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
+      restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="restaurant-list">
-      <NavBar />
-      <Container style={{ padding: 20 }}>
-        <Header as="h1">Available Restaurants</Header>
+      <div className="restaurant-list">
+        <NavBar />
+        <Container style={{ padding: 20 }}>
+          <Header as="h1">Available Restaurants</Header>
 
-        <div className="search-bar">
-          <Input
-            focus
-            type="text"
-            placeholder="Search Restaurant 🔍"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-
-        {loading ? (
-          <div>Loading...</div>
-        ) : filteredRestaurants.length === 0 ? (
-          <p>No restaurants found.</p>
-        ) : (
-          <div className="restaurant-container"
-               style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-            {filteredRestaurants.map((restaurant) => (
-              <Card //inline css code for each card
-                  key={restaurant._id}
-                  style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                    width: '300px',
-                    margin: '10px', // some space around the cards
-              }}>
-                <Dimmer.Dimmable
-                  as={Image}
-                  dimmed={hoveredCard === restaurant._id}
-                  dimmer={{
-                    active: hoveredCard === restaurant._id,
-                    content: (
-                      <Button
-                        primary
-                        onClick={() => alert("Place your order!")}
-                      >
-                        Order Here
-                      </Button>
-                    ),
-                  }}
-                  onMouseEnter={() => setHoveredCard(restaurant._id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  src={restaurantImages[restaurant.name] || defaultImage}
-                />
-                <Card.Content>
-                  <Card.Header>{restaurant.name}</Card.Header>
-                  <Card.Meta>Email: {restaurant.email}</Card.Meta>
-                  <Card.Description>
-                    Address: {restaurant.address}
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <Link to={`/place-order/${restaurant._id}`}>
-                    Place Order Here
-                  </Link>
-                </Card.Content>
-              </Card>
-            ))}
+          <div className="search-bar">
+            <Input
+                focus
+                type="text"
+                placeholder="Search Restaurant 🔍"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
-        )}
-        {/*<MenuList />*/}
-      </Container>
-    </div>
+
+          {loading ? (
+              <div>Loading...</div>
+          ) : filteredRestaurants.length === 0 ? (
+              <p>No restaurants found.</p>
+          ) : (
+              <div className="restaurant-container"
+                   style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+                {filteredRestaurants.map((restaurant) => (
+                    <Card //inline css code for each card
+                        key={restaurant._id}
+                        style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                          width: '300px',
+                          margin: '10px', // some space around the cards
+                        }}>
+                      <Dimmer.Dimmable
+                          as={Image}
+                          dimmed={hoveredCard === restaurant._id}
+                          dimmer={{
+                            active: hoveredCard === restaurant._id,
+                            content:(
+                                <Link to={`/place-order/${restaurant._id}`} className="ui primary button">
+                                  Place Order Here
+                                </Link>
+                            ),
+                          }}
+                          onMouseEnter={() => setHoveredCard(restaurant._id)}
+                          onMouseLeave={() => setHoveredCard(null)}
+                          src={restaurantImages[restaurant.name] || defaultImage}
+                      />
+                      <Card.Content>
+                        <Card.Header>{restaurant.name}</Card.Header>
+                        <Card.Meta>Email: {restaurant.email}</Card.Meta>
+                        <Card.Description>
+                          Address: {restaurant.address}
+                        </Card.Description>
+                      </Card.Content>
+                      <Card.Content extra>
+                        <Card.Description>
+                          Every dollar of your order goes to support the revival of MINK empire!
+                        </Card.Description>
+                      </Card.Content>
+                    </Card>
+                ))}
+              </div>
+          )}
+        </Container>
+      </div>
   );
 }
 
