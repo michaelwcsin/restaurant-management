@@ -106,7 +106,7 @@ function RestaurantList() {
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                  <Link to={`/restaurants/${restaurant._id}/details`}>
+                  <Link to={`/place-order/${restaurant._id}`}>
                     Place Order Here
                   </Link>
                 </Card.Content>
