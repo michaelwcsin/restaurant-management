@@ -6,7 +6,6 @@ const CustomerSchema = new mongoose.Schema({
   email: { type: String, required: true },
   address: { type: String, required: false },
   phone: { type: String, required: false },
-  password: { type: String, required: true },
 });
 
 const Customer = mongoose.model("customers", CustomerSchema);

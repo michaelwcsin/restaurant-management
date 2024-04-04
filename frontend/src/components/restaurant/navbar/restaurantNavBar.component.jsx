@@ -1,7 +1,8 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import "./userNavBar.styles.css";
+import NavLink from "react-bootstrap/esm/NavLink";
+import "./restaurantNavBar.styles.css";
 
 function NavBar() {
   return (
@@ -16,21 +17,13 @@ function NavBar() {
               height="30"
               className="d-inline-block align-top"
             />{" "}
-            <b>MINK</b>
+            <b1>MINK</b1>
           </Navbar.Brand>
         </Nav>
         <Nav>
-          <Nav.Link href="/home">
+          <NavLink href="/home">
             <b>Home</b>
-          </Nav.Link>
-          <div class="vr"></div>
-          <Nav.Link href="">
-            <b>Orders</b>
-          </Nav.Link>
-          <div class="vr"></div>
-          <Nav.Link href="">
-            <b>Cart</b>
-          </Nav.Link>
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>

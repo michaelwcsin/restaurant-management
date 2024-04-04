@@ -65,3 +65,12 @@ export const createOrderInRepository = async (data) => {
     throw new Error(`Failed to create order: ${error.message}`);
   }
 };
+
+export const getOrderFromRepository = async (query) => {
+  try {
+    const order = await Order.find(query);
+    return order;
+  } catch (e) {
+    throw Error("Error while fetching order");
+  }
+};

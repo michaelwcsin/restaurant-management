@@ -26,10 +26,9 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: 450px;
-  max-height: 85vh;
+  width: 40vw;
   padding: 25px;
+  height: 46vh;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .DialogContent:focus {
@@ -70,6 +69,16 @@ input {
   background-color: white;
   color: #212529;
   box-shadow: 0 2px 10px var(--black-a7);
+}
+.Button.violet p {
+  margin: 0;
+}
+.Button.violet h1 {
+  margin: 0;
+}
+.Button.violet h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
 }
 .Button.violet:hover {
   background-color: var(--mauve-3);
@@ -192,4 +201,21 @@ input {
 .item-button {
   border: 2px solid black;
   border-radius: 20px;
+}
+
+.edit-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.available {
+  color: green;
+}
+.sold-out {
+  color: red;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
 }

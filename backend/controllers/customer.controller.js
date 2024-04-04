@@ -16,13 +16,13 @@ export const getCustomers = async (req, res) => {
   }
 };
 
-// ! Should get one single customer
 export const getCustomer = async (req, res) => {
+  const { id } = req.params;
   try {
-    const customer = await getCustomerFromRepository({});
+    const customer = await getCustomerFromRepository({ _id: id });
     res.status(200).send(customer);
   } catch (e) {
-    res.status(500).send(`Failed to get customer: ${e.message}`);
+    res.status(500).send(e.message, `failed to fetch customer ${id}`);
   }
 };
 

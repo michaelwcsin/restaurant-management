@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavLink from "react-bootstrap/esm/NavLink";
-import "./restaurantNavBar.styles.css";
+import "./homeNavBar.styles.css";
 
 function NavBar() {
   return (
@@ -21,21 +21,16 @@ function NavBar() {
           </Navbar.Brand>
         </Nav>
         <Nav>
-          <NavLink href="/home">
-            <b>Home</b>
-          </NavLink>
-          <div class="vr"></div>
-          <Nav.Link href="/restaurants">
-            <b>Orders</b>
+          <Nav.Link href="/manager">
+            <b>Manager</b>
           </Nav.Link>
           <div class="vr"></div>
           <Nav.Link href="/customers">
-            <b>Analytics</b>
+            <b>Customer</b>
           </Nav.Link>
         </Nav>
       </Container>
     </Navbar>
   );
 }
-
 export default NavBar;

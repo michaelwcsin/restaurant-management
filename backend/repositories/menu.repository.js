@@ -10,6 +10,17 @@ export const getMenusFromRepository = async (query) => {
   }
 };
 
+export const getMenuFromRepository = async (query) => {
+  try {
+    const menu = await Menu.find(query);
+    return menu;
+  } catch (e) {
+    throw Error("Error while fetching menu");
+  }
+};
+
+
+
 // PATCH
 export const updateMenusInRepository = async (query, update) => {
   try {
