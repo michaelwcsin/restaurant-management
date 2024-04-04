@@ -2,7 +2,25 @@ import {
   getManagerFromRepository,
   getManagersFromRepository,
   updateManagersInRepository,
+  checkLoginInfoManagers,
 } from "../repositories/manager.respository.js";
+
+export const loginManagers = async(req, res) => {
+  const {email, password } = req.body;
+  try {
+    // check if manager exists
+    const manager = await checkLoginInfoManagers (email, password);
+    console.log("in controller.js", manager);
+    if (!manager) { //fail
+      return res.status(401).json({ message: 'Login failed ' + manager + email+password});
+    }
+    //successful login
+    res.json({ success: true, message: 'Login successful' });
+
+  } catch (e) {
+    res.status(500).send(`Failed to get check for manager's login ${e.message}`);
+  }
+};
 
 export const getManagers = async (req, res) => {
   try {

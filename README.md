@@ -1,5 +1,10 @@
 # Ensure the following commands are followed before starting the application (for backend and frontend)
 
+for back end: create the database first
+```angular2html
+ node customer.data.js; node menu.data.js; node pickup.data.js; node manager.data.js ; node order.data.js; node restaurant.data.js
+```
+then
 ```cmd
 npm install
 npm start

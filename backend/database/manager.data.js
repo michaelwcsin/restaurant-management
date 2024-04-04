@@ -9,18 +9,21 @@ const managers = [
   {
     name: "Manager A",
     email: "manager.a@example.com",
+    password:"easy",
     address: "111 Main Street, Edmonton, AB",
     phone: "123-456-7890",
   },
   {
     name: "Manager B",
     email: "manager.b@example.com",
+    password:"easy",
     address: "222 Elm Street, Edmonton, AB",
     phone: "987-654-3210",
   },
   {
     name: "Manager C",
     email: "manager.c@example.com",
+    password:"easy",
     address: "333 Oak Street, Edmonton, AB",
     phone: "555-123-4567",
   },

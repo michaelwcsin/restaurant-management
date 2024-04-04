@@ -2,21 +2,33 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  Button,
   Card,
   Container,
+  Dimmer,
   Header,
+  Image,
   Input,
 } from "semantic-ui-react";
-import NavBar from "../../components/user/navBar/userNavBar.component";
-import "./Restaurant.css";
+// import { default as MenuList } from "../src/components/user/menu/menuList.component";
+import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 
+import restaurantImage1 from "../../assets/restaurantsphoto/cactus.jpeg"
+import restaurantImage2 from "../../assets/restaurantsphoto/shawarma.png"
+import restaurantImage3 from "../../assets/restaurantsphoto/saigontaste.png"
+import defaultImage from "../../assets/restaurantsphoto/default.jpg"
+
+const restaurantImages = {
+  'Cactus Club': restaurantImage1,
+  'Shawarma City': restaurantImage2,
+  'Saigon Taste': restaurantImage3,
+};
 function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const CartContext = createContext();
-
+  const [active, setActive] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -30,9 +42,9 @@ function RestaurantList() {
         setLoading(false);
       }
     };
+
     fetchRestaurants();
   }, []);
-
 
   const filteredRestaurants = restaurants.filter((restaurant) =>
     restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -53,15 +65,40 @@ function RestaurantList() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
+
         {loading ? (
           <div>Loading...</div>
         ) : filteredRestaurants.length === 0 ? (
           <p>No restaurants found.</p>
         ) : (
-          <div className="restaurant-container">
+          <div className="restaurant-container"
+               style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
             {filteredRestaurants.map((restaurant) => (
-              <Card  key={restaurant._id}>
-                <Card.Content >
+              <Card //inline css code for each card
+                  key={restaurant._id}
+                  style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    width: '300px',
+                    margin: '10px', // some space around the cards
+              }}>
+                <Dimmer.Dimmable
+                  as={Image}
+                  dimmed={hoveredCard === restaurant._id}
+                  dimmer={{
+                    active: hoveredCard === restaurant._id,
+                    content: (
+                      <Button
+                        primary
+                        onClick={() => alert("Place your order!")}
+                      >
+                        Order Here
+                      </Button>
+                    ),
+                  }}
+                  onMouseEnter={() => setHoveredCard(restaurant._id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  src={restaurantImages[restaurant.name] || defaultImage}
+                />
+                <Card.Content>
                   <Card.Header>{restaurant.name}</Card.Header>
                   <Card.Meta>Email: {restaurant.email}</Card.Meta>
                   <Card.Description>
@@ -69,7 +106,7 @@ function RestaurantList() {
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                  <Link to={`/place-order/${restaurant._id}`}>
+                  <Link to={`/restaurants/${restaurant._id}/details`}>
                     Place Order Here
                   </Link>
                 </Card.Content>
@@ -77,6 +114,7 @@ function RestaurantList() {
             ))}
           </div>
         )}
+        {/*<MenuList />*/}
       </Container>
     </div>
   );

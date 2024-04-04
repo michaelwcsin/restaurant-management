@@ -1,5 +1,26 @@
 import Manager from "../models/manager.model.js";
 
+export const checkLoginInfoManagers = async (email, password) => {
+  try {
+    // look for the manager by email first
+    console.log("in controller.js: email:", email);
+
+    const manager = await Manager.findOne({ email: email });
+    // const manager = await Manager.find({ email: 'manager.a@example.com'});
+    // if manager doesn't exist or password doesn't match, return false
+    if (!manager || manager.password !== password) {
+      console.log("Manager doesn't exist:", email, password)
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    // If there's an error (e.g., database connection issue), log it and return false
+    console.error("Error checking manager login info:", error);
+    return false;
+  }
+};
+
 // GET
 export const getManagersFromRepository = async (query) => {
   try {
