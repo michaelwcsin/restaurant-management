@@ -18,7 +18,7 @@ const HomePage = () => {
         <Stack gap={3} className="stack">
           <div>
             <Button variant="light" className="twoButtons">
-              <a href="/restaurants">
+              <a href="/customers">
                 <b id="customer-button">Customer View</b>
               </a>
             </Button>

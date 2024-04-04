@@ -10,13 +10,13 @@ import {
   Image,
   Input,
 } from "semantic-ui-react";
-import { default as MenuList } from "../src/components/user/menu/menuList.component";
-import NavBar from "./components/restaurant/navbar/restaurantNavBar.component";
+// import { default as MenuList } from "../src/components/user/menu/menuList.component";
+import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 
-import restaurantImage1 from "./assets/restaurantsphoto/cactus.jpeg"
-import restaurantImage2 from "./assets/restaurantsphoto/shawarma.png"
-import restaurantImage3 from "./assets/restaurantsphoto/saigontaste.png"
-import defaultImage from "./assets/restaurantsphoto/default.jpg"
+import restaurantImage1 from "../../assets/restaurantsphoto/cactus.jpeg"
+import restaurantImage2 from "../../assets/restaurantsphoto/shawarma.png"
+import restaurantImage3 from "../../assets/restaurantsphoto/saigontaste.png"
+import defaultImage from "../../assets/restaurantsphoto/default.jpg"
 
 const restaurantImages = {
   'Cactus Club': restaurantImage1,
@@ -114,7 +114,7 @@ function RestaurantList() {
             ))}
           </div>
         )}
-        <MenuList />
+        {/*<MenuList />*/}
       </Container>
     </div>
   );

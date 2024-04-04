@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import RestaurantList from "./Restaurant";
+import RestaurantList from "./pages/user/Restaurant";
 import { RestaurantProvider } from "./components/admin/restaurants/RestaurantContext";
 import AddMenuItem from "./pages/Manager/AddMenuItem";
 import ManagerPage from "./pages/Manager/ManagerPage";
