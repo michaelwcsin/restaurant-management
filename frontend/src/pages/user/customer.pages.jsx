@@ -13,7 +13,7 @@ const CustomerPage = () => {
                 <a href="/login-customers">Log in</a>
             </Button>
             <Button variant="light" className="mb-2 btn">
-                <a href="/placeorder">Place Order as guest</a>
+                <a href="/restaurants">Place Order as guest</a>
             </Button>
         </div>
     </div>
