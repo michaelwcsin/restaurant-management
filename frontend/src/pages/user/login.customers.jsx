@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
 import {
     MDBBtn,
@@ -10,11 +11,38 @@ import {
     MDBCol,
     MDBInput,
     MDBCheckbox
-}
-from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom';
 import "./login.customers.css";
 import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
 const LoginCustomers = () => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const handleSignIn = async () => {
+        try {
+            console.log("Email customer:", email);
+            console.log("Password:", password);
+
+            const response = await
+                axios.post('http://localhost:8000/customers/login', {
+                    email: email,
+                    password: password
+                });
+            console.log("response:",response);
+
+            if (response.data.success) {
+                navigate('/restaurants');
+            } else {
+                alert('Incorrect email or password.');
+            }
+        } catch (error) {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+            alert('Error: ' + error.message);
+        }
+    };
+
     return (
         <div>
         <LoginNavBar />
@@ -34,15 +62,27 @@ const LoginCustomers = () => {
 
                             <MDBCardBody>
 
-                                <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-                                <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+                                <MDBInput wrapperClass='mb-4'
+                                          label='Email address'
+                                          id='form1'
+                                          type='email'
+                                          onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <MDBInput wrapperClass='mb-4'
+                                          label='Password'
+                                          id='form2'
+                                          type='password'
+                                          onChange={(e) => setPassword(e.target.value)}
+                                />
 
                                 <div className="d-flex justify-content-between mx-4 mb-4">
                                     <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
                                     <a href="!#">Forgot password?</a>
                                 </div>
 
-                                <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+                                <MDBBtn className="mb-4 w-100" onClick={handleSignIn}>
+                                    <b>Sign in</b>
+                                </MDBBtn>
 
                             </MDBCardBody>
 

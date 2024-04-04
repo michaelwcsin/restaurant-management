@@ -1,5 +1,29 @@
 import Customer from "../models/customer.model.js";
 
+//
+export const checkLoginInfoCustomer = async (email, password) => {
+  try {
+    // look for the customer by email first
+    console.log("in controller.js: email:", email);
+    console.log("Email:", email);
+    console.log("Password:", password);
+    const customer = await Customer.findOne({ email: email });
+    // const manager = await Manager.find({ email: 'manager.a@example.com'});
+    // if manager doesn't exist or password doesn't match, return false
+    if (!customer || customer.password !== password) {
+      console.log("Customer doesn't exist:", email, password)
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    // If there's an error (e.g., database connection issue), log it and return false
+    console.error("Error checking customer login info:", error);
+    return false;
+  }
+};
+
+
 // GET customer list
 export const getCustomersFromRepository = async (query) => {
   try {
