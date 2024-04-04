@@ -22,6 +22,15 @@ const orders = [{
     "660af6010e98c3834e1632ca"
   ],
   "sumPrice": 18.99
+},
+
+{
+  "customerId": "660cd5995dce748125e400cb",
+  "restaurantId": "660af6042c3daf09719bbc87",
+  "menuItems": [
+    "660af6010e98c3834e1632bb"
+  ],
+  "sumPrice": 16.99
 }
 ];
 
