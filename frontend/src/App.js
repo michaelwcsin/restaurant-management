@@ -22,7 +22,7 @@ const App = () => {
         <Routes>
           <Route index element={<Navigate to="/home" />}></Route>
           <Route path="/home" element={<HomePage />} />
-          <Route path="/placeorder" element={<RestaurantList />} />
+          <Route path="/restaurants" element={<RestaurantList />} />
           <Route path="/customers" element={<CustomerPage />} />
           <Route path="/manager" element={<ManagerPage />} />
           <Route path="/add-menu-item" element={<AddMenuItem />} />

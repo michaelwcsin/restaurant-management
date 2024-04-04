@@ -4,7 +4,27 @@ import {
   getCustomerFromRepository,
   getCustomersFromRepository,
   updateCustomersInRepository,
+  checkLoginInfoCustomer,
 } from "../repositories/customer.repository.js";
+
+//check log in info
+export const loginCustomer = async(req, res) => {
+  const {email, password } = req.body;
+  try {
+    // check if manager exists
+    const customer = await checkLoginInfoCustomer(email, password);
+    console.log("in controller.js", customer);
+    if (!customer) { //fail
+      return res.status(401).json({ message: 'Login failed '+ email+ " "+password});
+    }
+    //successful login
+    res.json({ success: true, message: 'Login successful' });
+
+  } catch (e) {
+    res.status(500).send(`Failed to get check for customer's login ${e.message}`);
+  }
+};
+
 
 // Customers
 export const getCustomers = async (req, res) => {

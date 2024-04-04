@@ -4,7 +4,8 @@ export const checkLoginInfoManagers = async (email, password) => {
   try {
     // look for the manager by email first
     console.log("in controller.js: email:", email);
-
+    console.log("Email:", email);
+    console.log("Password:", password);
     const manager = await Manager.findOne({ email: email });
     // const manager = await Manager.find({ email: 'manager.a@example.com'});
     // if manager doesn't exist or password doesn't match, return false
