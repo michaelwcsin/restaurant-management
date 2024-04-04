@@ -13,6 +13,7 @@ const PlaceOrderPage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cart, setCartItems] = useState([]);
+  const [cartId, setCartId] = useState([]);
   const [total, setTotal] = useState(0);
   const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState("");
@@ -71,6 +72,7 @@ const PlaceOrderPage = () => {
 
   const handleAdd = async (item, itemPrice) => {
     cart.push(item);
+    cartId.push(item);
     addPrice(itemPrice);
     setShowPopup(true);
     setTimeout(() => {
@@ -83,8 +85,12 @@ const PlaceOrderPage = () => {
     const index = cart.indexOf(item);
     const newCart = [...cart];
     newCart.splice(index, 1);
+    const index1 = cartId.indexOf(item._id);
+    const newCart1 = [...cart];
+    newCart1.splice(index1, 1);
     subPrice(itemPrice);
     setCartItems(newCart);
+    setCartId(newCart1);
   };
 
   const addPrice = async (itemPrice) => {
@@ -105,31 +111,18 @@ const PlaceOrderPage = () => {
     }
   };
 
-  const convertToId = async () => {
-    const arr = [];
-    console.log(cart)
-    for (let i = 0; i <= cart.length; i++) {
-      if (cart[i]){
-      const id = cart[i]._id;
-      arr.push(id);
-      }
-    }
-    return arr;
-  };
-
   const handleCustomer = (id) => {
     setCustomer(id);
   };
-  
-  const order = {
-    customerId: customer,
-    restaurantId: restaurantId,
-    menuItems: convertToId(),
-    sumPrice: total,
-  }
 
   const handleOrder = async () => {
-    axios.post("http://localhost:8000/orders",order)
+    axios.post("http://localhost:8000/orders",{
+      customer,
+      restaurantId,
+      cartId,
+      total,
+      "status":"Ordered"
+    })
     .then((result) => {
       console.log("Document inserted successfully",result.data);
     })

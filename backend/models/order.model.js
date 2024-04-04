@@ -5,6 +5,7 @@ const OrderSchema = new mongoose.Schema({
   restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: "restaurants" },
   menuItems: [{ type: mongoose.Schema.Types.ObjectId, ref: "menus" }], // List of menu objectId's
   sumPrice: { type: Number, required: true },
+  status: { type: String, required: true },
 });
 
 const Order = mongoose.model("orders", OrderSchema);

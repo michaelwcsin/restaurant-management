@@ -12,12 +12,14 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    padding-top: 50px;
 }
 
 .onboarding .btn {
-    width: 200px; /* Set your desired width */
+    width: 215px;
+    height: 40px; /* Set your desired width */
     text-align: center;
-    margin-bottom: 2px; /* Optional spacing between buttons */
+    margin-bottom: 15px; /* Optional spacing between buttons */
 }
 
 .onboarding .btn a {
@@ -28,4 +30,18 @@
     width: 100%;
     text-decoration: none;
     color: inherit; /* Ensures that the anchor tag inherits the text color from the button */
+}
+
+
+#button{
+    color: rgb(96, 123, 66);
+}
+
+
+svg {
+    fill: rgb(255, 255, 255);
+}
+
+.user {
+    margin-bottom: 5vh;
 }
