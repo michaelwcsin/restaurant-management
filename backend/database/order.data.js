@@ -12,7 +12,8 @@ const orders = [{
     "660af6010e98c3834e1632bc",
     "660af6010e98c3834e1632c7"
   ],
-  "sumPrice": 27.98
+  "sumPrice": 27.98,
+  "status": "Ordered"
 },
 {
   "customerId": "660cd5995dce748125e400ca",
@@ -21,7 +22,8 @@ const orders = [{
     "660af6010e98c3834e1632b8",
     "660af6010e98c3834e1632ca"
   ],
-  "sumPrice": 18.99
+  "sumPrice": 18.99,
+  "status": "In Progress"
 },
 
 {
@@ -30,7 +32,8 @@ const orders = [{
   "menuItems": [
     "660af6010e98c3834e1632bb"
   ],
-  "sumPrice": 16.99
+  "sumPrice": 16.99,
+  "status": "Awaiting Pickup"
 }
 ];
 

@@ -9,3 +9,24 @@
         border-bottom-left-radius: 0rem;
     }
 }
+
+p {
+    font-size: px;
+}
+
+.card{
+    width: 500px;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bgimg{
+    filter: brightness(60%);
+}
+
+.text {
+    color: white;
+}

@@ -45,57 +45,74 @@ const LoginManagers = () => {
                 alert('Error: ' + error.message);
             }
     };
+
     return (
         <div>
-            <LoginNavBar />
+        <LoginNavBar />
+        <div className="container">
+            <MDBContainer className="my-5">
+            <MDBCard>
+                <div class="bg-image">
+                <div>
+                <img id="bgimg" src={image1} class="img-fluid" alt="Sample" />
+                </div>
+                <div class="mask">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="100"
+                        height="100"
+                        fill="#FFF"
+                        class="bi bi-person-circle"
+                        viewBox="0 0 16 16"
+                    >
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path
+                        fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+                        />
+                    </svg>
+                    </div>
+                </div>
+                </div>
+                <MDBRow className="g-0 d-flex align-items-center">
+                <MDBCol md="12">
+                    <MDBCardBody className="text-center">
+                    <MDBInput
+                    wrapperClass="mb-4"
+                    label="Email address"
+                    id="form1"
+                    type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <MDBInput
+                        wrapperClass="mb-4"
+                        label="Password"
+                        id="form2"
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className="d-flex justify-content-between mx-4 mb-4">
+                        <MDBCheckbox
+                        name="flexCheck"
+                        value=""
+                        id="flexCheckDefault"
+                        label="Remember me"
+                        />
+                        <a href="!#">Forgot password?</a>
+                    </div>
 
-            <MDBContainer className='my-5'>
-                <h2 className="text-center mb-4">Manager Log in</h2>
-
-                <MDBCard>
-
-                    <MDBRow className='g-0 d-flex align-items-center'>
-
-                        <MDBCol md='4'>
-                            <MDBCardImage src={image1} alt='mink' className='rounded-t-5 rounded-tr-lg-0' fluid/>
-                        </MDBCol>
-
-                        <MDBCol md='8'>
-
-                            <MDBCardBody>
-
-                                <MDBInput wrapperClass='mb-4'
-                                          label='Email address'
-                                          id='form1'
-                                          type='email'
-                                          onChange={(e) => setEmail(e.target.value)}
-                                />
-                                <MDBInput wrapperClass='mb-4'
-                                          label='Password'
-                                          id='form2'
-                                          type='password'
-                                          onChange={(e) => setPassword(e.target.value)}
-                                />
-
-                                <div className="d-flex justify-content-between mx-4 mb-4">
-                                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
-                                    <a href="!#">Forgot password?</a>
-                                </div>
-
-                                <MDBBtn className="mb-4 w-100" onClick={handleSignIn}>
-                                    <b>Sign in</b>
-                                </MDBBtn>
-
-                            </MDBCardBody>
-
-                        </MDBCol>
-
-                    </MDBRow>
-
-                </MDBCard>
+                    <MDBBtn  className="mb-4 text-center" onClick={handleSignIn}>
+                        <b className="text">Sign in</b>
+                    </MDBBtn>
+                    </MDBCardBody>
+                </MDBCol>
+                </MDBRow>
+            </MDBCard>
             </MDBContainer>
         </div>
+        </div>
     );
-}
+};
 
 export default LoginManagers
