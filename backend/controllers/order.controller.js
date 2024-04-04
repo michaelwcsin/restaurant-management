@@ -58,6 +58,7 @@ export const getOrder = async (req, res) => {
     const order = await getOrderFromRepository({ _id: id });
     res.status(200).send(order);
   } catch (e) {
-    res.status(500).send(e.message, `failed to fetch order ${id}`);
+    res.status(500).send(`Failed to fetch order ${id}: ${e.message}`);
+
   }
 };

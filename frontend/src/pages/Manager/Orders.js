@@ -4,6 +4,7 @@ import axios from "axios";
 function Orders({ restaurantId }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [detailedOrders, setDetailedOrders] = useState([]); 
   const isMounted = useRef(true);
 
   useEffect(() => {
@@ -17,25 +18,37 @@ function Orders({ restaurantId }) {
       try {
         const response = await axios.get("http://localhost:8000/orders");
         const filteredOrders = response.data.filter(order => order.restaurantId === restaurantId);
+        console.log("Filtered Orders:", filteredOrders); 
         setOrders(filteredOrders);
         setLoading(false);
+        return filteredOrders; 
       } catch (error) {
         console.error("Error fetching orders:", error);
         setLoading(false);
+        return []; 
+      }
+    };
+
+    const fetchData = async () => {
+      const fetchedOrders = await fetchOrders();
+      if (fetchedOrders.length > 0) {
+        fetchOrderDetails(fetchedOrders);
       }
     };
 
     if (restaurantId) {
-      fetchOrders();
+      fetchData();
     }
   }, [restaurantId]);
 
   useEffect(() => {
     console.log("Orders:", orders);
     if (orders.length > 0) {
-      fetchOrderDetails();
+      setDetailedOrders([]); 
+      fetchOrderDetails(orders); 
     }
   }, [orders]);
+  
 
   const fetchCustomerDetails = async (customerId) => {
     try {
@@ -50,9 +63,6 @@ function Orders({ restaurantId }) {
       return null;
     }
   };
-  
-  
-  
 
   const fetchMenuDetails = async (menuId) => {
     try {
@@ -68,27 +78,24 @@ function Orders({ restaurantId }) {
     }
   };
 
-  const fetchOrderDetails = async () => {
+  const fetchOrderDetails = async (ordersData) => {
     try {
       const detailedOrders = await Promise.all(
-        orders.map(async (order) => {
+        ordersData.map(async (order) => {
           try {
+            console.log("Order ID:", order._id); 
             const orderResponse = await axios.get(`http://localhost:8000/orders/${order._id}`);
             const customer = await fetchCustomerDetails(order.customerId);
             const menuItems = await Promise.all(order.menuItems.map(async (itemId) => {
               const menuItem = await fetchMenuDetails(itemId);
-              console.log("Menu Item Name:", menuItem ? menuItem.name : "Unknown");
-              return menuItem;
+              return menuItem ? menuItem.name : "Unknown";
             }));
-            const totalPrice = menuItems.reduce((acc, item) => acc + item.price, 0);
-  
-            console.log("Customer Name:", customer ? customer.name : "Unknown");
-  
+
             return {
               ...orderResponse.data,
               customerName: customer ? customer.name : "Unknown",
               menuItems,
-              totalPrice,
+              sumPrice: order.sumPrice,
             };
           } catch (error) {
             console.error("Error fetching order details:", error);
@@ -96,11 +103,9 @@ function Orders({ restaurantId }) {
           }
         })
       );
-  
+
       const validOrders = detailedOrders.filter(order => order !== null);
-      if (isMounted.current) {
-        setOrders(validOrders);
-      }
+      setDetailedOrders(validOrders); 
     } catch (error) {
       console.error("Error fetching order details:", error);
     }
@@ -114,25 +119,25 @@ function Orders({ restaurantId }) {
     <div className="container">
       <h1 className="title">Orders</h1>
       <ul className="order-list">
-        {orders.map((order) => (
+        {detailedOrders.map((order) => (
           <li key={order._id} className="order-item">
-            <p>Order ID: {order._id}</p>
+            
             <p>Customer Name: {order.customerName}</p>
             <p>Menu Items:</p>
             <ul>
-              {order.menuItems.map((itemName, index) => (
-                <li key={index}>
-                  {itemName} 
-                </li>
-              ))}
+            {order.menuItems.map((itemName, index) => (
+              <li key={`${order._id}-${index}`} className="menu-item">{itemName}</li>
+            ))}
+
+
+
             </ul>
-            <p>Total Price: ${order.totalPrice}</p>
+            <p>Sum Price: {order.sumPrice ? `$${order.sumPrice.toFixed(2)}` : 'N/A'}</p>
           </li>
         ))}
       </ul>
     </div>
   );
-  
 }
 
 export default Orders;
