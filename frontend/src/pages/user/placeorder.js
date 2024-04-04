@@ -197,7 +197,7 @@ const PlaceOrderPage = () => {
             ), // This can be imported from another file, take a look at admin/menuitems/adminmenu.component.jsx
           },
           {
-            menuItem: "Cart",
+            menuItem: `Cart (${cart.length} items) - Total: $${total}`,
             render: () => (
               <TabPane style={{ overflowY: "auto", height: "80vh" }}>
                 {" "}
