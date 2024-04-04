@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
 import {
     MDBBtn,
@@ -10,8 +11,7 @@ import {
     MDBCol,
     MDBInput,
     MDBCheckbox
-}
-    from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
 import "./login.managers.css";
 import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
@@ -19,10 +19,43 @@ import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx"
 
 const LoginManagers = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleSignIn = () => {
-        // perform sign-in logic here, then navigate
-        navigate('/manager');
+    const handleSignIn = async () => {
+        try {
+            console.log("email:",email);
+            console.log("password:",password);
+
+            const response = await
+                axios.post('http://localhost:8000/managers/login', {
+                email: email,
+                password: password
+            });
+            console.log("response:",response);
+
+            if (response.data.success) {
+                navigate('/manager');
+            } else {
+                alert('Incorrect email or password.');
+            }
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                alert('Login failed: ' + error.response.data.message);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.log(error.request);
+                alert('No response received');
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                alert('Error: ' + error.message);
+            }
+        }
+
     };
     return (
         <div>
@@ -43,8 +76,18 @@ const LoginManagers = () => {
 
                             <MDBCardBody>
 
-                                <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-                                <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+                                <MDBInput wrapperClass='mb-4'
+                                          label='Email address'
+                                          id='form1'
+                                          type='email'
+                                          onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <MDBInput wrapperClass='mb-4'
+                                          label='Password'
+                                          id='form2'
+                                          type='password'
+                                          onChange={(e) => setPassword(e.target.value)}
+                                />
 
                                 <div className="d-flex justify-content-between mx-4 mb-4">
                                     <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
