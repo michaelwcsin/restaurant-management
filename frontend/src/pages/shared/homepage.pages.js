@@ -15,24 +15,20 @@ const HomePage = () => {
           <h3>Food Service Made Easy</h3>
         </div>
         <div>
-        <Stack gap={3} className="stack">
-          <div>
+          <div className="user-options">
             <Button variant="light" className="twoButtons">
               <a href="/customers">
                 <b id="customer-button">Customer View</b>
               </a>
             </Button>
-          </div>
-          <div>
             <Button variant="light" className="twoButtons">
               <a href="/login-managers">
                 <b id="manager-button">Manager View</b>
               </a>
             </Button>
           </div>
-        </Stack>
         </div>
-    </Stack>
+      </Stack>
     </div>
   );
 };
