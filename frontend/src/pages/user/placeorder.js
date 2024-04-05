@@ -72,7 +72,7 @@ const PlaceOrderPage = () => {
 
   const handleAdd = async (item, itemPrice) => {
     cart.push(item);
-    cartId.push(item);
+    cartId.push(item._id);
     addPrice(itemPrice);
     setShowPopup(true);
     setTimeout(() => {
@@ -147,7 +147,7 @@ const PlaceOrderPage = () => {
           key: customer._id,
           text: customer.name,
           value: customer._id,
-          onselect: () => handleCustomer(customer._id),
+          onselect: () => setCustomer(customer._id),
         }))}
       />
       <Tab
