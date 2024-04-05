@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import OrderCard from "../../components/admin/ordercard/ordercard.component";
+import "./Orders.css";
 
 function Orders({ restaurantId }) {
   const [orders, setOrders] = useState([]);
@@ -138,27 +139,6 @@ function Orders({ restaurantId }) {
   return (
     <div className="order-container">
       <h1 className="title">Orders</h1>
-      <ul className="order-list">
-        {detailedOrders.map((order) => (
-          <li key={order._id} className="order-item">
-            <p>Customer Name: {order.customerName}</p>
-            <p>Menu Items:</p>
-            <ul>
-              {order.menuItems.map((itemName, index) => (
-                <li key={`${order._id}-${index}`} className="menu-item">
-                  {itemName}
-                </li>
-              ))}
-            </ul>
-            <p>
-              Sum Price:{" "}
-              {order.sumPrice ? `$${order.sumPrice.toFixed(2)}` : "N/A"}
-            </p>
-              <p>Pick-up Date: {order.pickUpDate}</p>
-              <p>Pick-up Time: {order.pickUpTime}</p>
-          </li>
-        ))}
-      </ul>
       <div className="order-list">
         {detailedOrders.map((order) => (
           <OrderCard key={order._id} order={order} />
