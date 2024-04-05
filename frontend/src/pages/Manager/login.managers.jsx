@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
 import {
@@ -15,12 +15,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 import "./login.managers.css";
 import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
-
+import { ManagerContext } from "../../components/contextAPI/managerContext";
 
 const LoginManagers = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { manager, setManager } = useContext(ManagerContext);
 
     const handleSignIn = async () => {
         try {
@@ -35,6 +36,7 @@ const LoginManagers = () => {
             console.log("response:",response);
 
             if (response.data.success) {
+                setManager({email: email});
                 navigate('/manager');
             } else {
                 alert('Incorrect email or password.');

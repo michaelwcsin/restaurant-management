@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Link } from "react-router-dom";
-import { useRestaurant } from "./RestaurantContext";
+import { useRestaurant } from "../../contextAPI/RestaurantContext";
 
 const RestaurantCard = ({ restaurant }) => {
   const { setSelectedRestaurant } = useRestaurant();

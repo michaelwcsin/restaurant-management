@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
 import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
 import {
@@ -15,10 +15,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 import "./login.customers.css";
 import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
+import { CustomerContext} from "../../components/contextAPI/customerContext";
+
 const LoginCustomers = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { customer, setCustomer } = useContext(CustomerContext);
+
     const handleSignIn = async () => {
         try {
             console.log("Email customer:", email);
@@ -32,6 +36,7 @@ const LoginCustomers = () => {
             console.log("response:",response);
 
             if (response.data.success) {
+                setCustomer({email: email});
                 navigate('/restaurants');
             } else {
                 alert('Incorrect email or password.');
