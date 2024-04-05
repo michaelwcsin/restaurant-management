@@ -31,7 +31,7 @@ const TabSheet = ({ restaurant }) => {
                     },
                     {
                         menuItem: "Analytics",
-                        render: () => <TabPane>Tab 3 Content</TabPane>,
+                        render: () => <TabPane>Tab 3 Analytics Content</TabPane>,
                     },
                 ]}
             />
