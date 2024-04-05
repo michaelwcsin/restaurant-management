@@ -1,42 +1,41 @@
 import React from "react";
 import { Tab, TabPane } from "semantic-ui-react";
-import Orders from "../../../pages/Manager/Orders"; // Ensure correct import if Orders is the default export
+import Orders from "../../../pages/Manager/Orders";
 import AdminMenu from "../menuitems/adminMenu.component";
 import "./tabsheet.styles.css";
+import axios from "axios";
+import Analytics from "../analytics/analytics.component";
 
-const TabSheet = ({ restaurant }) => {
-  const restaurantName = restaurant?.name;
+const TabSheet = ({ restaurant }) => { // this restaurant is the objectID of the restaurant
 
-  return (
-    <div>
-      {restaurantName && (
-        <h2 className="restaurant-name-header">{restaurantName}</h2>
-      )}
-      <Tab
-        menu={{ fluid: true, vertical: true, tabular: true }}
-        panes={[
-          {
-            menuItem: "Menu Items",
-            render: () => <AdminMenu restaurant={restaurant} />,
-          },
-          {
-            menuItem: "Orders",
-            render: () => (
-              <Tab.Pane style={{ overflowY: "auto", height: "80vh" }}>
-                {restaurant && (
-                  <Orders restaurantId={restaurant[0] ? restaurant[0] : null} />
-                )}
-              </Tab.Pane>
-            ),
-          },
-          {
-            menuItem: "Analytics",
-            render: () => <TabPane>Tab 3 Analytics Content</TabPane>,
-          },
-        ]}
-      />
-    </div>
-  );
+    return (
+        <div>
+            <Tab
+                menu={{ fluid: true, vertical: true, tabular: true }}
+                panes={[
+                    {
+                        menuItem: "Menu Items",
+                        render: () => <AdminMenu restaurant={restaurant} />,
+                    },
+                    {
+                        menuItem: "Orders",
+                        render: () => (
+                            <Tab.Pane style={{ overflowY: "auto", height: "80vh" }}>
+                                {restaurant && (
+                                    <Orders restaurantId={restaurant[0] ? restaurant[0] : null} />
+                                )}
+                            </Tab.Pane>
+                        ),
+                    },
+                    {
+                        menuItem: "Analytics", //pass the restaurant ID to get the orders from that restaurant only
+                        render: () => <Analytics restaurant={restaurant}/>,
+
+                    },
+                ]}
+            />
+        </div>
+    );
 };
 
 export default TabSheet;
