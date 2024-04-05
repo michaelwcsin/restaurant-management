@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import OrderCard from "../../components/admin/ordercard/ordercard.component";
 import "./Orders.css";
+import { useOrders } from "../../components/contextAPI/ordersContext";
 
 function Orders({ restaurantId }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [detailedOrders, setDetailedOrders] = useState([]);
   const isMounted = useRef(true);
+  // Get these from Context API
+  const { detailedOrders, setDetailedOrders } = useOrders()
 
   useEffect(() => {
     return () => {
@@ -48,7 +50,7 @@ function Orders({ restaurantId }) {
   useEffect(() => {
     console.log("Orders:", orders);
     if (orders.length > 0) {
-      setDetailedOrders([]);
+      // setDetailedOrders([]);
       fetchOrderDetails(orders);
     }
   }, [orders]);

@@ -15,7 +15,7 @@ const CustomerPage = () => {
             isGuest: true,
             email: "guest@example.com", // or any other default or placeholder email if needed
         });
-        navigate('/restaurants');
+        // navigate('/restaurants');
     };
   return (
     <div className="customerLoginPage">
@@ -26,7 +26,7 @@ const CustomerPage = () => {
                 <a href="/login-customers">Log in</a>
             </Button>
             <Button variant="light" className="mb-2 btn" onClick={handleGuestLogin}>
-                <a href="/restaurants">Place Order as guest</a>
+                <a>Place Order as guest</a>
             </Button>
         </div>
     </div>

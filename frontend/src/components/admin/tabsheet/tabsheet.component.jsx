@@ -29,7 +29,7 @@ const TabSheet = ({ restaurant }) => { // this restaurant is the objectID of the
                     },
                     {
                         menuItem: "Analytics", //pass the restaurant ID to get the orders from that restaurant only
-                        render: () => <Analytics restaurant={restaurant}/>,
+                        render: () => <Analytics/>,
 
                     },
                 ]}

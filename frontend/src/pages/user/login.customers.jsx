@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import "./login.customers.css";
 import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
 import { CustomerContext} from "../../components/contextAPI/customerContext";
+import {Header} from "semantic-ui-react";
 
 const LoginCustomers = () => {
     const navigate = useNavigate();
@@ -57,13 +58,16 @@ const LoginCustomers = () => {
         } catch (error) {
             // Something happened in setting up the request that triggered an Error
             console.log('Error', error.message);
-            alert('Error: ' + error.message);
+            alert('Incorrect Email or password');
         }
     };
 
   return (
     <div className='mainContainer'>
       <LoginNavBar />
+        <Header as="h2" textAlign="center" style={{ marginBottom: '0px' }}>
+            Welcome to Customer Login!
+        </Header>
       <div className="container">
         <MDBContainer className="my-5">
           <MDBCard>
