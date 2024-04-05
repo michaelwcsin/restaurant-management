@@ -28,9 +28,19 @@ export const updateOrdersInRepository = async (query, update) => {
     const menuItemsPrices = await Menu.find({ _id: { $in: updatedMenus } }, 'price');
     const sumPrice = menuItemsPrices.reduce((total, menuItem) => total + menuItem.price, 0);
 
+    let status = existingOrder.status; 
+    if (update.status) {
+      const validStatuses = ["in-progress", "awaiting-pickup", "completed"];
+      if (validStatuses.includes(update.status)) {
+        status = update.status;
+      } else {
+        throw new Error("Invalid status provided");
+      }
+    }
+
     const updatedOrder = await Order.findOneAndUpdate(
       { ...query },
-      { menuItems: updatedMenus, sumPrice: sumPrice },
+      { menuItems: updatedMenus, sumPrice: sumPrice, status: status }, 
       { new: true }
     ).lean();
 
@@ -53,18 +63,29 @@ export const deleteOrderFromRepository = async (query) => {
 export const createOrderInRepository = async (data) => {
   try {
     const { customerId, restaurantId, menuItems, sumPrice } = data;
+
+    let calculatedSumPrice = sumPrice; 
+    
+    if (!calculatedSumPrice) {
+      const menuItemsPrices = await Menu.find({ _id: { $in: menuItems } }, 'price');
+      calculatedSumPrice = menuItemsPrices.reduce((total, menuItem) => total + menuItem.price, 0);
+    }
+
     const newOrder = new Order({
       customerId,
       restaurantId,
       menuItems,
-      sumPrice,
+      sumPrice: calculatedSumPrice, 
+      status: "ordered",
     });
+
     const savedOrder = await newOrder.save();
     return savedOrder;
   } catch (error) {
     throw new Error(`Failed to create order: ${error.message}`);
   }
 };
+
 
 export const getOrderFromRepository = async (query) => {
   try {
