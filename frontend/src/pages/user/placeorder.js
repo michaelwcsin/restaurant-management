@@ -115,22 +115,39 @@ const PlaceOrderPage = () => {
     setCustomer(id);
   };
 
-  const handleOrder = async () => {
-    axios.post("http://localhost:8000/orders",{
-      customer,
-      restaurantId,
-      cartId,
-      total,
-      "status":"Ordered"
-    })
-    .then((result) => {
-      console.log("Document inserted successfully",result.data);
-    })
-    .catch((err) => {
-      console.error("Failed to insert document",err);
-    });
+  const handleConfirmCheckout = () => {
     setCheckoutOpen(true);
-  }
+  };
+
+  const handleOrder = async () => {
+    const cartMenuItemIds = [];
+
+    cart.forEach(cartItem => {
+      // Find the menu item in menuItems array
+      const menuItem = menuItems.find(item => item._id === cartItem._id);
+      if (menuItem) {
+        cartMenuItemIds.push(menuItem._id);
+      }
+    });
+    
+    axios
+      .post("http://localhost:8000/orders", {
+        customer,
+        restaurantId,
+        menuItems: cartMenuItemIds,
+        total,
+      })
+      .then((result) => {
+        console.log("Document inserted successfully", result.data);
+      })
+      .catch((err) => {
+        console.error("Failed to insert document", err);
+      });
+
+    setCheckoutOpen(true);
+  };
+
+  
 
   return (
     <div>
@@ -177,7 +194,9 @@ const PlaceOrderPage = () => {
                               <button
                                 className="ui vertical animated button"
                                 tabIndex="0"
-                                onClick={(e) => handleAdd(menuItem, menuItem.price, e)}
+                                onClick={(e) =>
+                                  handleAdd(menuItem, menuItem.price, e)
+                                }
                               >
                                 <div className="hidden content">Add</div>
                                 <div className="visible content">
@@ -187,20 +206,23 @@ const PlaceOrderPage = () => {
                               <button
                                 className="ui vertical animated button"
                                 tabIndex="0"
-                                onClick={(e) => handleRemove(menuItem, menuItem.price, e)}
+                                onClick={(e) =>
+                                  handleRemove(menuItem, menuItem.price, e)
+                                }
                               >
                                 <div className="hidden content">Remove</div>
                                 <div className="visible content">
                                   <i className="trash alternate outline icon"></i>
                                 </div>
                               </button>
-                              
                             </div>
                           ) : (
                             <button
                               className="ui vertical animated button"
                               tabIndex="0"
-                              onClick={(e) => handleAdd(menuItem, menuItem.price, e)}
+                              onClick={(e) =>
+                                handleAdd(menuItem, menuItem.price, e)
+                              }
                             >
                               <div className="hidden content">Add</div>
                               <div className="visible content">
@@ -216,7 +238,6 @@ const PlaceOrderPage = () => {
                   )}
                 </div>
               </TabPane>
-          
             ), // This can be imported from another file, take a look at admin/menuitems/adminmenu.component.jsx
           },
           {
@@ -241,7 +262,9 @@ const PlaceOrderPage = () => {
                           <div
                             class="ui vertical button"
                             tabindex="0"
-                            onClick={(e) => handleRemove(item, item.price, e)}
+                            onClick={(e) =>
+                              handleRemove(item, item.price, e)
+                            }
                           >
                             Remove
                           </div>
@@ -253,11 +276,14 @@ const PlaceOrderPage = () => {
                   )}
                   <h3>Total: ${total}</h3>
                   {!checkoutOpen && (
-                    <button className="ui toggle button active" onClick={handleOrder}>
+                    <button
+                      className="ui toggle button active"
+                      onClick={handleOrder}
+                    >
                       Checkout
                     </button>
                   )}
-                  {checkoutOpen && <Checkout />}
+                  {checkoutOpen && <Checkout onConfirmCheckout={handleConfirmCheckout} />}
                 </div>
               </TabPane>
             ),
@@ -272,11 +298,7 @@ const PlaceOrderPage = () => {
           },
         ]}
       />
-      {showPopup && (
-        <div className="popup">
-          Item successfully added to cart
-        </div>
-      )}
+      {showPopup && <div className="popup">Item successfully added to cart</div>}
     </div>
   );
 };

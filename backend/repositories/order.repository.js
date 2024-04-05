@@ -72,13 +72,16 @@ export const deleteOrderFromRepository = async (query) => {
 
 export const createOrderInRepository = async (data) => {
   try {
-    const { customerId, restaurantId, menuItems, sumPrice, pickUpDate, pickUpTime  } = data;
+    const { customerId, restaurantId, menuItems, pickUpDate, pickUpTime } = data;
 
-    let calculatedSumPrice = sumPrice; 
+    let calculatedSumPrice = 0; 
+
     
-    if (!calculatedSumPrice) {
-      const menuItemsPrices = await Menu.find({ _id: { $in: menuItems } }, 'price');
-      calculatedSumPrice = menuItemsPrices.reduce((total, menuItem) => total + menuItem.price, 0);
+    for (const menuItemId of menuItems) {
+      const menuItem = await Menu.findById(menuItemId);
+      if (menuItem) {
+        calculatedSumPrice += menuItem.price || 0; 
+      }
     }
 
     const newOrder = new Order({
@@ -97,6 +100,7 @@ export const createOrderInRepository = async (data) => {
     throw new Error(`Failed to create order: ${error.message}`);
   }
 };
+
 
 
 export const getOrderFromRepository = async (query) => {
