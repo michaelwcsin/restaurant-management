@@ -30,3 +30,9 @@ p {
 .text {
     color: white;
 }
+
+.mainContainer {
+    height: 100vh;
+    background-image: url("../../assets/background/paper_fibers.png");
+    background-size: cover;
+  }
