@@ -1,9 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Card, Dropdown, Image, Modal } from "semantic-ui-react";
-import axios from "axios";
-
 
 const OrderCard = ({ order }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -11,6 +10,8 @@ const OrderCard = ({ order }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("Ordered");
+  const [showReadyForPickup, setShowReadyForPickup] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const handleDropdownChange = (event, data) => {
     setSelectedStatus(data.value);
@@ -18,7 +19,7 @@ const OrderCard = ({ order }) => {
 
   const handleApproveClick = async () => {
     setShowButtons(false);
-  
+    setShowReadyForPickup(true);
     try {
       const update = {};
       if (selectedDate) {
@@ -28,8 +29,11 @@ const OrderCard = ({ order }) => {
         update.pickUpTime = selectedTime;
       }
       update.status = "in-progress";
-  
-      const response = await axios.patch(`http://localhost:8000/orders/${order._id}`, update);
+
+      const response = await axios.patch(
+        `http://localhost:8000/orders/${order._id}`,
+        update
+      );
       console.log("Order updated:", response.data);
     } catch (error) {
       console.error("Error updating order:", error);
@@ -39,7 +43,9 @@ const OrderCard = ({ order }) => {
 
   const handleDeclineClick = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8000/orders/${order._id}`);
+      const response = await axios.delete(
+        `http://localhost:8000/orders/${order._id}`
+      );
       console.log("Order deleted:", response.data);
     } catch (error) {
       console.error("Error deleting order:", error);
@@ -47,33 +53,36 @@ const OrderCard = ({ order }) => {
     }
   };
 
-  const handleReadyforPickupClick = async () => {
+  const handleReadyForPickupClick = async () => {
     setShowButtons(false);
+    setShowReadyForPickup(false);
+    setShowCompleted(true);
     try {
       const update = { status: "awaiting-pickup" };
-      const response = await axios.patch(`http://localhost:8000/orders/${order._id}`, update);
+      const response = await axios.patch(
+        `http://localhost:8000/orders/${order._id}`,
+        update
+      );
       console.log("Order status updated", response.data);
     } catch (error) {
       console.error("Error updating order status:", error);
       console.log("Error response:", error.response);
     }
   };
-
 
   const handleCompletedClick = async () => {
     try {
       const update = { status: "completed" };
-      const response = await axios.patch(`http://localhost:8000/orders/${order._id}`, update);
+      const response = await axios.patch(
+        `http://localhost:8000/orders/${order._id}`,
+        update
+      );
       console.log("Order status updated", response.data);
     } catch (error) {
       console.error("Error updating order status:", error);
       console.log("Error response:", error.response);
     }
   };
-  
-
-
-  
 
   const handleCardClick = () => {
     setModalOpen(true);
@@ -82,7 +91,6 @@ const OrderCard = ({ order }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -95,17 +103,27 @@ const OrderCard = ({ order }) => {
   return (
     <div>
       <Card style={{ width: "100%", height: "100%" }}>
-        <Card.Content onClick={handleCardClick} style={{ cursor: "pointer" }}>
+        <Card.Content
+          onClick={handleCardClick}
+          style={{ cursor: "pointer", minHeight: "25%" }}
+        >
           <Card.Header>{order.customerName}</Card.Header>
           <Card.Meta>{order.orderStatus}</Card.Meta>
           <Card.Description>{order.customerEmail}</Card.Description>
           <Card.Description>{order.customerPhone}</Card.Description>
         </Card.Content>
 
-        <Card.Content>
+        <Card.Content style={{ minHeight: "25%" }}>
           <Card.Description>
-            Pick-up Date: {order.pickUpDate === "N/A" ? (
-              <div style={{ border: "1px solid #000", borderRadius: "5px", padding: "5px" }}>
+            Pick-up Date:{" "}
+            {order.pickUpDate === "N/A" ? (
+              <div
+                style={{
+                  border: "1px solid #000",
+                  borderRadius: "5px",
+                  padding: "5px",
+                }}
+              >
                 <DatePicker
                   selected={selectedDate}
                   onChange={handleDateChange}
@@ -119,10 +137,17 @@ const OrderCard = ({ order }) => {
           </Card.Description>
         </Card.Content>
 
-        <Card.Content>
+        <Card.Content style={{ minHeight: "25%" }}>
           <Card.Description>
-            Pick-up Time: {order.pickUpTime === "N/A" ? (
-              <div style={{ border: "1px solid #000", borderRadius: "5px", padding: "5px" }}>
+            Pick-up Time:{" "}
+            {order.pickUpTime === "N/A" ? (
+              <div
+                style={{
+                  border: "1px solid #000",
+                  borderRadius: "5px",
+                  padding: "5px",
+                }}
+              >
                 <input
                   type="time"
                   value={selectedTime}
@@ -135,7 +160,7 @@ const OrderCard = ({ order }) => {
           </Card.Description>
         </Card.Content>
 
-        <Card.Content extra>
+        <Card.Content extra style={{ minHeight: "25%" }}>
           {showButtons ? (
             <Card.Content extra>
               <div className="ui two buttons">
@@ -147,29 +172,38 @@ const OrderCard = ({ order }) => {
                 >
                   Approve
                 </Button>
-                <Button basic color="red" style={{ width: "20%" }} onClick={handleDeclineClick}>
+                <Button
+                  basic
+                  color="red"
+                  style={{ width: "20%" }}
+                  onClick={handleDeclineClick}
+                >
                   Decline
                 </Button>
               </div>
             </Card.Content>
           ) : (
             <div>
-              <Button
-                basic
-                color="green"
-                style={{ width: "70%", marginBottom: "10px" }}
-                onClick={handleReadyforPickupClick}
-              >
-                Ready for Pickup
-              </Button>
-              <Button
-                basic
-                color="green"
-                style={{ width: "70%" }}
-                onClick={handleCompletedClick}
-              >
-                Completed
-              </Button>
+              {showReadyForPickup && (
+                <Button
+                  basic
+                  color="green"
+                  style={{ width: "90%" }}
+                  onClick={handleReadyForPickupClick}
+                >
+                  Ready for Pickup
+                </Button>
+              )}
+              {showCompleted && (
+                <Button
+                  basic
+                  color="green"
+                  style={{ width: "90%" }}
+                  onClick={handleCompletedClick}
+                >
+                  Completed
+                </Button>
+              )}
             </div>
           )}
         </Card.Content>

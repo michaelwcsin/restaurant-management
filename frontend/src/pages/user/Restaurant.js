@@ -29,6 +29,7 @@ function RestaurantList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [active, setActive] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+
   const { customer } = useContext(CustomerContext);
 
   useEffect(() => {

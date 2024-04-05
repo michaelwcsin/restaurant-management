@@ -1,33 +1,42 @@
 import React from "react";
 import { Tab, TabPane } from "semantic-ui-react";
-import {
-  default as OrderCard,
-  default as Orders,
-} from "../../../pages/Manager/Orders";
+import Orders from "../../../pages/Manager/Orders"; // Ensure correct import if Orders is the default export
 import AdminMenu from "../menuitems/adminMenu.component";
 import "./tabsheet.styles.css";
 
-const TabSheet = ({ restaurant }) => (
-  <Tab
-    menu={{ fluid: true, vertical: true, tabular: true }}
-    panes={[
-      {
-        menuItem: "Menu Items",
-        render: () => <AdminMenu restaurant={restaurant} />,
-      },
-      {
-        menuItem: "Orders",
-        render: () => (
-          <Tab.Pane style={{ overflowY: "auto", height: "80vh" }}>
-            {restaurant && (
-              <Orders restaurantId={restaurant[0] ? restaurant[0] : null} />
+const TabSheet = ({ restaurant }) => {
+    const restaurantName = restaurant?.name;
+
+    return (
+        <div>
+            {restaurantName && (
+                <h2 className="restaurant-name-header">{restaurantName}</h2>
             )}
-          </Tab.Pane>
-        ),
-      },
-      { menuItem: "Analytics", render: () => <TabPane>Tab 3 Content</TabPane> },
-    ]}
-  />
-);
+            <Tab
+                menu={{ fluid: true, vertical: true, tabular: true }}
+                panes={[
+                    {
+                        menuItem: "Menu Items",
+                        render: () => <AdminMenu restaurant={restaurant} />,
+                    },
+                    {
+                        menuItem: "Orders",
+                        render: () => (
+                            <Tab.Pane style={{ overflowY: "auto", height: "80vh" }}>
+                                {restaurant && (
+                                    <Orders restaurantId={restaurant._id} />
+                                )}
+                            </Tab.Pane>
+                        ),
+                    },
+                    {
+                        menuItem: "Analytics",
+                        render: () => <TabPane>Tab 3 Content</TabPane>,
+                    },
+                ]}
+            />
+        </div>
+    );
+};
 
 export default TabSheet;
