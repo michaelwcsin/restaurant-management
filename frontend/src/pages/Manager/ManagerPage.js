@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ManagerList from "../../components/admin/managerlist/managerlist.component";
 import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 import "./managerPage.styles.css";
+import { ManagerContext } from "../../components/contextAPI/managerContext";
 
 const ManagerPage = () => {
   const [managerId, setManagerId] = useState("");
   const [manager, setManager] = useState({});
   const [showOrders, setShowOrders] = useState(false);
+  // const { setManager }
 
   // gets manager ID from selection from dropdown and sets it in useState
   const handleManagerSelect = (managerId) => {
