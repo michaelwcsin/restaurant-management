@@ -5,7 +5,6 @@ import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
 import { ManagerContext } from "../../components/contextAPI/managerContext";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 import "./managerPage.styles.css";
-import { ManagerContext } from "../../components/contextAPI/managerContext";
 import { Header } from "semantic-ui-react";
 
 const ManagerPage = () => {
@@ -47,11 +46,11 @@ const ManagerPage = () => {
             try {
                 const response = await axios("http://localhost:8000/managers");
                 setManagers(response.data);
-                console.log("Managers ", managers);
+                //console.log("Managers ", managers);
 
                 const matchingManager = response.data.find(obj => obj.email === manager.email);
                 if (matchingManager) {
-                    console.log("Manager ", matchingManager);
+                    //console.log("Manager ", matchingManager);
                     setManager(matchingManager);
                 }
             } catch (error) {
