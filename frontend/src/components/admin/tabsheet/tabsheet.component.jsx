@@ -1,6 +1,6 @@
 import React from "react";
 import { Tab, TabPane } from "semantic-ui-react";
-import Orders from "../../../pages/Manager/Orders"; // Ensure correct import if Orders is the default export
+import Orders from "../../../pages/Manager/Orders";
 import AdminMenu from "../menuitems/adminMenu.component";
 import "./tabsheet.styles.css";
 import axios from "axios";

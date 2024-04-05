@@ -1,40 +1,45 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {Header, TabPane} from "semantic-ui-react";
+import React, { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
 
-const Analytics = ({ restaurant }) => {
-    const [selectedRestaurant, setSelectedRestaurant] = useState({});
-    const [menus, setMenus] = useState([]);
+const Analytics = ({ detailedOrders }) => {
+    const [popularItems, setPopularItems] = useState({});
 
     useEffect(() => {
-        const fetchRestaurants = async () => {
-            if (restaurant) {
-                try {
-                    // GET information of restaurant
-                    const response = await axios(
-                        `http://localhost:8000/restaurants/${restaurant}`
-                    );
-                    // Deconstruct restaurant information
-                    const [restaurantData] = response.data;
-                    const { name, email, address, phone, menuItems } = restaurantData;
-                    setSelectedRestaurant({ name, email, address, phone, menuItems });
+        const itemCounts = {};
+        detailedOrders.forEach(order => {
+            order.menuItems.forEach(item => {
+                itemCounts[item] = (itemCounts[item] || 0) + 1;
+            });
+        });
+        setPopularItems(itemCounts);
+    }, [detailedOrders]);
 
-                    // GET menu database response
-                    const menuResponse = await axios("http://localhost:8000/menus");
-                    setMenus(menuResponse.data);
-                } catch (error) {
-                    console.error("Error fetching:", error);
-                }
-            }
-        };
-        fetchRestaurants();
-    }, [restaurant]);
+    const data = {
+        labels: Object.keys(popularItems),
+        datasets: [
+            {
+                label: 'Popular Menu Items',
+                data: Object.values(popularItems),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
 
     return (
         <TabPane style={{ overflowY: "auto", height: "80vh" }}>
-            <Header style={{ fontSize: '28px', padding: '10px' }}
-            >{selectedRestaurant.name}</Header>
             <h2> Tab 3 Analytics Content is</h2>
+
+            <Bar data={data} options={options} />
             />
         </TabPane>
     );
