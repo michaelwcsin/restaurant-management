@@ -13,7 +13,6 @@ const orders = [{
   ],
   "sumPrice": 28.98,
   "status": "ordered",
-  "pickUpTime": "12:00 PM" 
 },
 {
   "customerId": "660cd5995dce748125e400ca",
