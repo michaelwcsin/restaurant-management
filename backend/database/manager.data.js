@@ -4,7 +4,7 @@ import { MongoClient } from "mongodb";
 const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
-// Initialize data for courses
+// Initialize data
 const managers = [
   {
     name: "Manager A",
@@ -29,7 +29,7 @@ const managers = [
   },
 ];
 
-// Function to shuffle an array in place
+// Function to shuffle array
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -54,7 +54,7 @@ MongoClient.connect(url)
      
       const shuffledRestaurants = shuffleArray(allRestaurants);
 
-      // Assign each manager to a restaurant 
+      // Assign each manager to a random restaurant 
       for (let i = 0; i < allManagers.length; i++) {
         const manager = allManagers[i];
         const restaurant = shuffledRestaurants[i % shuffledRestaurants.length];
@@ -64,7 +64,7 @@ MongoClient.connect(url)
         );
       }
 
-      console.log("Managers assigned to restaurants successfully!");
+      console.log("Document inserted successfully");
     } catch (error) {
       console.error("Failed to assign managers to restaurants:", error);
     } finally {

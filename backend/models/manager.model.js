@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const ManagerSchema = new mongoose.Schema({
-  //only email and password are required
   email: { type: String, required: true },
   password: { type: String, required: true },
   name: { type: String, required: false },

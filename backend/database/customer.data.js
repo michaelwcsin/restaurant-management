@@ -4,7 +4,7 @@ import { MongoClient } from "mongodb";
 const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
-// Initialize data for courses
+// Initialize data 
 const customers = [
   {
     name: "Nhi Phan",
@@ -39,13 +39,10 @@ const customers = [
 // Connect to MongoDB
 MongoClient.connect(url)
   .then((client) => {
-    // Select database
+    
     const db = client.db(dbName);
-
-    // Select collection
     const collection = db.collection("customers");
 
-    // Insert data
     collection
       .insertMany(customers)
       .then((result) => {
