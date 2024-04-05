@@ -1,6 +1,12 @@
 .restaurant-container {
-    padding: 40px;
+    padding: 0px;
     width: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.mainContainer {
+    height: 100vh;
+    background-image: url("../../assets/background/paper_fibers.png");
+    background-size: cover;
 }
