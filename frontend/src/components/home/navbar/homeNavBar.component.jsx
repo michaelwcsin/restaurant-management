@@ -21,12 +21,8 @@ function NavBar() {
           </Navbar.Brand>
         </Nav>
         <Nav>
-          <Nav.Link href="/manager">
-            <b>Manager</b>
-          </Nav.Link>
-          <div class="vr"></div>
-          <Nav.Link href="/customers">
-            <b>Customer</b>
+          <Nav.Link href="/home">
+            <b>Home</b>
           </Nav.Link>
         </Nav>
       </Container>

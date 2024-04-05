@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import "./login.managers.css";
 import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
 import { ManagerContext } from "../../components/contextAPI/managerContext";
+import {Header} from "semantic-ui-react";
 
 const LoginManagers = () => {
     const navigate = useNavigate();
@@ -44,15 +45,19 @@ const LoginManagers = () => {
         } catch (error) {
                 // Something happened in setting up the request that triggered an Error
                 console.log('Error', error.message);
-                alert('Error: ' + error.message);
+                alert('Incorrect email or password.');
             }
     };
     return (
         <div>
             <LoginNavBar />
+            <Header as="h2" textAlign="center" style={{ marginBottom: '0px' }}>
+                Welcome to Manager Login!
+            </Header>
             <div className="container">
                 <MDBContainer className="my-5">
-                <MDBCard>
+
+                    <MDBCard>
                     <div class="bg-image">
                     <div>
                         <img id="bgimg" src={image1} class="img-fluid" alt="Sample" />
