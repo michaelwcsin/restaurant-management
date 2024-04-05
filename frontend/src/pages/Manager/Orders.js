@@ -50,7 +50,7 @@ function Orders({ restaurantId }) {
   useEffect(() => {
     console.log("Orders:", orders);
     if (orders.length > 0) {
-      setDetailedOrders([]);
+      // setDetailedOrders([]);
       fetchOrderDetails(orders);
     }
   }, [orders]);

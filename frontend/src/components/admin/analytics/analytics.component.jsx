@@ -40,35 +40,50 @@ const Analytics = () => {
     const [sumPricePerCustomer, setSumPricePerCustomer] = useState({});
     const [ordersPerStatus, setOrdersPerStatus] = useState({});
     const [ordersPerPickupDate, setOrdersPerPickupDate] = useState({});
+    const [ordersPerMonth, setOrdersPerMonth] = useState({});
 
     useEffect(() => {
         const itemCounts = {};
         const pricePerCustomer = {};
         const statusCounts = {};
         const pickupDateCounts = {};
+        const ordersCountPerMonth = {};
 
         detailedOrders.forEach(order => {
-            // Populate itemCounts for popular menu items
+            // populate itemCounts for popular menu items
             order.menuItems.forEach(item => {
                 itemCounts[item] = (itemCounts[item] || 0) + 1;
             });
 
-            // Populate pricePerCustomer
+            // populate pricePerCustomer
             const sumPrice = pricePerCustomer[order.customerName] || 0;
             pricePerCustomer[order.customerName] = sumPrice + order.sumPrice;
 
-            // Populate statusCounts
+            // populate statusCounts
             statusCounts[order.status] = (statusCounts[order.status] || 0) + 1;
 
-            // Populate pickupDateCounts
+            // populate pickupDateCounts
             const dateString = order.pickUpDate ? new Date(order.pickUpDate).toLocaleDateString() : "N/A";
             pickupDateCounts[dateString] = (pickupDateCounts[dateString] || 0) + 1;
+
+            //populate ordersCountperMonth
+            const monthYear = new Date(order.pickUpDate).toLocaleDateString('en-US', {
+                month: 'long',
+                year: 'numeric'
+            });
+            if (order.pickUpDate) {
+                ordersCountPerMonth[monthYear] = (ordersCountPerMonth[monthYear] || 0) + 1;
+            }
+
+
         });
 
         setPopularItems(itemCounts);
         setSumPricePerCustomer(pricePerCustomer);
         setOrdersPerStatus(statusCounts);
         setOrdersPerPickupDate(pickupDateCounts);
+        setOrdersPerMonth(ordersCountPerMonth);
+
     }, [detailedOrders]);
 
     //same for all  charts
@@ -140,6 +155,30 @@ const Analytics = () => {
         'rgba(255, 159, 64, 1)'
     );
 
+    //data for oders Per month data
+    const ordersPerMonthData = {
+        labels: Object.keys(ordersPerMonth).sort((a, b) => {
+            // if labels are in the format "Month Year"
+            const [monthA, yearA] = a.split(' ');
+            const [monthB, yearB] = b.split(' ');
+            return new Date(`${monthA} 01 ${yearA}`) - new Date(`${monthB} 01 ${yearB}`);
+        }),
+        datasets: [
+            {
+                label: 'Number of Orders Per Month',
+                data: Object.keys(ordersPerMonth).sort((a, b) => {
+                    // Sorting based on date for correct chronological order
+                    const [monthA, yearA] = a.split(' ');
+                    const [monthB, yearB] = b.split(' ');
+                    return new Date(`${monthA} 01 ${yearA}`) - new Date(`${monthB} 01 ${yearB}`);
+                }).map(month => ordersPerMonth[month]),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
     return (
         <TabPane style={{ overflowY: "auto", height: "80vh" }}>
 
@@ -149,6 +188,7 @@ const Analytics = () => {
             <Bar data={sumPricePerCustomerData} options={options} />
             <Bar data={ordersPerStatusData} options={options} />
             <Bar data={ordersPerPickupDateData} options={options} />
+            <Bar data={ordersPerMonthData} options={options} />
 
         </TabPane>
     );
