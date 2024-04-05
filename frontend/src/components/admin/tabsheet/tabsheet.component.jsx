@@ -1,8 +1,11 @@
 import React from "react";
 import { Tab, TabPane } from "semantic-ui-react";
+import {
+  default as OrderCard,
+  default as Orders,
+} from "../../../pages/Manager/Orders";
 import AdminMenu from "../menuitems/adminMenu.component";
 import "./tabsheet.styles.css";
-import Orders from "../../../pages/Manager/Orders";
 
 const TabSheet = ({ restaurant }) => (
   <Tab
@@ -15,7 +18,7 @@ const TabSheet = ({ restaurant }) => (
       {
         menuItem: "Orders",
         render: () => (
-          <Tab.Pane>
+          <Tab.Pane style={{ overflowY: "auto", height: "80vh" }}>
             {restaurant && (
               <Orders restaurantId={restaurant[0] ? restaurant[0] : null} />
             )}
