@@ -108,7 +108,7 @@ const OrderCard = ({ order }) => {
           style={{ cursor: "pointer", minHeight: "25%" }}
         >
           <Card.Header>{order.customerName}</Card.Header>
-          <Card.Meta>{order.orderStatus}</Card.Meta>
+          <Card.Meta>{order.status}</Card.Meta>
           <Card.Description>{order.customerEmail}</Card.Description>
           <Card.Description>{order.customerPhone}</Card.Description>
         </Card.Content>

@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ManagerList from "../../components/admin/managerlist/managerlist.component";
 import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
+import { ManagerContext } from "../../components/contextAPI/managerContext";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 import "./managerPage.styles.css";
-import { ManagerContext } from "../../components/contextAPI/managerContext";
 
 const ManagerPage = () => {
   const [managerId, setManagerId] = useState("");
