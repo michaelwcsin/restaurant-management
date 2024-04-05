@@ -17,15 +17,10 @@ const Checkout = ({ onConfirmCheckout }) => {
     setSelectedTime(event.target.value);
   };
 
-  const handleConfirmCheckoutClick = () => {
-    if (onConfirmCheckout) {
-      onConfirmCheckout();
-    }
-  };
 
   return (
     <div className="checkout-container">
-      <h1>Choose the Date and Time for your order pickup</h1>
+      <h1>Date and Time for Pickup</h1>
       <div className="date-time-container">
         <div className="date-picker-container">
           <label>Select Date:</label>
@@ -48,11 +43,6 @@ const Checkout = ({ onConfirmCheckout }) => {
             />
           </div>
         </div>
-      </div>
-      <div>
-        <button className="ui green button" onClick={handleConfirmCheckoutClick}>
-          Confirm Checkout
-        </button>
       </div>
     </div>
   );

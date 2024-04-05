@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Segment, Tab, TabPane } from "semantic-ui-react";
 import NavBar from "../../components/user/navBar/userNavBar.component";
 import "./placeorder.css";
-import { Dropdown } from "semantic-ui-react";
-import Checkout from "./checkoutpage";
+import { CustomerContext } from "../../components/contextAPI/customerContext";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Orders from "./Orders";
 
 const PlaceOrderPage = () => {
   const { restaurantId } = useParams();
@@ -15,10 +17,20 @@ const PlaceOrderPage = () => {
   const [cart, setCartItems] = useState([]);
   const [cartId, setCartId] = useState([]);
   const [total, setTotal] = useState(0);
-  const [customers, setCustomers] = useState([]);
-  const [customer, setCustomer] = useState("");
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const { customer } = useContext(CustomerContext);
+  const [orders, setOrders] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleTimeChange = (event) => {
+    setSelectedTime(event.target.value);
+  };
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -30,8 +42,25 @@ const PlaceOrderPage = () => {
         console.error("Error fetching customers:", error);
       }
     };
+
     fetchCustomers();
   }, []);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/orders");
+        const result = response.data.filter(
+          (order) => order.customerId === customer._id
+        );
+        setOrders(result);
+      } catch (error) {
+        console.error("Error fetching orders", error);
+      }
+    };
+
+    fetchOrders();
+  }, [customer._id]);
 
   useEffect(() => {
     const fetchRestaurantAndMenuItems = async () => {
@@ -78,7 +107,6 @@ const PlaceOrderPage = () => {
     setTimeout(() => {
       setShowPopup(false);
     }, 2000);
-  
   };
 
   const handleRemove = async (item, itemPrice) => {
@@ -111,62 +139,47 @@ const PlaceOrderPage = () => {
     }
   };
 
-  const handleCustomer = (id) => {
-    setCustomer(id);
-  };
-
-  const handleConfirmCheckout = () => {
-    setCheckoutOpen(true);
-  };
 
   const handleOrder = async () => {
     const cartMenuItemIds = [];
 
-    cart.forEach(cartItem => {
+    cart.forEach((cartItem) => {
       // Find the menu item in menuItems array
-      const menuItem = menuItems.find(item => item._id === cartItem._id);
+      const menuItem = menuItems.find((item) => item._id === cartItem._id);
       if (menuItem) {
         cartMenuItemIds.push(menuItem._id);
       }
     });
+
+    const data = customers.find((item) => item._id === customer._id);
+    const customerId = data._id;
+    const sumPrice = total;
+    const pickUpDate = selectedDate;
+    const pickUpTime = selectedTime;
     
     axios
       .post("http://localhost:8000/orders", {
-        customer,
+        customerId,
         restaurantId,
         menuItems: cartMenuItemIds,
-        total,
+        sumPrice,
+        status: "Ordered",
+        pickUpDate,
+        pickUpTime,
       })
       .then((result) => {
         console.log("Document inserted successfully", result.data);
+        setCartItems([]);
+        setTotal(0);
       })
       .catch((err) => {
         console.error("Failed to insert document", err);
       });
-
-    setCheckoutOpen(true);
   };
-
-  
 
   return (
     <div>
       <NavBar />
-      <Dropdown
-        className="userDrop"
-        placeholder="Select Customer"
-        fluid
-        search
-        selection
-        clearable
-        floating
-        options={customers.map((customer) => ({
-          key: customer._id,
-          text: customer.name,
-          value: customer._id,
-          onselect: () => setCustomer(customer._id),
-        }))}
-      />
       <Tab
         className="tabs"
         menu={{ fluid: true, vertical: true, tabular: true }}
@@ -192,7 +205,7 @@ const PlaceOrderPage = () => {
                           {cart.some((item) => item._id === menuItem._id) ? (
                             <div className="ui buttons">
                               <button
-                                className="ui vertical animated button"
+                                className="ui green vertical animated button"
                                 tabIndex="0"
                                 onClick={(e) =>
                                   handleAdd(menuItem, menuItem.price, e)
@@ -204,7 +217,7 @@ const PlaceOrderPage = () => {
                                 </div>
                               </button>
                               <button
-                                className="ui vertical animated button"
+                                className="ui red vertical animated button"
                                 tabIndex="0"
                                 onClick={(e) =>
                                   handleRemove(menuItem, menuItem.price, e)
@@ -218,7 +231,7 @@ const PlaceOrderPage = () => {
                             </div>
                           ) : (
                             <button
-                              className="ui vertical animated button"
+                              className="ui green vertical animated button"
                               tabIndex="0"
                               onClick={(e) =>
                                 handleAdd(menuItem, menuItem.price, e)
@@ -251,6 +264,46 @@ const PlaceOrderPage = () => {
                   <p>Contact: {restaurant.phone}</p>
                   <div class="ui divider"></div>
                   <h2 class="ui center aligned header">Cart</h2>
+                  
+                    <div className="date-time-container">
+                      <div className="date-picker-container">
+                        <label>Select Date:</label>
+                        <div
+                          style={{
+                            border: "1px solid #000",
+                            borderRadius: "5px",
+                            padding: "5px",
+                            width: "150px"
+                          }}
+                        >
+                          <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            dateFormat="dd/MM/yyyy"
+                            minDate={new Date()}
+                          />
+                        </div>
+                      </div>
+                      <div className="time-picker-container">
+                        <label style={{paddingLeft:"30px"}}>Select Time:</label>
+                        <div
+                          style={{
+                            border: "1px solid #000",
+                            borderRadius: "5px",
+                            padding: "5px",
+                            width: "150px",
+                            marginLeft: "20px"
+                          }}
+                        >
+                          <input
+                            type="time"
+                            value={selectedTime}
+                            onChange={handleTimeChange}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  
                   {cart.length > 0 ? (
                     <ul>
                       {cart.map((item) => (
@@ -260,11 +313,9 @@ const PlaceOrderPage = () => {
                           </h3>
                           <p>{item?.description}</p>
                           <div
-                            class="ui vertical button"
+                            class="ui red vertical button"
                             tabindex="0"
-                            onClick={(e) =>
-                              handleRemove(item, item.price, e)
-                            }
+                            onClick={(e) => handleRemove(item, item.price, e)}
                           >
                             Remove
                           </div>
@@ -275,15 +326,13 @@ const PlaceOrderPage = () => {
                     <p>No Items In Cart</p>
                   )}
                   <h3>Total: ${total}</h3>
-                  {!checkoutOpen && (
-                    <button
-                      className="ui toggle button active"
-                      onClick={handleOrder}
-                    >
-                      Checkout
-                    </button>
-                  )}
-                  {checkoutOpen && <Checkout onConfirmCheckout={handleConfirmCheckout} />}
+
+                  <button
+                    className="ui toggle button active"
+                    onClick={handleOrder}
+                  >
+                    Checkout
+                  </button>
                 </div>
               </TabPane>
             ),
@@ -292,13 +341,18 @@ const PlaceOrderPage = () => {
             menuItem: "History",
             render: () => (
               <TabPane>
-                <h2 class="ui center aligned header">Cart</h2>
+                <div className="container1">
+                  <h2 className="ui center aligned header">Orders</h2>
+                  <Orders customerId={customer._id} />
+                </div>
               </TabPane>
             ),
           },
         ]}
       />
-      {showPopup && <div className="popup">Item successfully added to cart</div>}
+      {showPopup && (
+        <div className="popup">Item successfully added to cart</div>
+      )}
     </div>
   );
 };

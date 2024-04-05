@@ -41,4 +41,21 @@ h2 {
     }
   }
 
+
+
+  .date-time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+
+  }
+
+
+
+  label{
+    font-weight: bold;
+    padding: 10px;
+  }
+
   

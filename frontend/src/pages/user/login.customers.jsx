@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import axios from 'axios';
 import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
 import {
@@ -6,7 +6,6 @@ import {
     MDBContainer,
     MDBCard,
     MDBCardBody,
-    MDBCardImage,
     MDBRow,
     MDBCol,
     MDBInput,
@@ -23,6 +22,19 @@ const LoginCustomers = () => {
     const [password, setPassword] = useState('');
     const { customer, setCustomer } = useContext(CustomerContext);
 
+  const handleCustomer = async () => {
+        try {
+          const response = await axios.get("http://localhost:8000/customers");
+          console.log("Response:", response.data);
+          const fullCustomer = response.data.find(item => item.email === email );
+          setCustomer(fullCustomer)
+        } catch (error) {
+          console.error("Error fetching customer:", error);
+        }
+      };
+    
+
+
     const handleSignIn = async () => {
         try {
             console.log("Email customer:", email);
@@ -36,8 +48,9 @@ const LoginCustomers = () => {
             console.log("response:",response);
 
             if (response.data.success) {
-                setCustomer({email: email});
-                navigate('/restaurants');
+              await handleCustomer();
+              console.log(customer);
+              navigate('/restaurants');
             } else {
                 alert('Incorrect email or password.');
             }
