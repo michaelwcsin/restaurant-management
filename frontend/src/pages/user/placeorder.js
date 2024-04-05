@@ -85,8 +85,9 @@ const PlaceOrderPage = () => {
           })
         );
 
-        console.log("Menu Items Data:", menuItemsData);
-        setMenuItems(menuItemsData);
+        const filteredMenuItems = menuItemsData.filter(item => item.status === true);
+        console.log("Filtered Menu Items Data:", filteredMenuItems);
+        setMenuItems(filteredMenuItems);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
