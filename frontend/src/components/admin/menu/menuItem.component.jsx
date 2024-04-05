@@ -113,7 +113,10 @@ const MenuItem = ({ restaurant, menuItem, handleRefresh }) => {
                 { text: "Available", value: true },
                 { text: "Sold Out", value: false },
               ]}
+              style={{ width: "100%" }}
             />
+            </div>
+            <div className="buttonOptions">
             <ButtonGroup>
               <Dialog.Close asChild>
                 <Button negative onClick={handleDelete}>

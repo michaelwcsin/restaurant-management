@@ -58,7 +58,7 @@ function RestaurantList() {
         <NavBar />
         <Container style={{ padding: 20 }}>
           {/*check if customer is not null before getting customer.email, else, display "Guess"*/}
-          <Header as="h2">Welcome {customer ? customer.email :"Guest"}!</Header>
+          <Header as="h2">Welcome {customer ? customer.name :"Guest"}!</Header>
           <Header as="h2">Available Restaurants</Header>
 
           <div className="search-bar">
