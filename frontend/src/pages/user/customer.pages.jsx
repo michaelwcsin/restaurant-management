@@ -18,7 +18,7 @@ const CustomerPage = () => {
         navigate('/restaurants');
     };
   return (
-    <div className='customerLoginPage'>
+    <div className="customerLoginPage">
       <NavBar />
         <div className="onboarding">
             {/*Adding style in <a> make the whole area clickable)*/}

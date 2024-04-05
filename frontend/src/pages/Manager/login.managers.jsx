@@ -100,4 +100,4 @@ const LoginManagers = () => {
     );
 }
 
-export default LoginManagers
+export default LoginManagers;

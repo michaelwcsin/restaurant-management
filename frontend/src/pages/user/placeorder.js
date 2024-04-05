@@ -13,10 +13,12 @@ const PlaceOrderPage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cart, setCartItems] = useState([]);
+  const [cartId, setCartId] = useState([]);
   const [total, setTotal] = useState(0);
   const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState("");
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -70,15 +72,25 @@ const PlaceOrderPage = () => {
 
   const handleAdd = async (item, itemPrice) => {
     cart.push(item);
+    cartId.push(item);
     addPrice(itemPrice);
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 2000);
+  
   };
 
   const handleRemove = async (item, itemPrice) => {
     const index = cart.indexOf(item);
     const newCart = [...cart];
     newCart.splice(index, 1);
+    const index1 = cartId.indexOf(item._id);
+    const newCart1 = [...cart];
+    newCart1.splice(index1, 1);
     subPrice(itemPrice);
     setCartItems(newCart);
+    setCartId(newCart1);
   };
 
   const addPrice = async (itemPrice) => {
@@ -99,31 +111,18 @@ const PlaceOrderPage = () => {
     }
   };
 
-  const convertToId = async () => {
-    const arr = [];
-    console.log(cart)
-    for (let i = 0; i <= cart.length; i++) {
-      if (cart[i]){
-      const id = cart[i]._id;
-      arr.push(id);
-      }
-    }
-    return arr;
-  };
-
   const handleCustomer = (id) => {
     setCustomer(id);
   };
-  
-  const order = {
-    customerId: customer,
-    restaurantId: restaurantId,
-    menuItems: convertToId(),
-    sumPrice: total,
-  }
 
   const handleOrder = async () => {
-    axios.post("http://localhost:8000/orders",order)
+    axios.post("http://localhost:8000/orders",{
+      customer,
+      restaurantId,
+      cartId,
+      total,
+      "status":"Ordered"
+    })
     .then((result) => {
       console.log("Document inserted successfully",result.data);
     })
@@ -159,13 +158,12 @@ const PlaceOrderPage = () => {
             menuItem: "Menu",
             render: () => (
               <TabPane style={{ overflowY: "auto", height: "80vh" }}>
-                {" "}
                 <div className="container1">
                   <h1>{restaurant.name}</h1>
                   <p>Address: {restaurant.address}</p>
                   <p>Contact: {restaurant.phone}</p>
-                  <div class="ui divider"></div>
-                  <h2 class="ui center aligned header">Menu</h2>
+                  <div className="ui divider"></div>
+                  <h2 className="ui center aligned header">Menu</h2>
                   {menuItems.length > 0 ? (
                     <ul>
                       {menuItems.map((menuItem) => (
@@ -174,18 +172,42 @@ const PlaceOrderPage = () => {
                             {menuItem?.name}, ${menuItem?.price}
                           </h3>
                           <p>{menuItem?.description}</p>
-                          <div
-                            class="ui vertical animated button"
-                            tabindex="0"
-                            onClick={(e) =>
-                              handleAdd(menuItem, menuItem.price, e)
-                            }
-                          >
-                            <div class="hidden content">Add</div>
-                            <div class="visible content">
-                              <i class="shop icon"></i>
+                          {cart.some((item) => item._id === menuItem._id) ? (
+                            <div className="ui buttons">
+                              <button
+                                className="ui vertical animated button"
+                                tabIndex="0"
+                                onClick={(e) => handleAdd(menuItem, menuItem.price, e)}
+                              >
+                                <div className="hidden content">Add</div>
+                                <div className="visible content">
+                                  <i className="shop icon"></i>
+                                </div>
+                              </button>
+                              <button
+                                className="ui vertical animated button"
+                                tabIndex="0"
+                                onClick={(e) => handleRemove(menuItem, menuItem.price, e)}
+                              >
+                                <div className="hidden content">Remove</div>
+                                <div className="visible content">
+                                  <i className="trash alternate outline icon"></i>
+                                </div>
+                              </button>
+                              
                             </div>
-                          </div>
+                          ) : (
+                            <button
+                              className="ui vertical animated button"
+                              tabIndex="0"
+                              onClick={(e) => handleAdd(menuItem, menuItem.price, e)}
+                            >
+                              <div className="hidden content">Add</div>
+                              <div className="visible content">
+                                <i className="shop icon"></i>
+                              </div>
+                            </button>
+                          )}
                         </Segment>
                       ))}
                     </ul>
@@ -194,10 +216,11 @@ const PlaceOrderPage = () => {
                   )}
                 </div>
               </TabPane>
+          
             ), // This can be imported from another file, take a look at admin/menuitems/adminmenu.component.jsx
           },
           {
-            menuItem: "Cart",
+            menuItem: `Cart - $${total} (🛒 ${cart.length})`,
             render: () => (
               <TabPane style={{ overflowY: "auto", height: "80vh" }}>
                 {" "}
@@ -249,6 +272,11 @@ const PlaceOrderPage = () => {
           },
         ]}
       />
+      {showPopup && (
+        <div className="popup">
+          Item successfully added to cart
+        </div>
+      )}
     </div>
   );
 };
