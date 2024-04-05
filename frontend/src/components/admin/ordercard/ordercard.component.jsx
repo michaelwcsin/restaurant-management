@@ -10,6 +10,11 @@ const OrderCard = ({ order }) => {
   const [showButtons, setShowButtons] = useState(true);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState("Ordered");
+
+  const handleDropdownChange = (event, data) => {
+    setSelectedStatus(data.value);
+  };
 
   const handleApproveClick = async () => {
     setShowButtons(false);
