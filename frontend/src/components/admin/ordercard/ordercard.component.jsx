@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Button, Card, Dropdown, Image, Modal } from "semantic-ui-react";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const OrderCard = ({ order }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,29 +31,31 @@ const OrderCard = ({ order }) => {
 
   return (
     <div>
-      <Card style={{ width: "30%" }}>
+      <Card style={{ width: "100%", height: "100%" }}>
         <Card.Content onClick={handleCardClick} style={{ cursor: "pointer" }}>
           <Card.Header>{order.customerName}</Card.Header>
           <Card.Meta>{order.orderStatus}</Card.Meta>
           <Card.Description>{order.customerEmail}</Card.Description>
           <Card.Description>{order.customerPhone}</Card.Description>
-          
+        </Card.Content>
+
+        <Card.Content>
           <Card.Description>
-            Pick-up Date: {order.pickUpDate || "N/A"} 
+            Pick-up Date: {order.pickUpDate}
             <DatePicker
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-          />
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+            />
           </Card.Description>
           <Card.Description>
-            Pick-up Time: {order.pickUpTime || "N/A"}
-
+            Pick-up Time: {order.pickUpTime}
             <input
-            type="time"
-            value={selectedTime}
-            onChange={(e) => handleTimeChange(e.target.value)}/>
+              type="time"
+              value={selectedTime}
+              onChange={(e) => handleTimeChange(e.target.value)}
+            />
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
