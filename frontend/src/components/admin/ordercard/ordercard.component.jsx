@@ -48,6 +48,7 @@ const OrderCard = ({ order }) => {
         `http://localhost:8000/orders/${order._id}`
       );
       console.log("Order deleted:", response.data);
+      setShowButtons(false);
     } catch (error) {
       console.error("Error deleting order:", error);
       console.log("Error response:", error.response);
@@ -81,6 +82,8 @@ const OrderCard = ({ order }) => {
       );
       console.log("Order status updated", response.data);
       order.status = response.data.status;
+      setShowButtons(false);
+      setShowCompleted(false);
     } catch (error) {
       console.error("Error updating order status:", error);
       console.log("Error response:", error.response);
@@ -108,7 +111,7 @@ const OrderCard = ({ order }) => {
       <Card style={{ width: "100%", height: "100%" }}>
         <Card.Content
           onClick={handleCardClick}
-          style={{ cursor: "pointer", minHeight: "25%" }}
+          style={{ cursor: "pointer", minHeight: "40%" }}
         >
           <Card.Header>{order.customerName}</Card.Header>
           <Card.Meta>{order.status}</Card.Meta>
@@ -116,7 +119,7 @@ const OrderCard = ({ order }) => {
           <Card.Description>{order.customerPhone}</Card.Description>
         </Card.Content>
 
-        <Card.Content style={{ minHeight: "25%" }}>
+        <Card.Content style={{ minHeight: "20%" }}>
           <Card.Description>
             Pick-up Date:{" "}
             {order.pickUpDate === "N/A" ? (
@@ -140,7 +143,7 @@ const OrderCard = ({ order }) => {
           </Card.Description>
         </Card.Content>
 
-        <Card.Content style={{ minHeight: "25%" }}>
+        <Card.Content style={{ minHeight: "20%" }}>
           <Card.Description>
             Pick-up Time:{" "}
             {order.pickUpTime === "N/A" ? (
