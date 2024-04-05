@@ -6,6 +6,7 @@ import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
 import { ManagerContext } from "../../components/contextAPI/managerContext";
 import NavBar from "../../components/restaurant/navbar/restaurantNavBar.component";
 import "./managerPage.styles.css";
+import { Header } from "semantic-ui-react";
 
 const ManagerPage = () => {
   // const [managerId, setManagerId] = useState("");

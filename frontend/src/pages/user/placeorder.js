@@ -171,6 +171,10 @@ const PlaceOrderPage = () => {
         console.log("Document inserted successfully", result.data);
         setCartItems([]);
         setTotal(0);
+        setShowPopup(true); 
+        setTimeout(() => {
+          setShowPopup(false); 
+        }, 2000);
       })
       .catch((err) => {
         console.error("Failed to insert document", err);
@@ -355,6 +359,9 @@ const PlaceOrderPage = () => {
       />
       {showPopup && (
         <div className="popup">Item successfully added to cart</div>
+      )}
+      {showPopup && (
+        <div className="popup">Order successfully created</div>
       )}
       </div>
     </div>
