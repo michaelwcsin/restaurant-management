@@ -44,16 +44,26 @@ const OrderCard = ({ order }) => {
 
   const handleDeclineClick = async () => {
     try {
-      const response = await axios.delete(
+      const update = { status: "cancelled" };
+      const response = await axios.patch(
+        `http://localhost:8000/orders/${order._id}`,
+        update
+      );
+      console.log("Order status updated:", response.data);
+      order.status = response.data.status;
+      const deleteResponse = await axios.delete(
         `http://localhost:8000/orders/${order._id}`
       );
-      console.log("Order deleted:", response.data);
+      console.log("Order deleted:", deleteResponse.data);
+  
       setShowButtons(false);
     } catch (error) {
-      console.error("Error deleting order:", error);
+      console.error("Error handling decline:", error);
       console.log("Error response:", error.response);
     }
   };
+  
+  
 
   const handleReadyForPickupClick = async () => {
     setShowButtons(false);
