@@ -35,6 +35,7 @@ const OrderCard = ({ order }) => {
         update
       );
       console.log("Order updated:", response.data);
+      order.status = response.data.status;
     } catch (error) {
       console.error("Error updating order:", error);
       console.log("Error response:", error.response);
@@ -64,6 +65,7 @@ const OrderCard = ({ order }) => {
         update
       );
       console.log("Order status updated", response.data);
+      order.status = response.data.status;
     } catch (error) {
       console.error("Error updating order status:", error);
       console.log("Error response:", error.response);
@@ -78,6 +80,7 @@ const OrderCard = ({ order }) => {
         update
       );
       console.log("Order status updated", response.data);
+      order.status = response.data.status;
     } catch (error) {
       console.error("Error updating order status:", error);
       console.log("Error response:", error.response);
@@ -108,7 +111,7 @@ const OrderCard = ({ order }) => {
           style={{ cursor: "pointer", minHeight: "25%" }}
         >
           <Card.Header>{order.customerName}</Card.Header>
-          <Card.Meta>{order.orderStatus}</Card.Meta>
+          <Card.Meta>{order.status}</Card.Meta>
           <Card.Description>{order.customerEmail}</Card.Description>
           <Card.Description>{order.customerPhone}</Card.Description>
         </Card.Content>
