@@ -1,50 +1,52 @@
-import axios from "axios";
+import React, {useState, useContext} from 'react';
+import axios from 'axios';
+import image1 from '../shared/louis-hansel-phEaeqe555M-unsplash.jpg';
 import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCheckbox,
-  MDBCol,
-  MDBContainer,
-  MDBInput,
-  MDBRow,
-} from "mdb-react-ui-kit";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
-import image1 from "../shared/louis-hansel-phEaeqe555M-unsplash.jpg";
+    MDBBtn,
+    MDBContainer,
+    MDBCard,
+    MDBCardBody,
+    MDBCardImage,
+    MDBRow,
+    MDBCol,
+    MDBInput,
+    MDBCheckbox
+} from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom';
 import "./login.customers.css";
+import LoginNavBar from "../../components/user/navBar/loginNavBar.component.jsx";
+import { CustomerContext} from "../../components/contextAPI/customerContext";
 
 const LoginCustomers = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleSignIn = async () => {
-    try {
-      console.log("Email customer:", email);
-      console.log("Password:", password);
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const { customer, setCustomer } = useContext(CustomerContext);
 
-      const response = await axios.post(
-        "http://localhost:8000/customers/login",
-        {
-          email: email,
-          password: password,
+    const handleSignIn = async () => {
+        try {
+            console.log("Email customer:", email);
+            console.log("Password:", password);
+
+            const response = await
+                axios.post('http://localhost:8000/customers/login', {
+                    email: email,
+                    password: password
+                });
+            console.log("response:",response);
+
+            if (response.data.success) {
+                setCustomer({email: email});
+                navigate('/restaurants');
+            } else {
+                alert('Incorrect email or password.');
+            }
+        } catch (error) {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+            alert('Error: ' + error.message);
         }
-      );
-      console.log("response:", response);
-
-      if (response.data.success) {
-        navigate("/restaurants");
-      } else {
-        alert("Incorrect email or password.");
-      }
-    } catch (error) {
-      // Something happened in setting up the request that triggered an Error
-      console.log("Error", error.message);
-      alert("Error: " + error.message);
-    }
-  };
+    };
 
   return (
     <div>

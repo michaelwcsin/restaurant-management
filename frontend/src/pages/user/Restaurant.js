@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { CustomerContext} from "../../components/contextAPI/customerContext";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -28,6 +29,7 @@ function RestaurantList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [active, setActive] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const { customer } = useContext(CustomerContext);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -49,11 +51,15 @@ function RestaurantList() {
       restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // console.log("Customer is: ", customer.email);
+
   return (
       <div className="restaurant-list">
         <NavBar />
         <Container style={{ padding: 20 }}>
-          <Header as="h1">Available Restaurants</Header>
+          {/*check if customer is not null before getting customer.email, else, display "Guess"*/}
+          <Header as="h2">Welcome {customer ? customer.email :"Guest"}!</Header>
+          <Header as="h2">Available Restaurants</Header>
 
           <div className="search-bar">
             <Input
