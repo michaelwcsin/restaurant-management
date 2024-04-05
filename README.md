@@ -2,7 +2,7 @@
 
 for back end: create the database first
 ```angular2html
- node customer.data.js; node menu.data.js; node pickup.data.js; node order.data.js; node restaurant.data.js; node manager.data.js
+ node customer.data.js; node menu.data.js; node order.data.js; node restaurant.data.js; node manager.data.js
 ```
 then
 ```cmd
