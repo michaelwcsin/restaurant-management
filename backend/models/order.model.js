@@ -6,6 +6,8 @@ const OrderSchema = new mongoose.Schema({
   menuItems: [{ type: mongoose.Schema.Types.ObjectId, ref: "menus" }], // List of menu objectId's
   sumPrice: { type: Number, required: true },
   status: { type: String, default: "ordered" },
+  pickUpDate: { type: Date, required: false },
+  pickUpTime: { type: String, required: false }
 });
 
 const Order = mongoose.model("orders", OrderSchema);

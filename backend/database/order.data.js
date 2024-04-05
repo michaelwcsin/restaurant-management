@@ -13,7 +13,8 @@ const orders = [{
     "660af6010e98c3834e1632bb",
   ],
   "sumPrice": 28.98,
-  "status": "ordered"
+  "status": "ordered",
+  "pickUpTime": "12:00 PM" 
 },
 {
   "customerId": "660cd5995dce748125e400ca",
@@ -37,7 +38,9 @@ const orders = [{
     "660af6010e98c3834e1632ba"
   ],
   "sumPrice": 68.95,
-  "status": "awaiting-pickup"
+  "status": "awaiting-pickup",
+  "pickUpDate": "2024-04-04", 
+  "pickUpTime": "01:30 PM" 
 }
 ];
 

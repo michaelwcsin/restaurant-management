@@ -22,7 +22,7 @@ export const updateOrdersInRepository = async (query, update) => {
 
     const updatedMenus = [
       ...existingOrder.menuItems,
-      ...update.menuItems.filter((item) => !existingOrder.menuItems.includes(item)),
+      ...(update.menuItems ? update.menuItems.filter((item) => !existingOrder.menuItems.includes(item)) : []),
     ];
 
     const menuItemsPrices = await Menu.find({ _id: { $in: updatedMenus } }, 'price');
@@ -38,9 +38,18 @@ export const updateOrdersInRepository = async (query, update) => {
       }
     }
 
+    const pickUpDate = update.pickUpDate ? update.pickUpDate : existingOrder.pickUpDate;
+    const pickUpTime = update.pickUpTime ? update.pickUpTime : existingOrder.pickUpTime;
+
     const updatedOrder = await Order.findOneAndUpdate(
       { ...query },
-      { menuItems: updatedMenus, sumPrice: sumPrice, status: status }, 
+      { 
+        menuItems: updatedMenus, 
+        sumPrice: sumPrice, 
+        status: status,
+        pickUpDate: pickUpDate,
+        pickUpTime: pickUpTime
+      }, 
       { new: true }
     ).lean();
 
@@ -49,6 +58,7 @@ export const updateOrdersInRepository = async (query, update) => {
     throw new Error(`Error while updating order: ${e.message}`);
   }
 };
+
 
 // DELETE
 export const deleteOrderFromRepository = async (query) => {
@@ -62,7 +72,7 @@ export const deleteOrderFromRepository = async (query) => {
 
 export const createOrderInRepository = async (data) => {
   try {
-    const { customerId, restaurantId, menuItems, sumPrice } = data;
+    const { customerId, restaurantId, menuItems, sumPrice, pickUpDate, pickUpTime  } = data;
 
     let calculatedSumPrice = sumPrice; 
     
@@ -77,6 +87,8 @@ export const createOrderInRepository = async (data) => {
       menuItems,
       sumPrice: calculatedSumPrice, 
       status: "ordered",
+      pickUpDate, 
+      pickUpTime,
     });
 
     const savedOrder = await newOrder.save();
