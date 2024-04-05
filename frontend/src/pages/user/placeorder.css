@@ -10,7 +10,7 @@ h2 {
 }
 
 .tabs {
-    padding-top: 50px;
+    padding-top: 30px;
 }
 
 .popup {
@@ -58,4 +58,12 @@ h2 {
     padding: 10px;
   }
 
-  
+  .mainContainer {
+    height: 100vh;
+    background-image: url("../../assets/background/paper_fibers.png");
+    background-size: cover;
+  }
+  .table {
+    padding-left: 200px;
+    padding-right: 200px;
+  }

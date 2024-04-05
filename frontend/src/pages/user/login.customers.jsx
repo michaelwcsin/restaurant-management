@@ -62,7 +62,7 @@ const LoginCustomers = () => {
     };
 
   return (
-    <div>
+    <div className='mainContainer'>
       <LoginNavBar />
       <div className="container">
         <MDBContainer className="my-5">

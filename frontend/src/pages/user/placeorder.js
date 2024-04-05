@@ -178,16 +178,18 @@ const PlaceOrderPage = () => {
   };
 
   return (
-    <div>
+    <div className="mainContainer">
       <NavBar />
+      <div className="table">
       <Tab
         className="tabs"
-        menu={{ fluid: true, vertical: true, tabular: true }}
+        menu={{ fluid: true, vertical: true }}
+        menuPosition='left'
         panes={[
           {
             menuItem: "Menu",
             render: () => (
-              <TabPane style={{ overflowY: "auto", height: "80vh" }}>
+              <TabPane style={{ overflowY: "auto", height: "85vh", }}>
                 <div className="container1">
                   <h1>{restaurant.name}</h1>
                   <p>Address: {restaurant.address}</p>
@@ -256,7 +258,7 @@ const PlaceOrderPage = () => {
           {
             menuItem: `Cart - $${total} (🛒 ${cart.length})`,
             render: () => (
-              <TabPane style={{ overflowY: "auto", height: "80vh" }}>
+              <TabPane style={{ overflowY: "auto", height: "85vh"}}>
                 {" "}
                 <div className="container1">
                   <h1>{restaurant.name}</h1>
@@ -340,7 +342,8 @@ const PlaceOrderPage = () => {
           {
             menuItem: "History",
             render: () => (
-              <TabPane>
+              <TabPane style={{ overflowY: "auto", height: "85vh"}}>
+              {" "}
                 <div className="container1">
                   <h2 className="ui center aligned header">Orders</h2>
                   <Orders customerId={customer._id} />
@@ -353,6 +356,7 @@ const PlaceOrderPage = () => {
       {showPopup && (
         <div className="popup">Item successfully added to cart</div>
       )}
+      </div>
     </div>
   );
 };

@@ -29,6 +29,7 @@ function RestaurantList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [active, setActive] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+
   const { customer } = useContext(CustomerContext);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ function RestaurantList() {
   // console.log("Customer is: ", customer.email);
 
   return (
-      <div className="restaurant-list">
+      <div className="mainContainer">
         <NavBar />
         <Container style={{ padding: 20 }}>
           {/*check if customer is not null before getting customer.email, else, display "Guess"*/}
@@ -77,7 +78,7 @@ function RestaurantList() {
               <p>No restaurants found.</p>
           ) : (
               <div className="restaurant-container"
-                   style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+                   style={{ display: 'flex', flexWrap: 'wrap', gap: '62px', justifyContent: 'center' }}>
                 {filteredRestaurants.map((restaurant) => (
                     <Card //inline css code for each card
                         key={restaurant._id}
