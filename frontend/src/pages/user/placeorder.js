@@ -18,6 +18,8 @@ const PlaceOrderPage = () => {
   const [cartId, setCartId] = useState([]);
   const [total, setTotal] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopupOrder, setShowPopupOrder] = useState(false);
+
   const [customers, setCustomers] = useState([]);
   const { customer } = useContext(CustomerContext);
   const [orders, setOrders] = useState([]);
@@ -156,7 +158,7 @@ const PlaceOrderPage = () => {
     const sumPrice = total;
     const pickUpDate = selectedDate;
     const pickUpTime = selectedTime;
-    
+
     axios
       .post("http://localhost:8000/orders", {
         customerId,
@@ -171,9 +173,9 @@ const PlaceOrderPage = () => {
         console.log("Document inserted successfully", result.data);
         setCartItems([]);
         setTotal(0);
-        setShowPopup(true); 
+        setShowPopupOrder(true);
         setTimeout(() => {
-          setShowPopup(false); 
+          setShowPopupOrder(false);
         }, 2000);
       })
       .catch((err) => {
@@ -270,7 +272,7 @@ const PlaceOrderPage = () => {
                   <p>Contact: {restaurant.phone}</p>
                   <div class="ui divider"></div>
                   <h2 class="ui center aligned header">Cart</h2>
-                  
+
                     <div className="date-time-container">
                       <div className="date-picker-container">
                         <label>Select Date:</label>
@@ -309,7 +311,7 @@ const PlaceOrderPage = () => {
                         </div>
                       </div>
                     </div>
-                  
+
                   {cart.length > 0 ? (
                     <ul>
                       {cart.map((item) => (
@@ -360,7 +362,7 @@ const PlaceOrderPage = () => {
       {showPopup && (
         <div className="popup">Item successfully added to cart</div>
       )}
-      {showPopup && (
+      {showPopupOrder && (
         <div className="popup">Order successfully created</div>
       )}
       </div>

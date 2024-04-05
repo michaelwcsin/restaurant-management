@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Header } from "semantic-ui-react";
 import ManagerList from "../../components/admin/managerlist/managerlist.component";
 import TabSheet from "../../components/admin/tabsheet/tabsheet.component";
 import { ManagerContext } from "../../components/contextAPI/managerContext";
