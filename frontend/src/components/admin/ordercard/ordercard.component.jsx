@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Button, Card, Dropdown, Image, Modal } from "semantic-ui-react";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const OrderCard = ({ order }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showButtons, setShowButtons] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
   const handleCardClick = () => {
     setModalOpen(true);
@@ -17,6 +21,14 @@ const OrderCard = ({ order }) => {
     setShowButtons(false);
   };
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
+  };
+
   return (
     <div>
       <Card style={{ width: "30%" }}>
@@ -25,6 +37,24 @@ const OrderCard = ({ order }) => {
           <Card.Meta>{order.orderStatus}</Card.Meta>
           <Card.Description>{order.customerEmail}</Card.Description>
           <Card.Description>{order.customerPhone}</Card.Description>
+          
+          <Card.Description>
+            Pick-up Date: {order.pickUpDate || "N/A"} 
+            <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy"
+            minDate={new Date()}
+          />
+          </Card.Description>
+          <Card.Description>
+            Pick-up Time: {order.pickUpTime || "N/A"}
+
+            <input
+            type="time"
+            value={selectedTime}
+            onChange={(e) => handleTimeChange(e.target.value)}/>
+          </Card.Description>
         </Card.Content>
         <Card.Content extra>
           {showButtons ? (
@@ -46,10 +76,9 @@ const OrderCard = ({ order }) => {
           ) : (
             <Dropdown placeholder="Select Status" fluid selection floating>
               <Dropdown.Menu>
-                <Dropdown.Item>Ordered</Dropdown.Item>
                 <Dropdown.Item>In-Progress</Dropdown.Item>
-                <Dropdown.Item>Awaiting Pickup</Dropdown.Item>
-                <Dropdown.Item>Completed</Dropdown.Item>
+                <Dropdown.Item>Ready for PickUp</Dropdown.Item>
+                <Dropdown.Item>Picked Up</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           )}

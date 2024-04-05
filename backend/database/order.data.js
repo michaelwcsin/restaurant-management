@@ -4,8 +4,9 @@ import { MongoClient } from "mongodb";
 const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
+// Initialize data for courses
 const orders = [{
-  "customerId": "660cd5995dce748125e400c9",
+  "customerId": "660f655603fcef48aab65a63",
   "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
     "660af6010e98c3834e1632c6",
@@ -16,7 +17,7 @@ const orders = [{
   "pickUpTime": "12:00 PM" 
 },
 {
-  "customerId": "660cd5995dce748125e400ca",
+  "customerId": "660f655603fcef48aab65a65",
   "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
     "660af6010e98c3834e1632b8",
@@ -27,7 +28,7 @@ const orders = [{
 },
 
 {
-  "customerId": "660cd5995dce748125e400cb",
+  "customerId": "660f655603fcef48aab65a64",
   "restaurantId": "660af6042c3daf09719bbc86",
   "menuItems": [
     "660af6010e98c3834e1632c9",
