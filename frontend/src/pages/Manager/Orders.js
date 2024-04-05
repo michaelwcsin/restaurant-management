@@ -109,11 +109,13 @@ function Orders({ restaurantId }) {
 
             return {
               ...orderResponse.data,
-              customerName: customer ? customer.name : "Unknown",
-              customerEmail: customer ? customer.email : "Unknown",
-              customerPhone: customer ? customer.phone : "Unknown",
+              customerName: customer ? customer.name : "N/A",
+              customerEmail: customer ? customer.email : "N/A",
+              customerPhone: customer ? customer.phone : "N/A",
               menuItems,
               sumPrice: order.sumPrice,
+              pickUpDate: order.pickUpDate || "N/A",
+              pickUpTime: order.pickUpTime || "N/A",
             };
           } catch (error) {
             console.error("Error fetching order details:", error);
@@ -152,6 +154,8 @@ function Orders({ restaurantId }) {
               Sum Price:{" "}
               {order.sumPrice ? `$${order.sumPrice.toFixed(2)}` : "N/A"}
             </p>
+              <p>Pick-up Date: {order.pickUpDate}</p>
+              <p>Pick-up Time: {order.pickUpTime}</p>
           </li>
         ))}
       </ul>

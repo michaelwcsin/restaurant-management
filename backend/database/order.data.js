@@ -5,32 +5,8 @@ const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
 // Initialize data for courses
-const orders = [
-  {
-    customerId: "660ee4216065d370bff7b72a",
-    restaurantId: "660ee42a162a09064ff1a875",
-    menuItems: ["660af6010e98c3834e1632bc", "660af6010e98c3834e1632c7"],
-    sumPrice: 27.98,
-    status: "Ordered",
-  },
-  {
-    customerId: "660ee4216065d370bff7b72b",
-    restaurantId: "660ee42a162a09064ff1a876",
-    menuItems: ["660af6010e98c3834e1632b8", "660af6010e98c3834e1632ca"],
-    sumPrice: 18.99,
-    status: "In Progress",
-  },
-
-  {
-    customerId: "660ee4216065d370bff7b72c",
-    restaurantId: "660ee42a162a09064ff1a877",
-    menuItems: ["660af6010e98c3834e1632bb"],
-    sumPrice: 16.99,
-    status: "Awaiting Pickup",
-  },
-
 const orders = [{
-  "customerId": "660cd5995dce748125e400c9",
+  "customerId": "660f655603fcef48aab65a63",
   "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
     "660af6010e98c3834e1632c6",
@@ -41,7 +17,7 @@ const orders = [{
   "pickUpTime": "12:00 PM" 
 },
 {
-  "customerId": "660cd5995dce748125e400ca",
+  "customerId": "660f655603fcef48aab65a65",
   "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
     "660af6010e98c3834e1632b8",
@@ -52,7 +28,7 @@ const orders = [{
 },
 
 {
-  "customerId": "660cd5995dce748125e400cb",
+  "customerId": "660f655603fcef48aab65a64",
   "restaurantId": "660af6042c3daf09719bbc86",
   "menuItems": [
     "660af6010e98c3834e1632c9",
