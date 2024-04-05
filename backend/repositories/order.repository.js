@@ -30,7 +30,7 @@ export const updateOrdersInRepository = async (query, update) => {
 
     let status = existingOrder.status; 
     if (update.status) {
-      const validStatuses = ["in-progress", "awaiting-pickup", "completed"];
+      const validStatuses = ["in-progress", "awaiting-pickup", "completed", "cancelled"];
       if (validStatuses.includes(update.status)) {
         status = update.status;
       } else {

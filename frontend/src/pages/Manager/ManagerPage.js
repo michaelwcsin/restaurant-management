@@ -46,13 +46,13 @@ const ManagerPage = () => {
       try {
         const response = await axios("http://localhost:8000/managers");
         setManagers(response.data);
-        console.log("Managers ", managers);
+        //console.log("Managers ", managers);
 
         const matchingManager = response.data.find(
           (obj) => obj.email === manager.email
         );
         if (matchingManager) {
-          console.log("Manager ", matchingManager);
+          //console.log("Manager ", matchingManager);
           setManager(matchingManager);
         }
       } catch (error) {
