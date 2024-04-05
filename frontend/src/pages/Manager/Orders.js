@@ -110,6 +110,7 @@ function Orders({ restaurantId }) {
 
             return {
               ...orderResponse.data,
+              _id: order._id,
               customerName: customer ? customer.name : "N/A",
               customerEmail: customer ? customer.email : "N/A",
               customerPhone: customer ? customer.phone : "N/A",
@@ -117,6 +118,7 @@ function Orders({ restaurantId }) {
               sumPrice: order.sumPrice,
               pickUpDate: order.pickUpDate || "N/A",
               pickUpTime: order.pickUpTime || "N/A",
+              status: order.status,
             };
           } catch (error) {
             console.error("Error fetching order details:", error);
