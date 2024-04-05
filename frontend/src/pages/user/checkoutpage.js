@@ -1,9 +1,11 @@
+// Checkout.jsx
+
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './checkout.css';
 
-const Checkout = () => {
+const Checkout = ({ onConfirmCheckout }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
 
@@ -11,36 +13,36 @@ const Checkout = () => {
     setSelectedDate(date);
   };
 
-  const handleTimeChange = (time) => {
-    setSelectedTime(time);
+  const handleTimeChange = (event) => {
+    setSelectedTime(event.target.value);
   };
+
 
   return (
     <div className="checkout-container">
-      <h1>Choose the Date and Time for your order pickup</h1>
+      <h1>Date and Time for Pickup</h1>
       <div className="date-time-container">
         <div className="date-picker-container">
           <label>Select Date:</label>
-          <DatePicker
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-          />
+          <div style={{ border: "1px solid #000", borderRadius: "5px", padding: "5px" }}>
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+            />
+          </div>
         </div>
         <div className="time-picker-container">
           <label>Select Time:</label>
-          <input
-            type="time"
-            value={selectedTime}
-            onChange={(e) => handleTimeChange(e.target.value)}
-          />
+          <div style={{ border: "1px solid #000", borderRadius: "5px", padding: "5px" }}>
+            <input
+              type="time"
+              value={selectedTime}
+              onChange={handleTimeChange}
+            />
+          </div>
         </div>
-      </div>
-      <div>
-        <button className="ui green button" >
-          Confirm Checkout
-        </button>
       </div>
     </div>
   );

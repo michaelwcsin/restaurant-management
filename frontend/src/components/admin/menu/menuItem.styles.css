@@ -219,3 +219,13 @@ input {
   display: flex;
   justify-content: space-between;
 }
+
+.buttonOptions {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+

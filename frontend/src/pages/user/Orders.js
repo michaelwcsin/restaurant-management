@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import OrderCard from "../../components/admin/ordercard/ordercard.component";
+import OrderCard from "../../components/user/ordercard/ordercard.component";
 import "./Orders.css";
 
-function Orders({ restaurantId }) {
+function Orders({ customerId }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [detailedOrders, setDetailedOrders] = useState([]);
@@ -20,7 +20,7 @@ function Orders({ restaurantId }) {
       try {
         const response = await axios.get("http://localhost:8000/orders");
         const filteredOrders = response.data.filter(
-          (order) => order.restaurantId === restaurantId
+          (order) => order.customerId === customerId
         );
         console.log("Filtered Orders:", filteredOrders);
         setOrders(filteredOrders);
@@ -40,10 +40,10 @@ function Orders({ restaurantId }) {
       }
     };
 
-    if (restaurantId) {
+    if (customerId) {
       fetchData();
     }
-  }, [restaurantId]);
+  }, [customerId]);
 
   useEffect(() => {
     console.log("Orders:", orders);
@@ -140,7 +140,6 @@ function Orders({ restaurantId }) {
 
   return (
     <div className="order-container">
-      <h1 className="title">Orders</h1>
       <div className="order-list">
         {detailedOrders.map((order) => (
           <OrderCard key={order._id} order={order} />

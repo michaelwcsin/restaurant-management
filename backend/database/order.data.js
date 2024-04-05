@@ -6,22 +6,41 @@ const dbName = "restaurantDB";
 
 // Initialize data for courses
 const orders = [{
-  "customerId": "660cd5995dce748125e400c9",
-  "restaurantId": "660af6042c3daf09719bbc86",
+  "customerId": "660f655603fcef48aab65a63",
+  "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
-    "660af6010e98c3834e1632bc",
-    "660af6010e98c3834e1632c7"
+    "660af6010e98c3834e1632c6",
+    "660af6010e98c3834e1632bb",
   ],
-  "sumPrice": 27.98
+  "sumPrice": 28.98,
+  "status": "ordered",
+  "pickUpTime": "12:00 PM" 
 },
 {
-  "customerId": "660cd5995dce748125e400ca",
+  "customerId": "660f655603fcef48aab65a65",
   "restaurantId": "660af6042c3daf09719bbc87",
   "menuItems": [
     "660af6010e98c3834e1632b8",
     "660af6010e98c3834e1632ca"
   ],
-  "sumPrice": 18.99
+  "sumPrice": 18.99,
+  "status": "in-progress"
+},
+
+{
+  "customerId": "660f655603fcef48aab65a64",
+  "restaurantId": "660af6042c3daf09719bbc86",
+  "menuItems": [
+    "660af6010e98c3834e1632c9",
+    "660af6010e98c3834e1632c7",
+    "660af6010e98c3834e1632cd",
+    "660af6010e98c3834e1632c4",
+    "660af6010e98c3834e1632ba"
+  ],
+  "sumPrice": 68.95,
+  "status": "awaiting-pickup",
+  "pickUpDate": "2024-04-04", 
+  "pickUpTime": "01:30 PM" 
 }
 ];
 

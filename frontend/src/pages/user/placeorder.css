@@ -10,5 +10,60 @@ h2 {
 }
 
 .tabs {
-    padding-top: 50px;
+    padding-top: 30px;
 }
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 9999;
+    animation: fadeInOut 2s ease-in-out; 
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+
+  .date-time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+
+  }
+
+
+
+  label{
+    font-weight: bold;
+    padding: 10px;
+  }
+
+  .mainContainer {
+    height: 100vh;
+    background-image: url("../../assets/background/paper_fibers.png");
+    background-size: cover;
+  }
+  .table {
+    padding-left: 200px;
+    padding-right: 200px;
+  }

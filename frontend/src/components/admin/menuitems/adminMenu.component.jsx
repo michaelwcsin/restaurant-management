@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { TabPane } from "semantic-ui-react";
+import {Header, TabPane} from "semantic-ui-react";
 import MenuList from "../menu/menuList.component";
 import AddMenu from "../menuinteraction/addMenu.component";
 
@@ -60,6 +60,8 @@ const AdminMenu = ({ restaurant }) => {
 
   return (
     <TabPane style={{ overflowY: "auto", height: "80vh" }}>
+      <Header style={{ fontSize: '28px', padding: '10px' }}
+      >{selectedRestaurant.name}</Header>
       <AddMenu restaurant={restaurant} handleRefresh={handleRefresh} />
       <MenuList
         restaurant={restaurant}

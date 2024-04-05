@@ -3,7 +3,7 @@
 for back end: create the database first
 have to insert restaurant first before manager cause 1-many
 ```angular2html
- node customer.data.js; node menu.data.js; node pickup.data.js; node restaurant.data.js; node manager.data.js ; node order.data.js
+ node menu.data.js; node pickup.data.js; node restaurant.data.js; node manager.data.js ; node order.data.js
 ```
 then
 ```cmd
