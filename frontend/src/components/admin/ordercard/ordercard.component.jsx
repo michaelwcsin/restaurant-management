@@ -8,6 +8,11 @@ const OrderCard = ({ order }) => {
   const [showButtons, setShowButtons] = useState(true);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState("Ordered");
+
+  const handleDropdownChange = (event, data) => {
+    setSelectedStatus(data.value);
+  };
 
   const handleCardClick = () => {
     setModalOpen(true);
@@ -76,13 +81,33 @@ const OrderCard = ({ order }) => {
               </div>
             </Card.Content>
           ) : (
-            <Dropdown placeholder="Select Status" fluid selection floating>
-              <Dropdown.Menu>
-                <Dropdown.Item>In-Progress</Dropdown.Item>
-                <Dropdown.Item>Ready for PickUp</Dropdown.Item>
-                <Dropdown.Item>Picked Up</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <Dropdown
+              placeholder="Select Status"
+              fluid
+              selection
+              floating
+              onChange={handleDropdownChange}
+              value={selectedStatus}
+              options={[
+                {
+                  key: "In-Progress",
+                  text: <span style={{ color: "black" }}>In-Progress</span>,
+                  value: "In-Progress",
+                },
+                {
+                  key: "Ready for Pick-up",
+                  text: (
+                    <span style={{ color: "black" }}>Ready for Pick-up</span>
+                  ),
+                  value: "Ready for Pick-up",
+                },
+                {
+                  key: "Picked Up",
+                  text: <span style={{ color: "black" }}>Picked Up</span>,
+                  value: "Picked Up",
+                },
+              ]}
+            />
           )}
         </Card.Content>
       </Card>
