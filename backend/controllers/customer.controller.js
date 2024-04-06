@@ -26,7 +26,6 @@ export const loginCustomer = async(req, res) => {
 };
 
 
-// Customers
 export const getCustomers = async (req, res) => {
   try {
     const customers = await getCustomersFromRepository({});

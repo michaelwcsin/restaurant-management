@@ -4,7 +4,7 @@ import { MongoClient } from "mongodb";
 const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
-// Initialize data for courses
+// Initialize data 
 const menus = [
   {
     name: "Spaghetti Carbonara",

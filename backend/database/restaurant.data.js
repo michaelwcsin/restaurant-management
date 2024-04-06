@@ -4,7 +4,7 @@ import { MongoClient, ObjectId } from "mongodb";
 const url = "mongodb://localhost:27017";
 const dbName = "restaurantDB";
 
-// Initialize data for courses
+// Initialize data 
 const restaurants = [
   {
     name: "Cactus Club",
@@ -41,7 +41,7 @@ MongoClient.connect(url)
       const menuCollection = db.collection("menus");
       const menuItems = await menuCollection.find({}).toArray();
 
-      // Update restaurants with menu items
+      // Assign restaurants random menu items
       await Promise.all(
         restaurants.map(async (restaurant) => {
           const uniqueMenuItems = getUniqueMenuItems(menuItems, 8);
@@ -53,7 +53,7 @@ MongoClient.connect(url)
         })
       );
 
-      console.log("Restaurants updated with menu items successfully!");
+      console.log("Document inserted successfully");
     } catch (error) {
       console.error("Failed to update restaurants with menu items:", error);
     } finally {
@@ -64,7 +64,7 @@ MongoClient.connect(url)
     console.error("Failed to connect to MongoDB:", err);
   });
 
-// get unique menu items
+//each restaurant gets a unique menu items
 function getUniqueMenuItems(menuItems, count) {
   const shuffledMenuItems = menuItems.sort(() => 0.5 - Math.random());
   const uniqueItems = new Set();

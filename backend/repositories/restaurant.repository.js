@@ -62,7 +62,6 @@ export const createRestaurantInRepository = async (data) => {
 
     const savedRestaurant = await newRestaurant.save();
 
-    // Add menu items to the restaurant's menuItems array
     if (menuItems && menuItems.length > 0) {
       for (const menuItemId of menuItems) {
         const menuItem = await Menu.findById(menuItemId);

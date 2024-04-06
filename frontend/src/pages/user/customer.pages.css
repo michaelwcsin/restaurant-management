@@ -17,9 +17,9 @@
 
 .onboarding .btn {
     width: 215px;
-    height: 40px; /* Set your desired width */
+    height: 40px; /* width */
     text-align: center;
-    margin-bottom: 15px; /* Optional spacing between buttons */
+    margin-bottom: 15px; /* spacing between buttons */
 }
 
 .onboarding .btn a {

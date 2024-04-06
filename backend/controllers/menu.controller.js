@@ -6,7 +6,6 @@ import {
   getMenuFromRepository,
 } from "../repositories/menu.repository.js";
 
-// Menus
 export const getMenus = async (req, res) => {
   try {
     const menus = await getMenusFromRepository({});

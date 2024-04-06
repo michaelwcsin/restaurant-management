@@ -46,11 +46,10 @@ export const deleteMenuFromRepository = async (query) => {
 };
 
 // POST
-// POST
 export const createMenuInRepository = async (data) => {
   try {
     const { name, description, price, status } = data;
-    const existingMenu = await Menu.findOne({ name }); // Check for existing menu by name
+    const existingMenu = await Menu.findOne({ name }); 
     if (existingMenu) {
       throw new Error("Menu already exists");
     }
