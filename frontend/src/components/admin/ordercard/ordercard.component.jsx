@@ -12,6 +12,7 @@ const OrderCard = ({ order }) => {
   const [selectedStatus, setSelectedStatus] = useState("Ordered");
   const [showReadyForPickup, setShowReadyForPickup] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
+  const [soldOutPopupOpen, setSoldOutPopupOpen] = useState(false);
 
   const handleDropdownChange = (event, data) => {
     setSelectedStatus(data.value);
@@ -28,8 +29,27 @@ const OrderCard = ({ order }) => {
       if (selectedTime) {
         update.pickUpTime = selectedTime;
       }
-      update.status = "in-progress";
-
+  
+      
+      console.log("Status of menu items:");
+      order.menuItems.forEach(item => {
+        console.log(`${item.name}: ${item.status}`);
+      });
+  
+      // Check if any menu item is sold out
+      const hasFalseStatus = order.menuItems.some(item => !item.status);
+  
+      if (hasFalseStatus) {
+        // one or more menu item status is false
+        update.status = "cancelled";
+        setSoldOutPopupOpen(true);
+        setShowReadyForPickup(false);
+        setShowCompleted(false);
+      } else {
+        // if no item is sold out
+        update.status = "in-progress";
+      }
+  
       const response = await axios.patch(
         `http://localhost:8000/orders/${order._id}`,
         update
@@ -41,6 +61,7 @@ const OrderCard = ({ order }) => {
       console.log("Error response:", error.response);
     }
   };
+  
 
   const handleDeclineClick = async () => {
     try {
@@ -239,9 +260,9 @@ const OrderCard = ({ order }) => {
         <Modal.Header>Order Items</Modal.Header>
         <Modal.Content style={{ overflowY: "auto", height: "66%" }}>
           <ul>
-            {order.menuItems.map((itemName, index) => (
+            {order.menuItems.map((item, index) => (
               <li key={`${order._id}-${index}`} className="menu-item">
-                {itemName}
+                <div>{item.name}</div>
               </li>
             ))}
           </ul>
@@ -266,6 +287,15 @@ const OrderCard = ({ order }) => {
           <Button onClick={handleCloseModal} color="black">
             Close
           </Button>
+        </Modal.Actions>
+      </Modal>
+      <Modal open={soldOutPopupOpen} size="mini">
+        <Modal.Header>Items Sold Out</Modal.Header>
+        <Modal.Content>
+          <p>One or more items in the list sold out</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => setSoldOutPopupOpen(false)}>Close</Button>
         </Modal.Actions>
       </Modal>
     </div>

@@ -83,7 +83,8 @@ function Orders({ restaurantId }) {
         Array.isArray(response.data) &&
         response.data.length > 0
       ) {
-        return response.data[0];
+        const menuItem = response.data[0];
+        return menuItem;
       } else {
         throw new Error("Menu Item not found or invalid response");
       }
@@ -92,13 +93,12 @@ function Orders({ restaurantId }) {
       return null;
     }
   };
-
+  
   const fetchOrderDetails = async (ordersData) => {
     try {
       const detailedOrders = await Promise.all(
         ordersData.map(async (order) => {
           try {
-            console.log("Order ID:", order._id);
             const orderResponse = await axios.get(
               `http://localhost:8000/orders/${order._id}`
             );
@@ -106,10 +106,11 @@ function Orders({ restaurantId }) {
             const menuItems = await Promise.all(
               order.menuItems.map(async (itemId) => {
                 const menuItem = await fetchMenuDetails(itemId);
-                return menuItem ? menuItem.name : "Unknown";
+                console.log("Fetched Menu Item:", menuItem);
+                return menuItem ? menuItem : { name: "Unknown", status: "Unknown" };
               })
             );
-
+  
             return {
               ...orderResponse.data,
               _id: order._id,
@@ -128,14 +129,13 @@ function Orders({ restaurantId }) {
           }
         })
       );
-
       const validOrders = detailedOrders.filter((order) => order !== null);
       setDetailedOrders(validOrders);
     } catch (error) {
       console.error("Error fetching order details:", error);
     }
   };
-
+  
   if (loading) {
     return <div>Loading orders...</div>;
   }

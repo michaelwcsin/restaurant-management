@@ -7,38 +7,37 @@ const dbName = "restaurantDB";
 // Initialize data 
 const orders = [{
   "customerId": "660f655603fcef48aab65a63",
-  "restaurantId": "660af6042c3daf09719bbc87",
+  "restaurantId": "66109766e89b58b7398a7dcd",
   "menuItems": [
-    "660af6010e98c3834e1632c6",
-    "660af6010e98c3834e1632bb",
+    "6610974e4daac80cf3b7e03c",
+    "6610974e4daac80cf3b7e047",
+    "6610974e4daac80cf3b7e03a"
   ],
-  "sumPrice": 28.98,
-  "status": "ordered",
+  
   "pickUpTime": "12:00 PM" 
 },
 {
   "customerId": "660f655603fcef48aab65a65",
-  "restaurantId": "660af6042c3daf09719bbc87",
+  "restaurantId": "66109766e89b58b7398a7dcd",
   "menuItems": [
-    "660af6010e98c3834e1632b8",
-    "660af6010e98c3834e1632ca"
+    "6610974e4daac80cf3b7e039",
+    "6610974e4daac80cf3b7e049",
+    "6610974e4daac80cf3b7e03d",
+    "6610974e4daac80cf3b7e049",
   ],
-  "sumPrice": 18.99,
-  "status": "in-progress"
+  
 },
 
 {
   "customerId": "660f655603fcef48aab65a64",
-  "restaurantId": "660af6042c3daf09719bbc86",
+  "restaurantId": "66109766e89b58b7398a7dcf",
   "menuItems": [
-    "660af6010e98c3834e1632c9",
-    "660af6010e98c3834e1632c7",
-    "660af6010e98c3834e1632cd",
-    "660af6010e98c3834e1632c4",
-    "660af6010e98c3834e1632ba"
+    "6610974e4daac80cf3b7e040",
+    "6610974e4daac80cf3b7e033",
+    "6610974e4daac80cf3b7e037",
+    "6610974e4daac80cf3b7e04b",
+    "6610974e4daac80cf3b7e03b"
   ],
-  "sumPrice": 68.95,
-  "status": "awaiting-pickup",
   "pickUpDate": "2024-04-04", 
   "pickUpTime": "01:30 PM" 
 }
