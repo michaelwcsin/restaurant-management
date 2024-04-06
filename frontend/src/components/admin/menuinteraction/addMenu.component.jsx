@@ -97,8 +97,14 @@ function AddMenu({ restaurant, handleRefresh }) {
             required
             onChange={handleChangeSelection}
             options={[
-              { text: "Available", value: true },
-              { text: "Sold Out", value: false },
+              {
+                text: <span style={{ color: "black" }}>Available</span>,
+                value: true,
+              },
+              {
+                text: <span style={{ color: "black" }}>Sold Out</span>,
+                value: false,
+              },
             ]}
           />
         </ModalDescription>
