@@ -1,0 +1,22 @@
+.checkout-container {
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+.date-time-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.date-picker-container,
+.time-picker-container {
+  width: 45%;
+}
+
+.date-picker-container {
+  margin-right: 10px;
+}
+
+

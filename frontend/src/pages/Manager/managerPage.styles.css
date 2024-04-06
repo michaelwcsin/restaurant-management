@@ -1,0 +1,9 @@
+.manager-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.manager-select {
+  margin: 1rem;
+  width: 15%;
+}
