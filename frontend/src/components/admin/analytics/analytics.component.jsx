@@ -21,7 +21,7 @@ ChartJS.register(
     Tooltip,
     Legend
 );
-
+// helper functions to insert data in each function.
 const createChartData = (labels, data, label, backgroundColor, borderColor) => ({
     labels,
     datasets: [
@@ -86,11 +86,11 @@ const Analytics = () => {
 
     }, [detailedOrders]);
 
-    //same for all  charts
+    //same for all charts the display
     const options = {
         scales: {
             y: {
-                type: 'linear',
+                type: 'linear', // for linear scale
                 beginAtZero: true,
             },
             x: {
