@@ -34,6 +34,13 @@ const customers = [
     address: "789 Oak Street, Edmonton, AB",
     phone: "555-123-4567",
   },
+  {
+    name: "Chen Liang",
+    email: "chen.liang@example.com",
+    password: "easy",
+    address: "MacEwan University, Edmonton, AB",
+    phone: "555-777-9999",
+  },
 ];
 
 // Connect to MongoDB
