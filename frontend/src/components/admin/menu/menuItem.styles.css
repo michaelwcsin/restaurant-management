@@ -227,5 +227,7 @@ input {
   justify-content: center;
 }
 
-
-
+.bottom-options {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,13 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
 import { Segment, Tab, TabPane } from "semantic-ui-react";
-import NavBar from "../../components/user/navBar/userNavBar.component";
-import "./placeorder.css";
 import { CustomerContext } from "../../components/contextAPI/customerContext";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import NavBar from "../../components/user/navBar/userNavBar.component";
 import Orders from "./Orders";
+import "./placeorder.css";
 
 const PlaceOrderPage = () => {
   const { restaurantId } = useParams();
@@ -25,6 +25,11 @@ const PlaceOrderPage = () => {
   const [orders, setOrders] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+
+  const handleResetDateTime = () => {
+    setSelectedDate(null);
+    setSelectedTime("");
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -85,7 +90,9 @@ const PlaceOrderPage = () => {
           })
         );
 
-        const filteredMenuItems = menuItemsData.filter(item => item.status === true);
+        const filteredMenuItems = menuItemsData.filter(
+          (item) => item.status === true
+        );
         console.log("Filtered Menu Items Data:", filteredMenuItems);
         setMenuItems(filteredMenuItems);
         setLoading(false);
@@ -142,7 +149,6 @@ const PlaceOrderPage = () => {
     }
   };
 
-
   const handleOrder = async () => {
     const cartMenuItemIds = [];
 
@@ -182,37 +188,64 @@ const PlaceOrderPage = () => {
       .catch((err) => {
         console.error("Failed to insert document", err);
       });
+    handleResetDateTime();
   };
 
   return (
     <div className="mainContainer">
       <NavBar />
       <div className="table">
-      <Tab
-        className="tabs"
-        menu={{ fluid: true, vertical: true }}
-        menuPosition='left'
-        panes={[
-          {
-            menuItem: "Menu",
-            render: () => (
-              <TabPane style={{ overflowY: "auto", height: "85vh", }}>
-                <div className="container1">
-                  <h1>{restaurant.name}</h1>
-                  <p>Address: {restaurant.address}</p>
-                  <p>Contact: {restaurant.phone}</p>
-                  <div className="ui divider"></div>
-                  <h2 className="ui center aligned header">Menu</h2>
-                  {menuItems.length > 0 ? (
-                    <ul>
-                      {menuItems.map((menuItem) => (
-                        <Segment key={menuItem?._id}>
-                          <h3>
-                            {menuItem?.name}, ${menuItem?.price}
-                          </h3>
-                          <p>{menuItem?.description}</p>
-                          {cart.some((item) => item._id === menuItem._id) ? (
-                            <div className="ui buttons">
+        <Tab
+          className="tabs"
+          menu={{ fluid: true, vertical: true }}
+          menuPosition="left"
+          panes={[
+            {
+              menuItem: "Menu",
+              render: () => (
+                <TabPane style={{ overflowY: "auto", height: "85vh" }}>
+                  <div className="container1">
+                    <h1>{restaurant.name}</h1>
+                    <p>Address: {restaurant.address}</p>
+                    <p>Contact: {restaurant.phone}</p>
+                    <div className="ui divider"></div>
+                    <h2 className="ui center aligned header">Menu</h2>
+                    {menuItems.length > 0 ? (
+                      <ul>
+                        {menuItems.map((menuItem) => (
+                          <Segment key={menuItem?._id}>
+                            <h3>
+                              {menuItem?.name}, ${menuItem?.price}
+                            </h3>
+                            <p>{menuItem?.description}</p>
+                            {cart.some((item) => item._id === menuItem._id) ? (
+                              <div className="ui buttons">
+                                <button
+                                  className="ui green vertical animated button"
+                                  tabIndex="0"
+                                  onClick={(e) =>
+                                    handleAdd(menuItem, menuItem.price, e)
+                                  }
+                                >
+                                  <div className="hidden content">Add</div>
+                                  <div className="visible content">
+                                    <i className="shop icon"></i>
+                                  </div>
+                                </button>
+                                <button
+                                  className="ui red vertical animated button"
+                                  tabIndex="0"
+                                  onClick={(e) =>
+                                    handleRemove(menuItem, menuItem.price, e)
+                                  }
+                                >
+                                  <div className="hidden content">Remove</div>
+                                  <div className="visible content">
+                                    <i className="trash alternate outline icon"></i>
+                                  </div>
+                                </button>
+                              </div>
+                            ) : (
                               <button
                                 className="ui green vertical animated button"
                                 tabIndex="0"
@@ -225,55 +258,49 @@ const PlaceOrderPage = () => {
                                   <i className="shop icon"></i>
                                 </div>
                               </button>
-                              <button
-                                className="ui red vertical animated button"
-                                tabIndex="0"
-                                onClick={(e) =>
-                                  handleRemove(menuItem, menuItem.price, e)
-                                }
-                              >
-                                <div className="hidden content">Remove</div>
-                                <div className="visible content">
-                                  <i className="trash alternate outline icon"></i>
-                                </div>
-                              </button>
-                            </div>
-                          ) : (
-                            <button
-                              className="ui green vertical animated button"
-                              tabIndex="0"
-                              onClick={(e) =>
-                                handleAdd(menuItem, menuItem.price, e)
-                              }
+                            )}
+                          </Segment>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No menu items available</p>
+                    )}
+                  </div>
+                </TabPane>
+              ), // This can be imported from another file, take a look at admin/menuitems/adminmenu.component.jsx
+            },
+            {
+              menuItem: `Cart - $${total} (🛒 ${cart.length})`,
+              render: () => (
+                <TabPane style={{ overflowY: "auto", height: "85vh" }}>
+                  {" "}
+                  <div className="container1">
+                    <h1>{restaurant.name}</h1>
+                    <p>Address: {restaurant.address}</p>
+                    <p>Contact: {restaurant.phone}</p>
+                    <div class="ui divider"></div>
+                    <h2 class="ui center aligned header">Cart</h2>
+                    {cart.length > 0 ? (
+                      <ul>
+                        {cart.map((item) => (
+                          <Segment key={item?._id}>
+                            <h3>
+                              {item?.name}, ${item?.price}
+                            </h3>
+                            <p>{item?.description}</p>
+                            <div
+                              class="ui red vertical button"
+                              tabindex="0"
+                              onClick={(e) => handleRemove(item, item.price, e)}
                             >
-                              <div className="hidden content">Add</div>
-                              <div className="visible content">
-                                <i className="shop icon"></i>
-                              </div>
-                            </button>
-                          )}
-                        </Segment>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>No menu items available</p>
-                  )}
-                </div>
-              </TabPane>
-            ), // This can be imported from another file, take a look at admin/menuitems/adminmenu.component.jsx
-          },
-          {
-            menuItem: `Cart - $${total} (🛒 ${cart.length})`,
-            render: () => (
-              <TabPane style={{ overflowY: "auto", height: "85vh"}}>
-                {" "}
-                <div className="container1">
-                  <h1>{restaurant.name}</h1>
-                  <p>Address: {restaurant.address}</p>
-                  <p>Contact: {restaurant.phone}</p>
-                  <div class="ui divider"></div>
-                  <h2 class="ui center aligned header">Cart</h2>
-
+                              Remove
+                            </div>
+                          </Segment>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No Items In Cart</p>
+                    )}
                     <div className="date-time-container">
                       <div className="date-picker-container">
                         <label>Select Date:</label>
@@ -282,7 +309,7 @@ const PlaceOrderPage = () => {
                             border: "1px solid #000",
                             borderRadius: "5px",
                             padding: "5px",
-                            width: "150px"
+                            width: "150px",
                           }}
                         >
                           <DatePicker
@@ -294,14 +321,16 @@ const PlaceOrderPage = () => {
                         </div>
                       </div>
                       <div className="time-picker-container">
-                        <label style={{paddingLeft:"30px"}}>Select Time:</label>
+                        <label style={{ paddingLeft: "30px" }}>
+                          Select Time:
+                        </label>
                         <div
                           style={{
                             border: "1px solid #000",
                             borderRadius: "5px",
                             padding: "5px",
                             width: "150px",
-                            marginLeft: "20px"
+                            marginLeft: "20px",
                           }}
                         >
                           <input
@@ -312,60 +341,38 @@ const PlaceOrderPage = () => {
                         </div>
                       </div>
                     </div>
+                    <h3>Total: ${total}</h3>
 
-                  {cart.length > 0 ? (
-                    <ul>
-                      {cart.map((item) => (
-                        <Segment key={item?._id}>
-                          <h3>
-                            {item?.name}, ${item?.price}
-                          </h3>
-                          <p>{item?.description}</p>
-                          <div
-                            class="ui red vertical button"
-                            tabindex="0"
-                            onClick={(e) => handleRemove(item, item.price, e)}
-                          >
-                            Remove
-                          </div>
-                        </Segment>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>No Items In Cart</p>
-                  )}
-                  <h3>Total: ${total}</h3>
-
-                  <button
-                    className="ui toggle button active"
-                    onClick={handleOrder}
-                  >
-                    Checkout
-                  </button>
-                </div>
-              </TabPane>
-            ),
-          },
-          {
-            menuItem: "History",
-            render: () => (
-              <TabPane style={{ overflowY: "auto", height: "85vh"}}>
-              {" "}
-                <div className="container1">
-                  <h2 className="ui center aligned header">Orders</h2>
-                  <Orders customerId={customer._id} />
-                </div>
-              </TabPane>
-            ),
-          },
-        ]}
-      />
-      {showPopup && (
-        <div className="popup">Item successfully added to cart</div>
-      )}
-      {showPopupOrder && (
-        <div className="popup">Order successfully created</div>
-      )}
+                    <button
+                      className="ui toggle button active"
+                      onClick={handleOrder}
+                    >
+                      Checkout
+                    </button>
+                  </div>
+                </TabPane>
+              ),
+            },
+            {
+              menuItem: "History",
+              render: () => (
+                <TabPane style={{ overflowY: "auto", height: "85vh" }}>
+                  {" "}
+                  <div className="container1">
+                    <h2 className="ui center aligned header">Orders</h2>
+                    <Orders customerId={customer._id} />
+                  </div>
+                </TabPane>
+              ),
+            },
+          ]}
+        />
+        {showPopup && (
+          <div className="popup">Item successfully added to cart</div>
+        )}
+        {showPopupOrder && (
+          <div className="popup">Order successfully created</div>
+        )}
       </div>
     </div>
   );

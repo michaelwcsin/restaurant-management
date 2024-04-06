@@ -102,34 +102,42 @@ const MenuItem = ({ restaurant, menuItem, handleRefresh }) => {
           />
           <Header>Edit availability:</Header>
 
-          <div className="edit-options">
-            <Select
-              placeholder="Edit menu item availability"
-              name="status"
-              required
-              value={status}
-              onChange={(e, { value }) => setStatus(value)}
-              options={[
-                { text: "Available", value: true },
-                { text: "Sold Out", value: false },
-              ]}
-              style={{ width: "100%" }}
-            />
+          <div className="bottom-options">
+            <div className="edit-options">
+              <Select
+                placeholder="Edit menu item availability"
+                name="status"
+                required
+                value={status}
+                onChange={(e, { value }) => setStatus(value)}
+                options={[
+                  {
+                    text: <span style={{ color: "black" }}>Available</span>,
+                    value: true,
+                  },
+                  {
+                    text: <span style={{ color: "black" }}>Sold Out</span>,
+                    value: false,
+                  },
+                ]}
+                style={{ width: "100%" }}
+              />
             </div>
             <div className="buttonOptions">
-            <ButtonGroup>
-              <Dialog.Close asChild>
-                <Button negative onClick={handleDelete}>
-                  Delete Menu
-                </Button>
-              </Dialog.Close>
-              <ButtonOr />
-              <Dialog.Close asChild>
-                <Button positive onClick={handleSave}>
-                  Save Changes
-                </Button>
-              </Dialog.Close>
-            </ButtonGroup>
+              <ButtonGroup>
+                <Dialog.Close asChild>
+                  <Button negative onClick={handleDelete}>
+                    Delete Menu
+                  </Button>
+                </Dialog.Close>
+                <ButtonOr />
+                <Dialog.Close asChild>
+                  <Button positive onClick={handleSave}>
+                    Save Changes
+                  </Button>
+                </Dialog.Close>
+              </ButtonGroup>
+            </div>
           </div>
 
           <Dialog.Close asChild>
