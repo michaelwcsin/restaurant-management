@@ -8,19 +8,19 @@ const dbName = "restaurantDB";
 const restaurants = [
   {
     name: "Cactus Club",
-    email: "restaurantA@example.com",
+    email: "spikey.club@example.com",
     address: "111 Main Street, Edmonton, AB",
     phone: "111-111-1111",
   },
   {
     name: "Shawarma City",
-    email: "restaurantB@example.com",
+    email: "many.spices.dune@example.com",
     address: "222 Elm Street, Edmonton, AB",
     phone: "222-222-2222",
   },
   {
     name: "Saigon Taste",
-    email: "restaurantC@example.com",
+    email: "artificial.taste.of.vietnam@example.com",
     address: "333 Oak Street, Edmonton, AB",
     phone: "333-333-3333",
   },

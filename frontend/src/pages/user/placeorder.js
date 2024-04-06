@@ -213,57 +213,62 @@ const PlaceOrderPage = () => {
                     {menuItems.length > 0 ? (
                       <ul>
                         {menuItems.map((menuItem) => (
-                          <Segment key={menuItem?._id}>
-                            <h3>
-                              {menuItem?.name}, ${menuItem?.price}
-                            </h3>
-                            <p>{menuItem?.description}</p>
-                            {cart.some((item) => item._id === menuItem._id) ? (
-                              <div className="ui buttons">
-                                <button
-                                  className="ui green vertical animated button"
-                                  tabIndex="0"
-                                  onClick={(e) =>
-                                    handleAdd(menuItem, menuItem.price, e)
-                                  }
-                                >
-                                  <div className="hidden content">Add</div>
-                                  <div className="visible content">
-                                    <i className="shop icon"></i>
-                                  </div>
-                                </button>
-                                <button
-                                  className="ui red vertical animated button"
-                                  tabIndex="0"
-                                  onClick={(e) =>
-                                    handleRemove(menuItem, menuItem.price, e)
-                                  }
-                                >
-                                  <div className="hidden content">Remove</div>
-                                  <div className="visible content">
-                                    <i className="trash alternate outline icon"></i>
-                                  </div>
-                                </button>
-                              </div>
-                            ) : (
-                              <button
-                                className="ui green vertical animated button"
-                                tabIndex="0"
-                                onClick={(e) =>
-                                  handleAdd(menuItem, menuItem.price, e)
-                                }
-                              >
-                                <div className="hidden content">Add</div>
-                                <div className="visible content">
-                                  <i className="shop icon"></i>
+                            <Segment key={menuItem?._id}>
+                              <div className="menu-item">
+                                <img src={menuItem?.image} alt={menuItem?.name} className="ui small image"/>
+                                <div className="content">
+                                  <h3>
+                                    {menuItem?.name}, ${menuItem?.price}
+                                  </h3>
+                                  <p>{menuItem?.description}</p>
                                 </div>
-                              </button>
-                            )}
-                          </Segment>
+                              </div>
+                              {cart.some((item) => item._id === menuItem._id) ? (
+                                  <div className="ui buttons">
+                                    <button
+                                        className="ui green vertical animated button"
+                                        tabIndex="0"
+                                        onClick={(e) =>
+                                            handleAdd(menuItem, menuItem.price, e)
+                                        }
+                                    >
+                                      <div className="hidden content">Add</div>
+                                      <div className="visible content">
+                                        <i className="shop icon"></i>
+                                      </div>
+                                    </button>
+                                    <button
+                                        className="ui red vertical animated button"
+                                        tabIndex="0"
+                                        onClick={(e) =>
+                                            handleRemove(menuItem, menuItem.price, e)
+                                        }
+                                    >
+                                      <div className="hidden content">Remove</div>
+                                      <div className="visible content">
+                                        <i className="trash alternate outline icon"></i>
+                                      </div>
+                                    </button>
+                                  </div>
+                              ) : (
+                                  <button
+                                      className="ui green vertical animated button"
+                                      tabIndex="0"
+                                      onClick={(e) =>
+                                          handleAdd(menuItem, menuItem.price, e)
+                                      }
+                                  >
+                                    <div className="hidden content">Add</div>
+                                    <div className="visible content">
+                                      <i className="shop icon"></i>
+                                    </div>
+                                  </button>
+                              )}
+                            </Segment>
                         ))}
                       </ul>
                     ) : (
-                      <p>No menu items available</p>
+                        <p>No menu items available</p>
                     )}
                   </div>
                 </TabPane>

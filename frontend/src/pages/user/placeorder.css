@@ -67,3 +67,13 @@ h2 {
     padding-left: 200px;
     padding-right: 200px;
   }
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.menu-item .content {
+    margin-left: 1em;
+}
